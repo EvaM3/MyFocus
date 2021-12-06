@@ -11,21 +11,22 @@ import XCTest
 class TaskTests: XCTestCase {
 
     func test_init() {
-        let task = Task(description: "Buy a few books", completed: true, creationDate: Date(), achievedDate: Date())
-        XCTAssert(task.description == "Buy a few books")
-        XCTAssertTrue(task.completed, "Expected true, got \(task.completed)")
+        let sut = Task(description: "Buy a few books", completed: true, creationDate: Date(), achievedDate: Date())
+        XCTAssert(sut.description == "Buy a few books")
+        XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
         
     }
     
     func test_undoCompletedTask() {
-        var description: String
-        var completed: Bool
-        var creationDate: Date
-        var achievedDate: Date?
-        
-        let undoTask = Task(description: "Learn Russian today", completed: false, creationDate: Date(), achievedDate: Date())
-        XCTAssert(undoTask.description == "Learn Russian today")
-        XCTAssertTrue(undoTask.completed, "Expected false, got \(undoTask.completed)")
+        // ARRANGE:
+        var sut = Task(description: "Learn Russian today", completed: true, creationDate: Date(), achievedDate: Date())
+        XCTAssert(sut.description == "Learn Russian today")
+        XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
+        // ACT:
+        sut.unDoCompleteTask()
+        // ASSERT:
+        XCTAssertFalse(sut.completed)
+        XCTAssertNil(sut.achievedDate)
     }
     
     func test_completeTask() {
