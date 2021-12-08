@@ -30,8 +30,14 @@ class TaskTests: XCTestCase {
     }
     
     func test_completeTask() {
-        let completeTask = Task(description: "Buy some flowers", completed: true, creationDate: Date(), achievedDate: Date())
-        XCTAssert(completeTask.description == "Buy some flowers" )
-        XCTAssertTrue(completeTask.completed, "Expected true, got\(completeTask.completed)")
+        // ARRANGE:
+        var sut = Task(description: "Buy some flowers", completed: true, creationDate: Date(), achievedDate: Date())
+        XCTAssert(sut.description == "Buy some flowers" )
+        XCTAssertTrue(sut.completed, "Expected true, got\(sut.completed)")
+        // ACT:
+        sut.completeTask()
+        // ASSERT:
+        XCTAssertTrue(sut.completed)
+        XCTAssert((sut.achievedDate != nil))
     }
 }
