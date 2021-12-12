@@ -9,7 +9,7 @@ import XCTest
 @testable import MyFocus
 
 class TaskTests: XCTestCase {
-
+    
     func test_init() {
         let sut = Task(description: "Buy a few books", completed: true, creationDate: Date(), achievedDate: Date())
         XCTAssert(sut.description == "Buy a few books")
@@ -39,5 +39,29 @@ class TaskTests: XCTestCase {
         // ASSERT:
         XCTAssertTrue(sut.completed)
         XCTAssert((sut.achievedDate != nil))
+    }
+    
+    func test_undoCompleteTaskTrueandNil() {
+        // ARRANGE:
+        var sut = Task(description: "Learn Russian today", completed: true, creationDate: Date(), achievedDate: Date())
+        XCTAssert(sut.description == "Learn Russian today")
+        XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
+        // ACT:
+        sut.unDoCompleteTask()
+        // ASSERT:
+        XCTAssertTrue(sut.completed)
+        XCTAssertNil(sut.achievedDate)
+    }
+    
+    func test_undoCompleteTaskFalseAndFilled() {
+        // ARRANGE:
+        var sut = Task(description: "Learn Russian today", completed: false, creationDate: Date(), achievedDate: Date())
+        XCTAssert(sut.description == "Learn Russian today")
+        XCTAssertFalse(sut.completed, "Expected false, got \(sut.completed)")
+        // ACT:
+        sut.unDoCompleteTask()
+        // ASSERT:
+        XCTAssertFalse(sut.completed)
+        XCTAssertNil((sut.achievedDate))
     }
 }
