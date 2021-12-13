@@ -12,9 +12,20 @@ class TaskTests: XCTestCase {
     
     func test_init() {
         let sut = Task(description: "Buy a few books", completed: true, creationDate: Date(), achievedDate: Date())
-        XCTAssert(sut.description == "Buy a few books")
+        XCTAssertEqual(sut.description, "Buy a few books")
         XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
-        
+    }
+    
+    func test_completeTask() {
+        // ARRANGE:
+        var sut = Task(description: "Buy some flowers", completed: true, creationDate: Date(), achievedDate: Date())
+        XCTAssert(sut.description == "Buy some flowers" )
+        XCTAssertTrue(sut.completed, "Expected true, got\(sut.completed)")
+        // ACT:
+        sut.completeTask()
+        // ASSERT:
+        XCTAssertTrue(sut.completed)
+        XCTAssertNotNil(sut.achievedDate)
     }
     
     func test_undoCompletedTask() {
@@ -29,17 +40,6 @@ class TaskTests: XCTestCase {
         XCTAssertNil(sut.achievedDate)
     }
     
-    func test_completeTask() {
-        // ARRANGE:
-        var sut = Task(description: "Buy some flowers", completed: true, creationDate: Date(), achievedDate: Date())
-        XCTAssert(sut.description == "Buy some flowers" )
-        XCTAssertTrue(sut.completed, "Expected true, got\(sut.completed)")
-        // ACT:
-        sut.completeTask()
-        // ASSERT:
-        XCTAssertTrue(sut.completed)
-        XCTAssert((sut.achievedDate != nil))
-    }
     
     func test_undoCompleteTaskTrueandNil() {
         // ARRANGE:
@@ -49,7 +49,7 @@ class TaskTests: XCTestCase {
         // ACT:
         sut.unDoCompleteTask()
         // ASSERT:
-        XCTAssertTrue(sut.completed)
+        XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.achievedDate)
     }
     

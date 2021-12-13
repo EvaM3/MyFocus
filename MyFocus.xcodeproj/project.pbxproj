@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A043CDF127680B9900FF2580 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF027680B9900FF2580 /* Goal.swift */; };
+		A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF227680BD800FF2580 /* GoalTests.swift */; };
 		A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CA27595DBE003428B7 /* AppDelegate.swift */; };
 		A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CC27595DBE003428B7 /* SceneDelegate.swift */; };
 		A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CE27595DBE003428B7 /* ViewController.swift */; };
@@ -29,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A043CDF027680B9900FF2580 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		A043CDF227680BD800FF2580 /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		A0A647C727595DBE003428B7 /* MyFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A647CA27595DBE003428B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A647CC27595DBE003428B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 				A0A647E427595E1B003428B7 /* MyFocusTests.swift */,
 				A0A647E627595E1B003428B7 /* Info.plist */,
 				A0A647EF27596157003428B7 /* TaskTests.swift */,
+				A043CDF227680BD800FF2580 /* GoalTests.swift */,
 			);
 			path = MyFocusTests;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				A0A647ED275960CC003428B7 /* Task.swift */,
+				A043CDF027680B9900FF2580 /* Goal.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 				A0A647EE275960CC003428B7 /* Task.swift in Sources */,
 				A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */,
 				A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */,
+				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
 				A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +232,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0A647F027596157003428B7 /* TaskTests.swift in Sources */,
+				A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */,
 				A0A647E527595E1B003428B7 /* MyFocusTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
