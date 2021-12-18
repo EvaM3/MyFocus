@@ -11,17 +11,16 @@ import XCTest
 class GoalTests: XCTestCase {
 
    func test_initGoal() {
-    
     var tasks: [Task]
     var goalDescription: String
     var completed: Bool
     var goalCreationDate: Date?
     var goalAchievedDate: Date?
     
-    var sut = (tasks: [Task],goalDescription: String, completed: Bool, goalCreationDate: Date, goalAchievedDate: Date).self
+    var sut = (tasks: [Task](),goalDescription: "Finish the essay", completed: true, goalCreationDate: Date(), goalAchievedDate: Date())
+    XCTAssertEqual(sut.goalDescription, "Finish the essay")
+    XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
     }
-    
-    
     }
    
 
