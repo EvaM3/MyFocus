@@ -113,8 +113,8 @@
 		A0A647EC275960A8003428B7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A0A647ED275960CC003428B7 /* Task.swift */,
 				A043CDF027680B9900FF2580 /* Goal.swift */,
+				A0A647ED275960CC003428B7 /* Task.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

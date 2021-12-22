@@ -2,7 +2,7 @@
 //  Goal.swift
 //  MyFocus
 //
-//  Created by Eva Sira Madarasz on 14/12/2021.
+//  Created by Eva Madarasz on 14/12/2021.
 //
 
 import Foundation
@@ -17,12 +17,12 @@ class Goal {
     var goalAchievedDate: Date?
     
     
-    init(tasks: [Task],goalDescription: String, completed: Bool, goalCreationDate: Date, goalAchievedDate: Date ) {
+    init(tasks: [Task],goalDescription: String) {
         self.tasks = tasks
         self.goalDescription = goalDescription
-        self.completed = completed
-        self.goalCreationDate = goalCreationDate
-        self.goalAchievedDate = goalAchievedDate
+        self.completed = false
+        self.goalCreationDate = Date()
+        self.goalAchievedDate = nil
     }
     
     func addTask(description: String) {
@@ -101,7 +101,7 @@ class Goal {
         return allTasksAchieved
         
     }
- }
+}
 
 
 

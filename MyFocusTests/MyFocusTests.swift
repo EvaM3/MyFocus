@@ -2,7 +2,7 @@
 //  MyFocusTests.swift
 //  MyFocusTests
 //
-//  Created by Eva Sira Madarasz on 02/12/2021.
+//  Created by Eva Madarasz on 02/12/2021.
 //
 
 import XCTest
