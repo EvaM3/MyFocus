@@ -48,6 +48,16 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.goalAchievedDate)
     }
+    
+    func test_deleteTask() {
+        // ARRANGE:
+        var sut = Goal(tasks: [], goalDescription: "", completed: false, goalCreationDate: Date(), goalAchievedDate: Date())
+        // ACT:
+        sut.deleteTask(index: <#T##Int#>)
+        // ASSERT:
+        XCTAssertFalse(sut.completed)
+    }
+    
 }
 
 
