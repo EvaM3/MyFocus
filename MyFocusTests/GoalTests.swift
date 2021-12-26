@@ -91,14 +91,33 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.completed)
     }
     
+    func test_deleteTaskAssertTrue() {
+        // ARRANGE:
+        var sut = Goal(tasks: [], goalDescription: "", completed: false, goalCreationDate: Date(), goalAchievedDate: Date())
+        // ACT:
+        sut.deleteTask(index: <#T##Int#>)
+        // ASSERT:
+        XCTAssertTrue(sut.completed)
+    }
+    
     func test_undoCompleteTask() {
         // ARRANGE:
         var sut = Goal(tasks: [], goalDescription: "", completed: false, goalCreationDate: Date(), goalAchievedDate: Date())
         // ACT:
-        sut.undoCompleteTask(index: <#T##Int#>)
+        sut.undoCompleteTask(index: <#Int#>)
         // ASSERT:
         XCTAssertFalse(sut.completed)
     }
+    
+    func test_undoCompleteTaskAssertTrue() {
+        // ARRANGE:
+        var sut = Goal(tasks: [], goalDescription: "", completed: false, goalCreationDate: Date(), goalAchievedDate: Date())
+        // ACT:
+        sut.undoCompleteTask(index: <#Int#>)
+        // ASSERT:
+        XCTAssertTrue(sut.completed)
+    }
+    
     
     func test_taskAchieved() {
         // ARRANGE:
@@ -107,6 +126,15 @@ class GoalTests: XCTestCase {
         sut.taskAchieved()
         // ASSERT:
         XCTAssertFalse(sut.completed)
+    }
+    
+    func test_taskAchievedAssertTrue() {
+        // ARRANGE:
+        var sut = Goal(tasks: [], goalDescription: "", completed: true, goalCreationDate: Date(), goalAchievedDate: Date())
+        // ACT:
+        sut.taskAchieved()
+        // ASSERT:
+        XCTAssertTrue(sut.completed)
     }
 }
 
