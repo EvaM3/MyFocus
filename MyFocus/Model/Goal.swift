@@ -17,7 +17,7 @@ class Goal {
     var goalAchievedDate: Date?
     
     
-    init(tasks: [Task], goalDescription: String, completed: Bool, goalCreationDate: Date, goalAchievedDate: Date) {
+    init(tasks: [Task], goalDescription: String) {
         self.tasks = tasks
         self.goalDescription = goalDescription
         self.completed = false
