@@ -48,14 +48,15 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         var sut = Goal(tasks: [], goalDescription: "")
-        XCTAssert(sut.goalAchievedDate != nil)
-        XCTAssertTrue(sut.completed)
+        XCTAssertNil(sut.goalAchievedDate)
+        XCTAssertFalse(sut.completed)
         
         // ACT:
         sut.completeGoal()
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
+        XCTAssertNotNil(sut.goalAchievedDate)
     }
     
     func test_completeGoalAssertFalseCompletedFalse() {

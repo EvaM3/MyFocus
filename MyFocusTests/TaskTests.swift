@@ -68,7 +68,8 @@ class TaskTests: XCTestCase {
     func test_undoCompletedTask() {
         
         // ARRANGE:
-        var sut = Task(description: "Learn Russian today", completed: true, creationDate: Date(), achievedDate: Date())
+        var sut = makeSut()
+        sut.completeTask()
         XCTAssert(sut.description == description3)
         XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
         
@@ -84,7 +85,8 @@ class TaskTests: XCTestCase {
     func test_WhenUndoCompleteTask_ThenTrueandNil() {
         
         // ARRANGE:
-        var sut = Task(description: "Learn Russian today", completed: true, creationDate: Date(), achievedDate: Date())
+        var sut = makeSut()
+        sut.completed = true
         XCTAssert(sut.description == description3)
         XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
         
@@ -140,7 +142,7 @@ class TaskTests: XCTestCase {
     }
     
     func makeSut() -> Task {
-      var sut = Task(description: "Learn Russian today", completed: false, creationDate: Date(), achievedDate: Date())
+      var sut = Task(description: "Learn Russian today", completed: false, creationDate: Date(), achievedDate: nil)
         return sut
     }
 }
