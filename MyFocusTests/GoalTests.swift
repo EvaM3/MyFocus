@@ -173,6 +173,11 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertFalse(sut.completed)
     }
+    
+    func makeSut() -> Goal {
+      var sut = Goal(tasks: [], goalDescription: "")
+        return sut
+    }
 }
 
 
