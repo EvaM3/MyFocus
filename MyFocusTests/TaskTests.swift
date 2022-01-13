@@ -82,7 +82,7 @@ class TaskTests: XCTestCase {
     }
     
     
-    func test_WhenUndoCompleteTask_ThenTrueandNil() {
+    func test_undoCompleteTask_WhenCompletedTrue_ThenFalseandNil() {
         
         // ARRANGE:
         var sut = makeSut()
@@ -113,7 +113,7 @@ class TaskTests: XCTestCase {
         XCTAssertNil((sut.achievedDate))
     }
     
-    func test_undoCompleteTask_ThenFalseAndNil() {
+    func test_undoCompleteTask_WhenCompletedFalse_ThenFalseAndNil() {
         
         // ARRANGE:
         var sut = makeSut()
