@@ -25,7 +25,6 @@ class TaskTests: XCTestCase {
         // ARRANGE:
         var sut = makeSut()
         XCTAssert(sut.description == description3 )
-        XCTAssertFalse(sut.completed, "Expected false, got\(sut.completed)")
         
         // ACT:
         sut.completeTask()
@@ -103,7 +102,6 @@ class TaskTests: XCTestCase {
         // ARRANGE:
         var sut = makeSut()
         XCTAssert(sut.description == description3)
-        XCTAssertFalse(sut.completed, "Expected false, got \(sut.completed)")
         
         // ACT:
         sut.unDoCompleteTask()

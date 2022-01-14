@@ -60,7 +60,7 @@ class GoalTests: XCTestCase {
         XCTAssertNotNil(sut.goalAchievedDate)
     }
     
-    func test_completeGoal_WhenAssertTrue_ThenCompletedFalse() {
+    func test_completeGoal_WhenAssertTrue_ThenCompletedTrue() {
         
         // ARRANGE:
         let sut = makeSut()
