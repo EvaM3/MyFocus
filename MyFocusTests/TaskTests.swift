@@ -16,51 +16,51 @@ class TaskTests: XCTestCase {
     
     func test_init() {
         let sut = makeSut()
-        XCTAssertNotEqual(sut.description, description1)
+        XCTAssertEqual(sut.description, description1)
         XCTAssertFalse(sut.completed, "Expected false, got \(sut.completed)")
     }
     
-    func test_completeTask() {
+    func test_completeTask_success() {
         
         // ARRANGE:
         var sut = makeSut()
-        XCTAssert(sut.description == description3 )
         
         // ACT:
         sut.completeTask()
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
-        XCTAssertTrue((sut.achievedDate != nil))
+        XCTAssertNotNil(sut.achievedDate)
     }
     
-    func test_completeTask_WhenFalse_ThenNotNil() {
+    func test_completeTask_WhenCompletedTrue_ThenSuccess() {
         
         // ARRANGE:
         var sut = makeSut()
-        XCTAssert(sut.description == description3)
-        XCTAssertFalse(sut.completed, "Expected false, got\(sut.completed)")
+        sut.completed = true
         
         // ACT:
         sut.completeTask()
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
-        XCTAssertNotNil((sut.achievedDate))
+        XCTAssertNotNil(sut.achievedDate)
     }
     
-    func test_completeTask_ThenTrueAndFilled() {
+    func test_completeTask_WhenAchievedDateNotNil_ThenSuccess() {
         
         // ARRANGE:
+        let date = Date()
         var sut = makeSut()
-        XCTAssert(sut.description == description3 )
+        sut.achievedDate = date
         
         // ACT:
         sut.completeTask()
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
-        XCTAssertTrue((sut.achievedDate != nil))
+        XCTAssertNotNil(sut.achievedDate)
+        XCTAssertNotEqual(date, sut.achievedDate)
     }
     
 
@@ -140,7 +140,7 @@ class TaskTests: XCTestCase {
     }
     
     func makeSut() -> Task {
-      var sut = Task(description: "Learn Russian today", completed: false, creationDate: Date(), achievedDate: nil)
+      var sut = Task(description: description1, completed: false, creationDate: Date(), achievedDate: nil)
         return sut
     }
 }
