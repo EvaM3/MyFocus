@@ -17,7 +17,7 @@ class GoalTests: XCTestCase {
     }
     
     
-    func test_addTask() {
+    func test_addTask_success() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -31,12 +31,11 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.goalAchievedDate)
     }
     
-    func test_addTaskAssertTrue() {
+    func test_addTask_WhenCompletedTrue_ThenSuccess() {
         
         // ARRANGE:
         let sut = makeSut()
-        XCTAssertEqual(sut.goalDescription, sut.goalDescription)
-        XCTAssertFalse(sut.completed)
+        sut.completed = true
         
         // ACT:
         sut.addTask(description: "")
@@ -45,7 +44,7 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.goalAchievedDate)
     }
     
-    func test_completeGoal() {
+    func test_completeGoal_success() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -60,12 +59,10 @@ class GoalTests: XCTestCase {
         XCTAssertNotNil(sut.goalAchievedDate)
     }
     
-    func test_completeGoal_WhenAssertTrue_ThenCompletedTrue() {
+    func test_completeGoal_WhenCompletedIsTrue_ThenSuccess() {
         
         // ARRANGE:
         let sut = makeSut()
-        XCTAssertNil(sut.goalAchievedDate)
-        XCTAssertFalse(sut.completed)
         
         // ACT:
         sut.completeGoal()
@@ -74,7 +71,7 @@ class GoalTests: XCTestCase {
         XCTAssertTrue(sut.completed)
     }
     
-    func test_unDoCompleteGoal() {
+    func test_unDoCompleteGoal_success() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -88,7 +85,7 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.goalAchievedDate)
     }
     
-    func test_unDoCompleteGoal_AssertTrueCompletedTrue() {
+    func test_unDoCompleteGoal_WhenAchievedDateIsNil_ThenSuccess() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -102,19 +99,7 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.goalAchievedDate)
     }
     
-    func test_deleteTask() {
-        
-        // ARRANGE:
-         let sut = makeSut()
-        
-        // ACT:
-        sut.deleteTask(index: 0)
-        
-        // ASSERT:
-        XCTAssertFalse(sut.completed)
-    }
-    
-    func test_deleteTaskAssertTrue() {
+    func test_deleteTask_success() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -123,10 +108,23 @@ class GoalTests: XCTestCase {
         sut.deleteTask(index: 0)
         
         // ASSERT:
-        XCTAssertTrue(sut.completed != nil)
+        XCTAssertFalse(sut.completed)
     }
     
-    func test_undoCompleteTask() {
+    func test_deleteTask_WhenAchievedDateIsNil_ThenSuccess() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        
+        // ACT:
+        sut.deleteTask(index: 0)
+        
+        // ASSERT:
+        XCTAssertFalse(sut.completed)
+        XCTAssertNil(sut.goalAchievedDate)
+    }
+    
+    func test_undoCompleteTask_success() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -138,7 +136,7 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.completed)
     }
     
-    func test_undoCompleteTask_AssertFalse() {
+    func test_undoCompleteTask_WhenAchievedDateIsNil_ThenSuccess() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -148,35 +146,41 @@ class GoalTests: XCTestCase {
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
+        XCTAssertNil(sut.goalAchievedDate)
     }
     
     
-    func test_taskAchieved() {
+    func test_taskAchieved_success() {
         
         // ARRANGE:
         let sut = makeSut()
+        sut.completed = true
         
         // ACT:
         sut.taskAchieved()
         
         // ASSERT:
-        XCTAssertFalse(sut.completed)
+        XCTAssertTrue(sut.completed)
     }
     
-    func test_taskAchievedAssertFalse() {
+    func test_taskAchieved_WhenAchievedDateIsNotNil_ThenSuccess() {
         
         // ARRANGE:
         let sut = makeSut()
+        sut.completed = true
+        sut.goalAchievedDate = Date()
         
         // ACT:
         sut.taskAchieved()
         
         // ASSERT:
-        XCTAssertFalse(sut.completed)
+        XCTAssertTrue(sut.completed)
+        XCTAssertNotNil(sut.goalAchievedDate)
     }
+    
     
     func makeSut() -> Goal {
-      let sut = Goal(tasks: [], goalDescription: "")
+        let sut = Goal(tasks: [], goalDescription: "")
         return sut
     }
 }

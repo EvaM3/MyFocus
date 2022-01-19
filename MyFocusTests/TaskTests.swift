@@ -12,7 +12,7 @@ class TaskTests: XCTestCase {
     
     let description1 = "Buy a few books"
     let description2 = "Buy some flowers"
-    let description3 = "Learn Russian today"
+   
     
     func test_init() {
         let sut = makeSut()
@@ -60,7 +60,7 @@ class TaskTests: XCTestCase {
         // ASSERT:
         XCTAssertTrue(sut.completed)
         XCTAssertNotNil(sut.achievedDate)
-        XCTAssertNotEqual(date, sut.achievedDate)
+        XCTAssertEqual(date, sut.achievedDate)
     }
     
 
@@ -69,7 +69,7 @@ class TaskTests: XCTestCase {
         // ARRANGE:
         var sut = makeSut()
         sut.completeTask()
-        XCTAssert(sut.description == description3)
+        XCTAssert(sut.description == description1)
         XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
         
         // ACT:
@@ -86,7 +86,7 @@ class TaskTests: XCTestCase {
         // ARRANGE:
         var sut = makeSut()
         sut.completed = true
-        XCTAssert(sut.description == description3)
+        XCTAssert(sut.description == description1)
         XCTAssertTrue(sut.completed, "Expected true, got \(sut.completed)")
         
         // ACT:
@@ -101,7 +101,6 @@ class TaskTests: XCTestCase {
         
         // ARRANGE:
         var sut = makeSut()
-        XCTAssert(sut.description == description3)
         
         // ACT:
         sut.unDoCompleteTask()
@@ -111,11 +110,10 @@ class TaskTests: XCTestCase {
         XCTAssertNil((sut.achievedDate))
     }
     
-    func test_undoCompleteTask_WhenCompletedFalse_ThenFalseAndNil() {
+    func test_undoCompleteTask_WhenCompletedIsFalse_ThenSuccess() {
         
         // ARRANGE:
         var sut = makeSut()
-        XCTAssert(sut.description == description3)
         XCTAssertFalse(sut.completed, "Expected false, got \(sut.completed)")
         
         // ACT:
@@ -130,7 +128,7 @@ class TaskTests: XCTestCase {
         
         // ARRANGE:
         var sut = makeSut()
-        XCTAssert(sut.description == description3)
+        XCTAssert(sut.description == description1)
         
         // ACT:
         sut.unDoCompleteTask()
@@ -140,7 +138,7 @@ class TaskTests: XCTestCase {
     }
     
     func makeSut() -> Task {
-      var sut = Task(description: description1, completed: false, creationDate: Date(), achievedDate: nil)
+      let sut = Task(description: description1, completed: false, creationDate: Date(), achievedDate: nil)
         return sut
     }
 }
