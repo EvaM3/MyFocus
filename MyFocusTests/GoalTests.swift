@@ -21,8 +21,6 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        XCTAssertEqual(sut.goalDescription, sut.goalDescription)
-        XCTAssertFalse(sut.completed)
         
         // ACT:
         sut.addTask(description: "")
