@@ -10,25 +10,31 @@ import Foundation
 
 
 class Goal {
-    var tasks: [Task]
-    var goalDescription: String
-    var completed: Bool
-    var goalCreationDate: Date?
-    var goalAchievedDate: Date?
+    private var goalTasks: [Task]
+    private var goalDescription: String
+    private var goalCompleted: Bool
+    private var goalCreationDate: Date
+    private var goalAchievedDate: Date?
+    var description: String { goalDescription }
+    var tasks: [Task] { goalTasks }
+    var completed: Bool { goalCompleted }
+    var creationDate: Date { goalCreationDate }
+    var achievedDate: Date? { goalAchievedDate}
     
     
-    init(tasks: [Task], goalDescription: String) {
-        self.tasks = tasks
-        self.goalDescription = goalDescription
-        self.completed = false
+    
+    init(tasks: [Task], description: String) {
+        self.goalTasks = tasks
+        self.goalDescription = description
+        self.goalCompleted = false
         self.goalCreationDate = Date()
         self.goalAchievedDate = nil
     }
     
     func addTask(description: String) {
         let newTask = Task(description: description, completed: false, creationDate: Date())
-        tasks.append(newTask)
-        completed = false
+        goalTasks.append(newTask)
+        goalCompleted = false
     }
     
     
@@ -36,11 +42,11 @@ class Goal {
         if goalAchievedDate == nil {
             goalAchievedDate = Date()
         }
-        if completed == false {
-            completed = true
+        if goalCompleted == false {
+            goalCompleted = true
         }
-        for i in 0..<tasks.count {
-            tasks[i].completeTask()
+        for i in 0..<goalTasks.count {
+            goalTasks[i].completeTask()
         }
     }
     
@@ -49,18 +55,18 @@ class Goal {
         if goalAchievedDate != nil {
             goalAchievedDate = nil
         }
-        if completed == true {
-            completed = false
+        if goalCompleted == true {
+            goalCompleted = false
         }
-        for i in 0..<tasks.count {
-            tasks[i].unDoCompleteTask()
+        for i in 0..<goalTasks.count {
+            goalTasks[i].unDoCompleteTask()
         }
     }
     
     
     func deleteTask(index: Int) {
-        if index >= 0 && index < tasks.count {
-            tasks.remove(at: index)
+        if index >= 0 && index < goalTasks.count {
+            goalTasks.remove(at: index)
         } else {
             return
         }
@@ -68,8 +74,8 @@ class Goal {
     
     
     func updateTask(index: Int, description: String) {
-        if index >= 0 && index < tasks.count {
-            tasks[index].updateTask(description: description)
+        if index >= 0 && index < goalTasks.count {
+            goalTasks[index].updateTask(description: description)
             undoCompleteGoal()
         } else {
             return
@@ -78,8 +84,8 @@ class Goal {
     
     
     func undoCompleteTask(index: Int) {
-        if index >= 0 && index < tasks.count {
-            tasks[index].unDoCompleteTask()
+        if index >= 0 && index < goalTasks.count {
+            goalTasks[index].unDoCompleteTask()
             undoCompleteGoal()
         } else {
             return
@@ -90,8 +96,8 @@ class Goal {
     func taskAchieved() -> Bool {
         var allTasksAchieved : Bool = false
         
-        for i in 0..<tasks.count {
-            if tasks[i].self.completed == true {
+        for i in 0..<goalTasks.count {
+            if goalTasks[i].self.completed == true {
                 allTasksAchieved = true
             } else {
                 allTasksAchieved = false
