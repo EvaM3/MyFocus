@@ -124,41 +124,18 @@ class TaskTests: XCTestCase {
         
         // ARRANGE:
         var sut = makeSut()
+        let originalDate = sut.creationDate
+        
         
         // ACT:
         sut.updateTask(description: description2)
         
         // ASSERT:
         XCTAssertEqual(sut.description,description2)
+        XCTAssertLessThan(originalDate, sut.creationDate)
     }
     
-    func test_updateTask_WhenDescriptionIsNotEmpty_ThenSuccess() {
-        
-        // ARRANGE:
-        var sut = makeSut()
-        XCTAssertNotNil(sut.description)
-        
-        // ACT:
-        sut.unDoCompleteTask()
-        
-        
-        // ASSERT:
-        XCTAssertNil(sut.achievedDate)
-    }
-    
-    func test_updateTask_WhenCreationDateIsUpdated_ThenSuccess() {
-        
-        // ARRANGE:
-        var sut = makeSut()
-        let date = sut.creationDate
-        sut.updateTask(description: sut.description)
-        
-        // ACT:
-        sut.unDoCompleteTask()
-        
-        // ASSERT:
-        XCTAssertNotEqual(date, sut.creationDate)
-    }
+  
     
     
     func makeSut() -> Task {
