@@ -122,6 +122,17 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertNil(sut.achievedDate)
     }
+    func test_unDoCompleteGoal_WhenAllTasksUnDone_ThenFinished() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        
+        // ACT:
+        sut.undoCompleteTask(index: sut.tasks.count)
+        
+        // ASSERT:
+        XCTAssertNil(sut.achievedDate)
+    }
     
     func test_deleteTask_success() {
         
@@ -134,6 +145,7 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertFalse(sut.completed)
     }
+    
     
     func test_deleteTask_WhenAchievedDateIsNil_ThenSuccess() {
         
@@ -187,6 +199,7 @@ class GoalTests: XCTestCase {
     
     func makeSut() -> Goal {
         let sut = Goal(tasks: [], description: testGoalDescription)
+        
         return sut
     }
 }
