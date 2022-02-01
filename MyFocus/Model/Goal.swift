@@ -34,9 +34,13 @@ class Goal {
     func addTask(description: String) {
         let newTask = Task(description: description, completed: false, creationDate: Date())
         goalTasks.append(newTask)
-        goalCompleted = false
+        unCompleteGoal()
     }
     
+    private func unCompleteGoal() {
+        goalCompleted = false
+        goalAchievedDate = nil
+    }
     
     func completeGoal() {
         if goalAchievedDate == nil {
@@ -52,12 +56,7 @@ class Goal {
     
     
     func undoCompleteGoal() {
-        if goalAchievedDate != nil {
-            goalAchievedDate = nil
-        }
-        if goalCompleted == true {
-            goalCompleted = false
-        }
+        unCompleteGoal()
         for i in 0..<goalTasks.count {
             goalTasks[i].unDoCompleteTask()
         }
