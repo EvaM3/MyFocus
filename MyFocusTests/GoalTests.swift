@@ -105,14 +105,24 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.tasks.count
     
-        
         // ACT:
         sut.completeGoal()
         
         // ASSERT:
         XCTAssertNotNil(sut.tasks.count)
+    }
+    
+    func test_completeGoal_WhenGoalCompleted_ThenSuccess() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        
+        // ACT:
+        sut.completeGoal()
+        
+        // ASSERT:
+        XCTAssertNotNil(sut.completeGoal)
     }
     
     
