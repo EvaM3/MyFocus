@@ -18,7 +18,7 @@ class GoalTests: XCTestCase {
         
     }
     
-   
+    
     
     func test_initGoal() {
         
@@ -29,7 +29,7 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.achievedDate)
         XCTAssertGreaterThan(Date(), sut.creationDate)
     }
-   
+    
     func test_initGoalWithTasks() {
         
         let testTasks = [Task(description: TestDescriptions.taskDescription1.rawValue, completed: true, creationDate: Date(), achievedDate: Date())]
@@ -72,7 +72,6 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.achievedDate)
     }
     
-    
     func test_completeGoal_success() {
         
         // ARRANGE:
@@ -105,7 +104,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-    
+        
         // ACT:
         sut.completeGoal()
         
@@ -124,7 +123,6 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertNotNil(sut.completeGoal)
     }
-    
     
     func test_unDoCompleteGoal_success() {
         
@@ -152,6 +150,7 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertNil(sut.achievedDate)
     }
+    
     func test_unDoCompleteGoal_WhenAllTasksUnDone_ThenFinished() {
         
         // ARRANGE:
@@ -159,13 +158,14 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.achievedDate)
         
         // ACT:
-        sut.undoCompleteTask(index: sut.tasks.count)
+        sut.undoCompleteGoal()
         
         // ASSERT:
-        sut.undoCompleteGoal()
+        sut.undoCompleteTask(index: sut.tasks.count)
     }
     
     func test_unDoCompletGoal_WhenCompletedIsFalse_ThenSuccess() {
+        
         // ARRANGE:
         let sut = makeSut()
         
@@ -174,9 +174,7 @@ class GoalTests: XCTestCase {
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
-        
     }
-    
     
     func test_deleteTask_success() {
         
@@ -189,7 +187,6 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertFalse(sut.completed)
     }
-    
     
     func test_deleteTask_WhenAchievedDateIsNil_ThenSuccess() {
         
