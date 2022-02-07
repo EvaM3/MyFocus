@@ -32,8 +32,12 @@ class GoalTests: XCTestCase {
     
     func test_initGoalWithTasks() {
         
+        
+        let goalTask1 = [Task(description: TestDescriptions.testGoalDescription.rawValue, completed: false, creationDate: Date(), achievedDate: Date())]
+        
         let testTasks = [Task(description: TestDescriptions.taskDescription1.rawValue, completed: true, creationDate: Date(), achievedDate: Date())]
         let sut = makeSut(tasks: testTasks, description: TestDescriptions.testGoalDescription2.rawValue)
+        let sut2 = makeSut(tasks:  goalTask1, description: TestDescriptions.testGoalDescription.rawValue)
         XCTAssertEqual(sut.description, TestDescriptions.testGoalDescription2.rawValue)
         XCTAssertFalse(sut.completed)
         XCTAssertEqual(sut.tasks.count, 1)
@@ -72,7 +76,7 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.achievedDate)
     }
     
-    func test_completeGoal_success() {
+    func test_completeGoal_WhenGoalWithoutTasks_ThenFailure() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -87,17 +91,21 @@ class GoalTests: XCTestCase {
         XCTAssertNotNil(sut.achievedDate)
     }
     
-    func test_completeGoal_WhenAllTasksAchieved_ThenCompleted() {
+    func test_completeGoal_WhenTaskIsNotAchieved_ThenCompleted() {
         
         // ARRANGE:
         let sut = makeSut()
-        XCTAssertNil(sut.achievedDate)
-        
+        sut.addTask(description: "")
+    
         // ACT:
         sut.completeGoal()
+        sut.addTask(description: TestDescriptions.testGoalDescription.rawValue)
         
         // ASSERT:
         XCTAssertNotNil(sut.taskAchieved)
+        XCTAssertNotNil(sut.addTask(description: TestDescriptions.testGoalDescription.rawValue))
+        
+        
     }
     
     func test_completeGoal_WhenTasksFinished_ThenSuccess() {
