@@ -43,15 +43,23 @@ class Goal {
     }
     
     func completeGoal() {
+        guard !goalTasks.isEmpty else {
+            unCompleteGoal()
+            return
+        }
+        
         if goalAchievedDate == nil {
             goalAchievedDate = Date()
         }
+        
         if goalCompleted == false {
             goalCompleted = true
         }
+        
         for i in 0..<goalTasks.count {
             goalTasks[i].completeTask()
         }
+        
     }
     
     
@@ -91,8 +99,16 @@ class Goal {
         }
     }
     
+    func completeTask(index: Int) {
+        if index >= 0 && index < goalTasks.count {
+            goalTasks[index].completeTask()
+            if allTasksAchieved() {
+                completeGoal()
+            }
+        }
+    }
     
-    func taskAchieved() -> Bool {
+    func allTasksAchieved() -> Bool {
         var allTasksAchieved : Bool = false
         
         for i in 0..<goalTasks.count {
