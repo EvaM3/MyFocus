@@ -184,7 +184,7 @@ class GoalTests: XCTestCase {
         XCTAssertNotNil(sut.tasks[1].achievedDate)
     }
     
-    func test_addDifferentTasks_ThenCompleted() {
+    func test_completeTaskWhenAllCompleted_ThenGoalCompleted() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -194,7 +194,9 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.tasks[1].completed)
        
         // ACT:
-        sut.completeGoal()
+        sut.completeTask(index: 0)
+        XCTAssertFalse(sut.completed)
+        sut.completeTask(index: 1)
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
