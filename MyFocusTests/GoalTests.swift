@@ -238,6 +238,8 @@ class GoalTests: XCTestCase {
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
+        XCTAssertFalse(sut.tasks[0].completed)
+        XCTAssertNil(sut.achievedDate)
     }
     
     
@@ -245,7 +247,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        
+        sut.deleteTask(index: sut.tasks.count)
         
         // ACT:
         sut.undoCompleteTask(index: sut.tasks.count)
