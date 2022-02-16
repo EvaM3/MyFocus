@@ -257,29 +257,36 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.achievedDate)
+        XCTAssertNotNil(sut.tasks.count)
     }
     
     
     
     
-    func test_unDoCompleteGoal_WhenAchievedDateIsNil_ThenSuccess() {
+    func test_unDoCompleteGoal_WhenMoreTasksUndone_ThenCompleted() {
         
         // ARRANGE:
         let sut = makeSut()
+        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        XCTAssertFalse(sut.tasks[0].completed)
+        XCTAssertFalse(sut.tasks[1].completed)
       
-    
-        
         
         // ACT:
+        sut.completeTask(index: 0)
+        XCTAssertFalse(sut.completed)
+        sut.completeTask(index: 1)
         sut.undoCompleteGoal()
         
         // ASSERT:
+        XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.tasks[0].achievedDate)
         XCTAssertNil(sut.achievedDate)
     }
     
     
-    func test_unDoCompletGoal_WhenCompletedIsFalse_ThenSuccess() {
+    func test_unDoCompleteGoal_WhenCompletedIsFalse_ThenSuccess() {
         
         // ARRANGE:
         let sut = makeSut()
@@ -295,12 +302,15 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
+    
         
         // ACT:
         sut.deleteTask(index: 1)
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
+        XCTAssertFalse(sut.tasks[1].completed)
+        XCTAssertNil(sut.achievedDate)
     }
     
     func test_deleteTask_WhenAchievedDateIsNil_ThenSuccess() {
