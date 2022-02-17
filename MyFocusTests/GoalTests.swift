@@ -285,6 +285,22 @@ class GoalTests: XCTestCase {
         XCTAssertNil(sut.achievedDate)
     }
     
+    func test_undoCompleteGoal_WhenUpdateTaskIsCalled_ThenUnCompleteGoal() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.updateTask(index: 0, description: TestDescriptions.taskDescription2.rawValue)
+        sut.undoCompleteTask(index: 0)
+        
+        // ACT:
+        sut.undoCompleteTask(index: 0)
+        sut.undoCompleteGoal()
+        
+        // ASSERT:
+        XCTAssertFalse(sut.tasks[0].completed)
+        XCTAssertNil(sut.achievedDate)
+    }
     
     func test_unDoCompleteGoal_WhenCompletedIsFalse_ThenSuccess() {
         
