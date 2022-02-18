@@ -65,9 +65,6 @@ class Goal {
     
     func undoCompleteGoal() {
         unCompleteGoal()
-        for i in 0..<goalTasks.count {
-            goalTasks[i].unDoCompleteTask()
-        }
     }
     
     
