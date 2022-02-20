@@ -11,6 +11,7 @@ import Foundation
 let previousDate = Date()
 let futureDate = Date().addingTimeInterval(2000)
 
+
 //  previousDate == futureDate
 //  previousDate != futureDate
 //  previousDate < futureDate

@@ -414,6 +414,7 @@ class GoalTests: XCTestCase {
         // ASSERT:
         XCTAssertNil(sut.achievedDate)
         XCTAssertFalse(sut.tasks[0].completed)
+        XCTAssertGreaterThan(Date(), sut.creationDate)
     }
     
     func test_updateTask_WhenTaskisNotEmpty_ThenSuccess() {
