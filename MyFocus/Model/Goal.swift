@@ -31,6 +31,26 @@ class Goal {
         self.goalAchievedDate = nil
     }
     
+   // func validDate() -> Date {
+        //
+        //        let formatter = DateFormatter()
+        //        var firstDate = formatter.dateFormat = "dd/mm/yyyy"
+        //        var secondDate = formatter.dateFormat = "dd/mm/yyyy"
+                
+//        var previousDate = achievedDate
+//        var futureDate = goalAchievedDate?.timeIntervalSinceNow
+//
+//        if previousDate < futureDate {
+//            return previousDate
+//        } else {
+//
+//            return
+//        }
+//
+//
+    //}
+    
+    
     func addTask(description: String) {
         let newTask = Task(description: description, completed: false, creationDate: Date())
         goalTasks.append(newTask)
@@ -64,6 +84,7 @@ class Goal {
     
     
     func undoCompleteGoal() {
+        
         unCompleteGoal()
     }
     
