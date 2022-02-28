@@ -32,10 +32,7 @@ class Goal {
     }
     
    // func validDate() -> Date {
-        //
-        //        let formatter = DateFormatter()
-        //        var firstDate = formatter.dateFormat = "dd/mm/yyyy"
-        //        var secondDate = formatter.dateFormat = "dd/mm/yyyy"
+       
                 
 //        var previousDate = achievedDate
 //        var futureDate = goalAchievedDate?.timeIntervalSinceNow
