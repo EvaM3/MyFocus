@@ -31,20 +31,20 @@ class Goal {
         self.goalAchievedDate = nil
     }
     
-   // func validDate() -> Date {
-       
-                
-//        var previousDate = achievedDate
-//        var futureDate = goalAchievedDate?.timeIntervalSinceNow
-//
-//        if previousDate < futureDate {
-//            return previousDate
-//        } else {
-//
-//            return
-//        }
-//
-//
+    // func validDate() -> Date {
+    
+    
+    //        var previousDate = achievedDate
+    //        var futureDate = goalAchievedDate?.timeIntervalSinceNow
+    //
+    //        if previousDate < futureDate {
+    //            return previousDate
+    //        } else {
+    //
+    //            return
+    //        }
+    //
+    //
     //}
     
     
@@ -55,6 +55,14 @@ class Goal {
     }
     
     private func unCompleteGoal() {
+        for i in 0..<goalTasks.count {
+            if let taskDate =  goalTasks[i].achievedDate,
+               let goalDate = goalAchievedDate,
+               taskDate >= goalDate {
+                goalTasks[i].unDoCompleteTask()
+            }
+        }
+        
         goalCompleted = false
         goalAchievedDate = nil
     }

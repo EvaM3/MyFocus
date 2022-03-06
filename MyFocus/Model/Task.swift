@@ -27,7 +27,7 @@ struct Task {
     
     
     mutating func completeTask() {
-        // TODO:
+        
         if achievedDate == nil {
             achievedDate = Date()
         }
@@ -38,7 +38,7 @@ struct Task {
     
     
     mutating func updateTask(description: String) {
-        // TODO:
+        
         self.description = description
         unDoCompleteTask()
         if creationDate != Date() {
