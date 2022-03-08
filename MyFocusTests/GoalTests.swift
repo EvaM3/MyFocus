@@ -454,6 +454,26 @@ class GoalTests: XCTestCase {
         XCTAssertEqual(sut.tasks[0].description, TestDescriptions.taskDescription2.rawValue)
     }
     
+    func test_updateTask_WhenSecondTaskisUpdatedAndNotCompleted_ThenSuccess() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(description: TestDescriptions.taskDescription3.rawValue)
+        
+        // ACT:
+        sut.updateTask(index: 1, description: TestDescriptions.taskDescription2.rawValue)
+        
+        
+        // ASSERT:
+        XCTAssertEqual(sut.tasks.count, 2)
+        XCTAssertFalse(sut.completed)
+        XCTAssertNil(sut.tasks[1].achievedDate)
+        XCTAssertFalse(sut.tasks[1].completed)
+        XCTAssertEqual(sut.tasks[1].description, TestDescriptions.taskDescription2.rawValue)
+        XCTAssertEqual(sut.tasks[0].description, TestDescriptions.taskDescription1.rawValue)
+        XCTAssertFalse(sut.tasks[0].completed)
+    }
     
     func test_updateTask_WhenGoalAchieved_ThenGoalUnAchieved() {
         
