@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="Task" representedClassName="Task" syncable="YES" codeGenerationType="class">
+        <attribute name="achievedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="taskCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="taskDescription" optional="YES" attributeType="String"/>
+        <relationship name="completed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="completed" inverseEntity="Task"/>
+        <relationship name="taskAchievedDate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="taskAchievedDate" inverseEntity="Task"/>
+        <relationship name="taskCreationDate" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="taskCreationDate" inverseEntity="Task"/>
+        <relationship name="taskDescription1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="taskDescription1" inverseEntity="Task"/>
+    </entity>
     <elements>
-        <element name="Entity" positionX="-63" positionY="-18" width="128" height="29"/>
+        <element name="Task" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>

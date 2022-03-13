@@ -10,6 +10,8 @@
 		A043CDF127680B9900FF2580 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF027680B9900FF2580 /* Goal.swift */; };
 		A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF227680BD800FF2580 /* GoalTests.swift */; };
 		A08096E8279DF3EA008A3AB3 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08096E7279DF3EA008A3AB3 /* Struct.swift */; };
+		A08551DA27DD63C500002ECE /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08551D827DD63C500002ECE /* Task+CoreDataClass.swift */; };
+		A08551DB27DD63C500002ECE /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08551D927DD63C500002ECE /* Task+CoreDataProperties.swift */; };
 		A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CA27595DBE003428B7 /* AppDelegate.swift */; };
 		A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CC27595DBE003428B7 /* SceneDelegate.swift */; };
 		A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CE27595DBE003428B7 /* ViewController.swift */; };
@@ -36,6 +38,8 @@
 		A043CDF027680B9900FF2580 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		A043CDF227680BD800FF2580 /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		A08096E7279DF3EA008A3AB3 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
+		A08551D827DD63C500002ECE /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A08551D927DD63C500002ECE /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A0A647C727595DBE003428B7 /* MyFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A647CA27595DBE003428B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A647CC27595DBE003428B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +77,8 @@
 		A0A647BE27595DBE003428B7 = {
 			isa = PBXGroup;
 			children = (
+				A08551D827DD63C500002ECE /* Task+CoreDataClass.swift */,
+				A08551D927DD63C500002ECE /* Task+CoreDataProperties.swift */,
 				A0E3E11327DA9F4C00085853 /* FocusData.xcdatamodeld */,
 				A0A647C927595DBE003428B7 /* MyFocus */,
 				A0A647E327595E1B003428B7 /* MyFocusTests */,
@@ -227,7 +233,9 @@
 			files = (
 				A08096E8279DF3EA008A3AB3 /* Struct.swift in Sources */,
 				A0A647EE275960CC003428B7 /* Task.swift in Sources */,
+				A08551DA27DD63C500002ECE /* Task+CoreDataClass.swift in Sources */,
 				A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */,
+				A08551DB27DD63C500002ECE /* Task+CoreDataProperties.swift in Sources */,
 				A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */,
 				A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */,
 				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
