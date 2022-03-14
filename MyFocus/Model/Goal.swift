@@ -15,7 +15,7 @@ class Goal {
     private var goalCompleted: Bool
     private var goalCreationDate: Date
     private var goalAchievedDate: Date?
-    var description: String { goalDescription }
+    var title: String { goalDescription }
     var tasks: [Task] { goalTasks }
     var completed: Bool { goalCompleted }
     var creationDate: Date { goalCreationDate }
@@ -25,31 +25,15 @@ class Goal {
     
     init(tasks: [Task], description: String) {
         self.goalTasks = tasks
-        self.goalDescription = description
+        self.goalTitle = title
         self.goalCompleted = false
         self.goalCreationDate = Date()
         self.goalAchievedDate = nil
     }
     
-    // func validDate() -> Date {
-    
-    
-    //        var previousDate = achievedDate
-    //        var futureDate = goalAchievedDate?.timeIntervalSinceNow
-    //
-    //        if previousDate < futureDate {
-    //            return previousDate
-    //        } else {
-    //
-    //            return
-    //        }
-    //
-    //
-    //}
-    
     
     func addTask(description: String) {
-        let newTask = Task(description: description, completed: false, creationDate: Date())
+        let newTask = Task(title: title, completed: false, creationDate: Date())
         goalTasks.append(newTask)
         unCompleteGoal()
     }
@@ -105,7 +89,7 @@ class Goal {
     
     func updateTask(index: Int, description: String) {
         if index >= 0 && index < goalTasks.count {
-            goalTasks[index].updateTask(description: description)
+            goalTasks[index].updateTask(title: title)
             undoCompleteGoal()
         } else {
             return

@@ -10,7 +10,7 @@ import Foundation
 
 struct Task {
     
-    var description: String
+    var title: String
     var completed: Bool
     var creationDate: Date
     var achievedDate: Date?
@@ -39,7 +39,7 @@ struct Task {
     
     mutating func updateTask(description: String) {
         
-        self.description = description
+        self.title = title
         unDoCompleteTask()
         if creationDate != Date() {
             creationDate = Date()
