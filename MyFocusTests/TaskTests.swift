@@ -10,13 +10,13 @@ import XCTest
 
 class TaskTests: XCTestCase {
     
-    let description1 = "Buy a few books"
-    let description2 = "Buy some flowers"
+    let title1 = "Buy a few books"
+    let title2 = "Buy some flowers"
    
     
     func test_init() {
         let sut = makeSut()
-        XCTAssertEqual(sut.description, description1)
+        XCTAssertEqual(sut.title, title1)
         XCTAssertFalse(sut.completed, "Expected false, got \(sut.completed)")
     }
     
@@ -128,10 +128,10 @@ class TaskTests: XCTestCase {
         
         
         // ACT:
-        sut.updateTask(description: description2)
+        sut.updateTask(title: title2)
         
         // ASSERT:
-        XCTAssertEqual(sut.description,description2)
+        XCTAssertEqual(sut.title,title2)
         XCTAssertLessThan(originalDate, sut.creationDate)
     }
     
@@ -139,7 +139,7 @@ class TaskTests: XCTestCase {
     
     
     func makeSut() -> Task {
-      let sut = Task(description: description1, completed: false, creationDate: Date(), achievedDate: nil)
+      let sut = Task(title: title1, completed: false, creationDate: Date(), achievedDate: nil)
         return sut
     }
 }

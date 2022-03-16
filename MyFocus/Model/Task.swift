@@ -37,7 +37,7 @@ struct Task {
     }
     
     
-    mutating func updateTask(description: String) {
+    mutating func updateTask(title: String) {
         
         self.title = title
         unDoCompleteTask()

@@ -10,13 +10,13 @@ import XCTest
 
 class GoalTests: XCTestCase {
     
-    enum TestDescriptions: String {
-        case testGoalDescription = "Finish the book"
-        case testGoalDescription2 = "Go jogging"
-        case taskDescription1 = "Take a walk"
-        case taskDescription2 = "Go grocery shopping"
-        case taskDescription3 = "Shop fot the birthday present"
-        case taskDescription4 = "Call your best friend"
+    enum TestTitles: String {
+        case testGoaltitle = "Finish the book"
+        case testGoaltitle2 = "Go jogging"
+        case tasktitle1 = "Take a walk"
+        case tasktitle2 = "Go grocery shopping"
+        case tasktitle3 = "Shop fot the birthday present"
+        case tasktitle4 = "Call your best friend"
         
     }
     
@@ -25,7 +25,7 @@ class GoalTests: XCTestCase {
     func test_initGoal() {
         
         let sut = makeSut()
-        XCTAssertEqual(sut.description, TestDescriptions.testGoalDescription.rawValue)
+        XCTAssertEqual(sut.title, TestTitles.testGoaltitle.rawValue)
         XCTAssertFalse(sut.completed)
         XCTAssertEqual(sut.tasks.count, 0)
         XCTAssertNil(sut.achievedDate)
@@ -36,14 +36,14 @@ class GoalTests: XCTestCase {
     func test_initGoalWithUncomletedTask() {
         
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        XCTAssertEqual(sut.description, TestDescriptions.testGoalDescription.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        XCTAssertEqual(sut.title, TestTitles.testGoaltitle.rawValue)
         XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.achievedDate)
         XCTAssertGreaterThan(Date(), sut.creationDate)
         
         XCTAssertEqual(sut.tasks.count, 1)
-        XCTAssertEqual(sut.tasks[0].description,TestDescriptions.taskDescription1.rawValue)
+        XCTAssertEqual(sut.tasks[0].title,TestTitles.tasktitle1.rawValue)
         XCTAssertFalse(sut.tasks[0].completed)
         XCTAssertNil(sut.tasks[0].achievedDate)
     }
@@ -51,9 +51,9 @@ class GoalTests: XCTestCase {
     
     func test_initGoalWithTasks() {
         
-        let testTasks = [Task(description: TestDescriptions.taskDescription1.rawValue, completed: true, creationDate: Date(), achievedDate: Date())]
-        let sut = makeSut(tasks: testTasks, description: TestDescriptions.testGoalDescription2.rawValue)
-        XCTAssertEqual(sut.description, TestDescriptions.testGoalDescription2.rawValue)
+        let testTasks = [Task(title: TestTitles.tasktitle1.rawValue, completed: true, creationDate: Date(), achievedDate: Date())]
+        let sut = makeSut(tasks: testTasks, title: TestTitles.testGoaltitle2.rawValue)
+        XCTAssertEqual(sut.title, TestTitles.testGoaltitle2.rawValue)
         XCTAssertFalse(sut.completed)
         XCTAssertEqual(sut.tasks.count, 1)
         XCTAssertNil(sut.achievedDate)
@@ -63,14 +63,14 @@ class GoalTests: XCTestCase {
     func test_addTaskSuccess() {
         
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription3.rawValue)
-        XCTAssertEqual(sut.description, TestDescriptions.testGoalDescription.rawValue)
+        sut.addTask(title: TestTitles.tasktitle3.rawValue)
+        XCTAssertEqual(sut.title, TestTitles.testGoaltitle.rawValue)
         XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.achievedDate)
         XCTAssertGreaterThan(Date(), sut.creationDate)
         
         XCTAssertEqual(sut.tasks.count, 1)
-        XCTAssertNotEqual(sut.tasks[0].description,TestDescriptions.taskDescription1.rawValue)
+        XCTAssertNotEqual(sut.tasks[0].title,TestTitles.tasktitle1.rawValue)
         XCTAssertFalse(sut.tasks[0].completed)
         XCTAssertNil(sut.tasks[0].achievedDate)
     }
@@ -80,13 +80,13 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.completeTask(index: 0)
         XCTAssertTrue(sut.completed)
         XCTAssertNotNil(sut.achievedDate)
         
         // ACT:
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
@@ -117,7 +117,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         
         // ACT:
         sut.completeGoal()
@@ -134,8 +134,8 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         
         // ACT:
         sut.completeGoal()
@@ -154,8 +154,8 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         sut.completeTask(index: 0)
         XCTAssertTrue(sut.tasks[0].completed)
         XCTAssertFalse(sut.tasks[1].completed)
@@ -176,8 +176,8 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription3.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription4.rawValue)
+        sut.addTask(title: TestTitles.tasktitle3.rawValue)
+        sut.addTask(title: TestTitles.tasktitle4.rawValue)
         XCTAssertFalse(sut.tasks[0].completed)
         XCTAssertFalse(sut.tasks[1].completed)
         
@@ -200,7 +200,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription3.rawValue)
+        sut.addTask(title: TestTitles.tasktitle3.rawValue)
         XCTAssertFalse(sut.tasks[0].completed)
         
         // ACT:
@@ -232,7 +232,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         
         
         // ACT:
@@ -250,8 +250,8 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         sut.completeTask(index: 0)
         
         
@@ -273,8 +273,8 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         sut.completeTask(index: 0)
         sut.completeGoal()
         
@@ -296,7 +296,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.completeGoal()
         
         
@@ -316,7 +316,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         XCTAssertFalse(sut.tasks[0].completed)
         
         // ACT:
@@ -332,8 +332,8 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         
         // ACT:
         sut.deleteTask(index: 0)
@@ -365,7 +365,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.completeTask(index: 0)
         XCTAssertTrue(sut.tasks[0].completed)
         
@@ -383,7 +383,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.completeGoal()
         XCTAssertTrue(sut.tasks[0].completed)
         
@@ -401,7 +401,7 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         
         
         // ACT:
@@ -430,11 +430,11 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         
         
         // ACT:
-        sut.updateTask(index: 0, description: TestDescriptions.taskDescription2.rawValue)
+        sut.updateTask(index: 0, title: TestTitles.tasktitle2.rawValue)
         
         
         // ASSERT:
@@ -442,7 +442,7 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.tasks[0].achievedDate)
         XCTAssertFalse(sut.tasks[0].completed)
-        XCTAssertEqual(sut.tasks[0].description, TestDescriptions.taskDescription2.rawValue)
+        XCTAssertEqual(sut.tasks[0].title, TestTitles.tasktitle2.rawValue)
     }
     
     
@@ -450,11 +450,11 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
-        sut.addTask(description: TestDescriptions.taskDescription2.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle2.rawValue)
         
         // ACT:
-        sut.updateTask(index: 1, description: TestDescriptions.taskDescription3.rawValue)
+        sut.updateTask(index: 1, title: TestTitles.tasktitle3.rawValue)
         
         
         // ASSERT:
@@ -462,8 +462,8 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.completed)
         XCTAssertNil(sut.tasks[1].achievedDate)
         XCTAssertFalse(sut.tasks[1].completed)
-        XCTAssertEqual(sut.tasks[1].description, TestDescriptions.taskDescription3.rawValue)
-        XCTAssertEqual(sut.tasks[0].description, TestDescriptions.taskDescription1.rawValue)
+        XCTAssertEqual(sut.tasks[1].title, TestTitles.tasktitle3.rawValue)
+        XCTAssertEqual(sut.tasks[0].title, TestTitles.tasktitle1.rawValue)
         XCTAssertFalse(sut.tasks[0].completed)
     }
     
@@ -472,12 +472,12 @@ class GoalTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        sut.addTask(description: TestDescriptions.taskDescription1.rawValue)
+        sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.completeGoal()
         
         
         // ACT:
-        sut.updateTask(index: 0, description: TestDescriptions.taskDescription2.rawValue)
+        sut.updateTask(index: 0, title: TestTitles.tasktitle2.rawValue)
         
         
         // ASSERT:
@@ -493,7 +493,7 @@ class GoalTests: XCTestCase {
         let sut = makeSut()
         
         // ACT:
-        sut.updateTask(index: 0, description: TestDescriptions.taskDescription1.rawValue)
+        sut.updateTask(index: 0, title: TestTitles.tasktitle1.rawValue)
         
         
         // ASSERT:
@@ -502,8 +502,8 @@ class GoalTests: XCTestCase {
     }
     
     
-    func makeSut(tasks: [Task] = [], description: String = TestDescriptions.testGoalDescription.rawValue) -> Goal {
-        let sut = Goal(tasks: tasks, description: description)
+    func makeSut(tasks: [Task] = [], title: String = TestTitles.testGoaltitle.rawValue) -> Goal {
+        let sut = Goal(tasks: tasks, title: title)
         
         return sut
     }

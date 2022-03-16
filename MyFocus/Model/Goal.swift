@@ -11,19 +11,18 @@ import Foundation
 
 class Goal {
     private var goalTasks: [Task]
-    private var goalDescription: String
+    private var goalTitle: String
     private var goalCompleted: Bool
     private var goalCreationDate: Date
     private var goalAchievedDate: Date?
-    var title: String { goalDescription }
+    var title: String { goalTitle }
     var tasks: [Task] { goalTasks }
     var completed: Bool { goalCompleted }
     var creationDate: Date { goalCreationDate }
     var achievedDate: Date? { goalAchievedDate}
     
     
-    
-    init(tasks: [Task], description: String) {
+    init(tasks: [Task], title: String) {
         self.goalTasks = tasks
         self.goalTitle = title
         self.goalCompleted = false
@@ -32,7 +31,7 @@ class Goal {
     }
     
     
-    func addTask(description: String) {
+    func addTask(title: String) {
         let newTask = Task(title: title, completed: false, creationDate: Date())
         goalTasks.append(newTask)
         unCompleteGoal()
@@ -87,7 +86,7 @@ class Goal {
     }
     
     
-    func updateTask(index: Int, description: String) {
+    func updateTask(index: Int, title: String) {
         if index >= 0 && index < goalTasks.count {
             goalTasks[index].updateTask(title: title)
             undoCompleteGoal()
