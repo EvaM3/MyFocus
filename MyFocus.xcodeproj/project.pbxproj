@@ -21,6 +21,7 @@
 		A0A647E527595E1B003428B7 /* MyFocusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647E427595E1B003428B7 /* MyFocusTests.swift */; };
 		A0A647EE275960CC003428B7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647ED275960CC003428B7 /* Task.swift */; };
 		A0A647F027596157003428B7 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647EF27596157003428B7 /* TaskTests.swift */; };
+		A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BA56BA2835A0FD0078517B /* DataController.swift */; };
 		A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0E3E11327DA9F4C00085853 /* FocusData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		A0A647E627595E1B003428B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0A647ED275960CC003428B7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A0A647EF27596157003428B7 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
+		A0BA56BA2835A0FD0078517B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		A0E3E11427DA9F4C00085853 /* FocusData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FocusData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				A0A647CA27595DBE003428B7 /* AppDelegate.swift */,
 				A0A647CC27595DBE003428B7 /* SceneDelegate.swift */,
 				A0A647CE27595DBE003428B7 /* ViewController.swift */,
+				A0BA56BA2835A0FD0078517B /* DataController.swift */,
 				A0A647D027595DBE003428B7 /* Main.storyboard */,
 				A0A647D327595DBF003428B7 /* Assets.xcassets */,
 				A0A647D527595DBF003428B7 /* LaunchScreen.storyboard */,
@@ -244,6 +247,7 @@
 				A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */,
 				A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */,
 				A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */,
+				A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */,
 				A0848F3327E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift in Sources */,
 				A0848F3427E7B98E00B90B7F /* TaskEntity+CoreDataProperties.swift in Sources */,
 				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
