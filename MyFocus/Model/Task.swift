@@ -8,8 +8,8 @@
 import Foundation
 
 
-struct Task {
-    
+struct Task: Identifiable {
+    var id: UUID
     var title: String
     var completed: Bool
     var creationDate: Date

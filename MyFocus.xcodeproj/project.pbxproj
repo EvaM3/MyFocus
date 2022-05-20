@@ -11,7 +11,6 @@
 		A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF227680BD800FF2580 /* GoalTests.swift */; };
 		A0848F3327E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0848F3127E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift */; };
 		A0848F3427E7B98E00B90B7F /* TaskEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0848F3227E7B98E00B90B7F /* TaskEntity+CoreDataProperties.swift */; };
-		A0848F3727E7BA6D00B90B7F /* FocusDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0848F3627E7BA6D00B90B7F /* FocusDataController.swift */; };
 		A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CA27595DBE003428B7 /* AppDelegate.swift */; };
 		A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CC27595DBE003428B7 /* SceneDelegate.swift */; };
 		A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CE27595DBE003428B7 /* ViewController.swift */; };
@@ -40,7 +39,6 @@
 		A043CDF227680BD800FF2580 /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		A0848F3127E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A0848F3227E7B98E00B90B7F /* TaskEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A0848F3627E7BA6D00B90B7F /* FocusDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusDataController.swift; sourceTree = "<group>"; };
 		A0A647C727595DBE003428B7 /* MyFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A647CA27595DBE003428B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A647CC27595DBE003428B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +79,6 @@
 			children = (
 				A0848F3227E7B98E00B90B7F /* TaskEntity+CoreDataProperties.swift */,
 				A0848F3127E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift */,
-				A0848F3627E7BA6D00B90B7F /* FocusDataController.swift */,
 			);
 			path = MyFocusItems;
 			sourceTree = "<group>";
@@ -243,7 +240,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0A647EE275960CC003428B7 /* Task.swift in Sources */,
-				A0848F3727E7BA6D00B90B7F /* FocusDataController.swift in Sources */,
 				A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */,
 				A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */,
 				A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */,

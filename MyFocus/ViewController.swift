@@ -25,14 +25,15 @@ extension ListEntityUI {
 class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
+        tableView.dataSource = self
+        tableView.delegate = self
         super.viewDidLoad()
-        
+        loadData()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
-        
     }
+    
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListEntityUI]()
     @IBOutlet weak var tableView: UITableView!
@@ -119,16 +120,17 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func loadData(pred: NSPredicate? = nil) {
         let filteredFetchResult = coreDataManager.loadData(predicate: pred)
         
-        listEntityArray = []
-        for item in filteredFetchResult {
+         listEntityArray = []
+         for item in filteredFetchResult {
             let newMap = map(item: item)
             listEntityArray.append(newMap)
             
         }
         tableView.reloadData()
     }
+    
     func saveData() {
-        coreDataManager.saveData()
-        self.loadData()
+    coreDataManager.saveData()
+    self.loadData()
     }
 }

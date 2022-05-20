@@ -5,7 +5,7 @@
 //  Created by Eva Madarasz on 18/05/2022.
 //
 
-import UIKit
+
 import CoreData
 
 
@@ -14,7 +14,7 @@ class CoreDataManager {
     
     
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "TaskEntity")
+        let container = NSPersistentContainer(name: "FocusData")
         
         container.loadPersistentStores(completionHandler: { (NSPersistentStoreDescription, error) in
             if let error = error as NSError? {

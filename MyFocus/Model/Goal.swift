@@ -9,7 +9,9 @@ import Foundation
 
 
 
-class Goal {
+struct Goal: Identifiable {
+    var id: UUID
+    
     private var goalTasks: [Task]
     private var goalTitle: String
     private var goalCompleted: Bool
@@ -23,6 +25,7 @@ class Goal {
     
     
     init(tasks: [Task], title: String) {
+        self.id = UUID()
         self.goalTasks = tasks
         self.goalTitle = title
         self.goalCompleted = false
@@ -31,13 +34,13 @@ class Goal {
     }
     
     
-    func addTask(title: String) {
-        let newTask = Task(title: title, completed: false, creationDate: Date())
+    mutating func addTask(title: String) {
+        let newTask = Task(id: UUID(), title: title, completed: false, creationDate: Date())
         goalTasks.append(newTask)
         unCompleteGoal()
     }
     
-    private func unCompleteGoal() {
+    private mutating func unCompleteGoal() {
         for i in 0..<goalTasks.count {
             if let taskDate =  goalTasks[i].achievedDate,
                let goalDate = goalAchievedDate,
@@ -50,7 +53,7 @@ class Goal {
         goalAchievedDate = nil
     }
     
-    func completeGoal() {
+    mutating func completeGoal() {
         guard !goalTasks.isEmpty else {
             unCompleteGoal()
             return
@@ -71,13 +74,13 @@ class Goal {
     }
     
     
-    func undoCompleteGoal() {
+    mutating func undoCompleteGoal() {
         
         unCompleteGoal()
     }
     
     
-    func deleteTask(index: Int) {
+    mutating func deleteTask(index: Int) {
         if index >= 0 && index < goalTasks.count {
             goalTasks.remove(at: index)
         } else {
@@ -86,7 +89,7 @@ class Goal {
     }
     
     
-    func updateTask(index: Int, title: String) {
+    mutating func updateTask(index: Int, title: String) {
         if index >= 0 && index < goalTasks.count {
             goalTasks[index].updateTask(title: title)
             undoCompleteGoal()
@@ -96,7 +99,7 @@ class Goal {
     }
     
     
-    func undoCompleteTask(index: Int) {
+    mutating func undoCompleteTask(index: Int) {
         if index >= 0 && index < goalTasks.count {
             goalTasks[index].unDoCompleteTask()
             undoCompleteGoal()
@@ -105,7 +108,7 @@ class Goal {
         }
     }
     
-    func completeTask(index: Int) {
+    mutating func completeTask(index: Int) {
         if index >= 0 && index < goalTasks.count {
             goalTasks[index].completeTask()
             if allTasksAchieved() {
