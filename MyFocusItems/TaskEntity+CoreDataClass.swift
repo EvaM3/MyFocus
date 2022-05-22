@@ -2,7 +2,7 @@
 //  TaskEntity+CoreDataClass.swift
 //  MyFocus
 //
-//  Created by Eva Sira Madarasz on 20/03/2022.
+//  Created by Eva Madarasz on 20/03/2022.
 //
 //
 

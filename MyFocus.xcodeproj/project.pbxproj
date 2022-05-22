@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00588B1283A689A00F19F12 /* GoalsEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00588AF283A689A00F19F12 /* GoalsEntity+CoreDataClass.swift */; };
+		A00588B2283A689A00F19F12 /* GoalsEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00588B0283A689A00F19F12 /* GoalsEntity+CoreDataProperties.swift */; };
 		A043CDF127680B9900FF2580 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF027680B9900FF2580 /* Goal.swift */; };
 		A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF227680BD800FF2580 /* GoalTests.swift */; };
 		A0848F3327E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0848F3127E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A00588AF283A689A00F19F12 /* GoalsEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalsEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A00588B0283A689A00F19F12 /* GoalsEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalsEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A043CDF027680B9900FF2580 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		A043CDF227680BD800FF2580 /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
 		A0848F3127E7B98E00B90B7F /* TaskEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 		A0A647BE27595DBE003428B7 = {
 			isa = PBXGroup;
 			children = (
+				A00588AF283A689A00F19F12 /* GoalsEntity+CoreDataClass.swift */,
+				A00588B0283A689A00F19F12 /* GoalsEntity+CoreDataProperties.swift */,
 				A0848F3527E7B9F300B90B7F /* MyFocusItems */,
 				A0E3E11327DA9F4C00085853 /* FocusData.xcdatamodeld */,
 				A0A647C927595DBE003428B7 /* MyFocus */,
@@ -239,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A00588B2283A689A00F19F12 /* GoalsEntity+CoreDataProperties.swift in Sources */,
 				A0A647EE275960CC003428B7 /* Task.swift in Sources */,
 				A0A647CF27595DBE003428B7 /* ViewController.swift in Sources */,
 				A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */,
@@ -248,6 +255,7 @@
 				A0848F3427E7B98E00B90B7F /* TaskEntity+CoreDataProperties.swift in Sources */,
 				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
 				A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */,
+				A00588B1283A689A00F19F12 /* GoalsEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
