@@ -6,15 +6,17 @@
         <attribute name="goalCreationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="goalTasks" optional="YES" attributeType="String"/>
         <attribute name="goalTitle" optional="YES" attributeType="String"/>
+        <relationship name="tasks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GoalsEntity" inverseName="tasks" inverseEntity="GoalsEntity"/>
     </entity>
-    <entity name="TaskEntity" representedClassName="TaskEntity" syncable="YES">
+    <entity name="TaskEntity" representedClassName="TaskEntity" parentEntity="GoalsEntity" syncable="YES">
         <attribute name="achievedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="goal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GoalsEntity"/>
     </entity>
     <elements>
-        <element name="GoalsEntity" positionX="-63" positionY="9" width="128" height="104"/>
-        <element name="TaskEntity" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="GoalsEntity" positionX="-63" positionY="9" width="128" height="119"/>
+        <element name="TaskEntity" positionX="-63" positionY="-18" width="128" height="104"/>
     </elements>
 </model>
