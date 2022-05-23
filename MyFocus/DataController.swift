@@ -45,6 +45,17 @@ class CoreDataManager {
             return []
         }
     }
+    
+    func loadGoalData(predicate: NSPredicate? = nil) -> [GoalsEntity] {
+        let request: NSFetchRequest<GoalsEntity> = GoalsEntity.fetchRequest()
+        request.predicate = predicate
+        do {
+            return try persistentContainer.viewContext.fetch(request)
+        } catch {
+            print("Error loading data \(error)")
+            return []
+        }
+    }
 
     func addItem(item: ListEntityUI) {
         let newItem = TaskEntity(context: persistentContainer.viewContext)
