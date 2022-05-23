@@ -2,7 +2,7 @@
 //  GoalsEntity+CoreDataProperties.swift
 //  MyFocus
 //
-//  Created by Eva Madarasz on 22/05/2022.
+//  Created by Eva Sira Madarasz on 22/05/2022.
 //
 //
 
@@ -16,11 +16,47 @@ extension GoalsEntity {
         return NSFetchRequest<GoalsEntity>(entityName: "GoalsEntity")
     }
 
-    @NSManaged public var goalAchievedDate: Date?
-    @NSManaged public var goalCreationDate: Date?
-    @NSManaged public var goalCompleted: Bool
-    @NSManaged public var goalTitle: String?
-    @NSManaged public var goalTasks: String?
+    @NSManaged public var achievedDate: Date?
+    @NSManaged public var completed: Bool
+    @NSManaged public var creationDate: Date?
+    @NSManaged public var title: String?
+    @NSManaged public var id: UUID?
+    @NSManaged public var tasks: NSOrderedSet?
+
+}
+
+// MARK: Generated accessors for tasks
+extension GoalsEntity {
+
+    @objc(insertObject:inTasksAtIndex:)
+    @NSManaged public func insertIntoTasks(_ value: TaskEntity, at idx: Int)
+
+    @objc(removeObjectFromTasksAtIndex:)
+    @NSManaged public func removeFromTasks(at idx: Int)
+
+    @objc(insertTasks:atIndexes:)
+    @NSManaged public func insertIntoTasks(_ values: [TaskEntity], at indexes: NSIndexSet)
+
+    @objc(removeTasksAtIndexes:)
+    @NSManaged public func removeFromTasks(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInTasksAtIndex:withObject:)
+    @NSManaged public func replaceTasks(at idx: Int, with value: TaskEntity)
+
+    @objc(replaceTasksAtIndexes:withTasks:)
+    @NSManaged public func replaceTasks(at indexes: NSIndexSet, with values: [TaskEntity])
+
+    @objc(addTasksObject:)
+    @NSManaged public func addToTasks(_ value: TaskEntity)
+
+    @objc(removeTasksObject:)
+    @NSManaged public func removeFromTasks(_ value: TaskEntity)
+
+    @objc(addTasks:)
+    @NSManaged public func addToTasks(_ values: NSOrderedSet)
+
+    @objc(removeTasks:)
+    @NSManaged public func removeFromTasks(_ values: NSOrderedSet)
 
 }
 

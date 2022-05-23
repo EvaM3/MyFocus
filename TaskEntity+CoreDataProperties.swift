@@ -2,7 +2,7 @@
 //  TaskEntity+CoreDataProperties.swift
 //  MyFocus
 //
-//  Created by Eva Madarasz on 20/03/2022.
+//  Created by Eva Sira Madarasz on 22/05/2022.
 //
 //
 
@@ -20,6 +20,7 @@ extension TaskEntity {
     @NSManaged public var completed: Bool
     @NSManaged public var creationDate: Date?
     @NSManaged public var name: String?
+    @NSManaged public var id: UUID?
 
 }
 
