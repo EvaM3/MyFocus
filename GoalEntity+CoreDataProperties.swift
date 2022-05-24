@@ -10,10 +10,10 @@ import Foundation
 import CoreData
 
 
-extension GoalsEntity {
+extension GoalEntity {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<GoalsEntity> {
-        return NSFetchRequest<GoalsEntity>(entityName: "GoalsEntity")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<GoalEntity> {
+        return NSFetchRequest<GoalEntity>(entityName: "GoalEntity")
     }
 
     @NSManaged public var achievedDate: Date?
@@ -26,7 +26,7 @@ extension GoalsEntity {
 }
 
 // MARK: Generated accessors for tasks
-extension GoalsEntity {
+extension GoalEntity {
 
     @objc(insertObject:inTasksAtIndex:)
     @NSManaged public func insertIntoTasks(_ value: TaskEntity, at idx: Int)
@@ -60,6 +60,6 @@ extension GoalsEntity {
 
 }
 
-extension GoalsEntity : Identifiable {
+extension GoalEntity : Identifiable {
 
 }

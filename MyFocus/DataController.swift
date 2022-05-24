@@ -46,8 +46,8 @@ class CoreDataManager {
         }
     }
     
-    func loadGoalData(predicate: NSPredicate? = nil) -> [GoalsEntity] {
-        let request: NSFetchRequest<GoalsEntity> = GoalsEntity.fetchRequest()
+    func loadGoalData(predicate: NSPredicate? = nil) -> [GoalEntity] {
+        let request: NSFetchRequest<GoalEntity> = GoalEntity.fetchRequest()
         request.predicate = predicate
         do {
             return try persistentContainer.viewContext.fetch(request)
