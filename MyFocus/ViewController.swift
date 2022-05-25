@@ -13,12 +13,31 @@ struct ListEntityUI {
     var achievedDate: Date?
     
 }
+
 extension ListEntityUI {
     init(mapListEntityUI : TaskEntity) {
         self.title = mapListEntityUI.name ?? ""
         self.isCompleted = mapListEntityUI.completed
         self.achievedDate = mapListEntityUI.achievedDate
         self.creationDate = mapListEntityUI.creationDate
+    }
+}
+
+struct GoalEntityUI {
+    var achievedDate: Date?
+    var completed: Bool
+    var creationDate: Date?
+    var title: String?
+    var tasks: NSOrderedSet?
+}
+
+extension GoalEntityUI {
+    init (mapGoalEntityUI : GoalEntity) {
+        self.title = mapGoalEntityUI.title ?? ""
+        self.completed = mapGoalEntityUI.completed
+        self.achievedDate = mapGoalEntityUI.achievedDate
+        self.creationDate = mapGoalEntityUI.creationDate
+        self.tasks =  mapGoalEntityUI.tasks
     }
 }
 
@@ -52,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-         self.present(changeCancelAndEditTasks(indexPath: indexPath), animated: true)
+        self.present(changeCancelAndEditTasks(indexPath: indexPath), animated: true)
     }
     
     
@@ -120,8 +139,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func loadData(pred: NSPredicate? = nil) {
         let filteredFetchResult = coreDataManager.loadData(predicate: pred)
         
-         listEntityArray = []
-         for item in filteredFetchResult {
+        listEntityArray = []
+        for item in filteredFetchResult {
             let newMap = map(item: item)
             listEntityArray.append(newMap)
             
@@ -130,7 +149,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func saveData() {
-    coreDataManager.saveData()
-    self.loadData()
+        coreDataManager.saveData()
+        self.loadData()
     }
 }

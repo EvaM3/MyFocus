@@ -32,7 +32,6 @@ class CoreDataManager {
         } catch {
             print("Error saving context \(error)")
         }
-        
     }
     
     func loadData(predicate: NSPredicate? = nil) -> [TaskEntity] {
@@ -78,6 +77,23 @@ class CoreDataManager {
         selectedTask.name = title
         
         self.saveData()
+        
+    }
+    
+    
+    func generateData() {
+       // let randomTask = TaskEntity.fetchRequest()
+        let loadedData = loadData()
+        let loadedGoal = loadGoalData()
+        let randomTask = loadedData.randomElement()
+        let randomGoal = loadedGoal.randomElement()
+        
+        self.saveData()
+    }
+    
+    func fetchGoalsAndTasks() {
+        let fetchedGoal = generateData()
+        
         
     }
     
