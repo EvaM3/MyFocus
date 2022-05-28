@@ -82,11 +82,13 @@ class CoreDataManager {
     
     
     func generateData() {
+        let randomTask = loadData().randomElement()
+        let randomGoal = loadGoalData().randomElement()
        // let randomTask = TaskEntity.fetchRequest()
-        let loadedData = loadData()
-        let loadedGoal = loadGoalData()
-        let randomTask = loadedData.randomElement()
-        let randomGoal = loadedGoal.randomElement()
+       // let loadedData = loadData()
+       // let loadedGoal = loadGoalData()
+      //  let randomTask = loadedData.randomElement()
+       // let randomGoal = loadedGoal.randomElement()
         
         self.saveData()
     }
