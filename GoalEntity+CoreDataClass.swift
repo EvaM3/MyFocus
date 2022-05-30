@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(GoalsEntity)
+@objc(GoalEntity)
 public class GoalEntity: NSManagedObject {
 
 }

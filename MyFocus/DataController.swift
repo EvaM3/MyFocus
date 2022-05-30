@@ -55,7 +55,7 @@ class CoreDataManager {
             return []
         }
     }
-
+    
     func addItem(item: ListEntityUI) {
         let newItem = TaskEntity(context: persistentContainer.viewContext)
         newItem.name = item.title
@@ -81,22 +81,29 @@ class CoreDataManager {
     }
     
     
-    func generateData() {
-        let randomTask = loadData().randomElement()
-        let randomGoal = loadGoalData().randomElement()
-       // let randomTask = TaskEntity.fetchRequest()
-       // let loadedData = loadData()
-       // let loadedGoal = loadGoalData()
-      //  let randomTask = loadedData.randomElement()
-       // let randomGoal = loadedGoal.randomElement()
-        
+    func generateRandomData() {
+        var randomTasks = [TaskEntity]()
+        for _ in 0...Int.random(in: 1...3) {
+            randomTasks.append(makeRandomTask())
+        }
+        let randomGoal = GoalEntity(context: persistentContainer.viewContext)
+        randomGoal.title = "HII"
+        randomGoal.creationDate = Date()
+        for randomTask in randomTasks {
+            randomGoal.addToTasks(randomTask)
+        }
         self.saveData()
+        
     }
     
-    func fetchGoalsAndTasks() {
-        let fetchedGoal = generateData()
-        
-        
+    func makeRandomTask() -> TaskEntity {
+        let randomTask = TaskEntity(context: persistentContainer.viewContext)
+        randomTask.name = "Finish the book \(UUID().uuidString)"
+        randomTask.creationDate = Date()
+        randomTask.achievedDate = nil
+        return randomTask
     }
+
+     
     
 }

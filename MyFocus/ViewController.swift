@@ -51,6 +51,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+       
     }
     
     let coreDataManager = CoreDataManager()
@@ -137,15 +138,21 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func loadData(pred: NSPredicate? = nil) {
+        coreDataManager.generateRandomData()
         let filteredFetchResult = coreDataManager.loadData(predicate: pred)
-        
+        let goalData = coreDataManager.loadGoalData()
+        print(goalData)
         listEntityArray = []
         for item in filteredFetchResult {
             let newMap = map(item: item)
             listEntityArray.append(newMap)
-            
         }
         tableView.reloadData()
+    }
+    
+    func mapGoalsAndTasks<ListEntityUI,GoalEntityUI>(_ items: [ListEntityUI], _ goals: (ListEntityUI) -> (GoalEntityUI)) -> [GoalEntityUI] {
+        
+   return []
     }
     
     func saveData() {
