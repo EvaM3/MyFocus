@@ -110,6 +110,7 @@ class CoreDataManager {
     
     func makeRandomGoals() -> GoalEntity {
         let randomGoal = GoalEntity(context: persistentContainer.viewContext)
+        randomGoal.title = "Write the essay \(UUID().uuidString)"
         randomGoal.creationDate = Date()
         randomGoal.achievedDate = nil
         return randomGoal

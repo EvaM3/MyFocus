@@ -55,6 +55,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     let coreDataManager = CoreDataManager()
+    var goalEntityArray = [GoalEntityUI]()
     var listEntityArray = [ListEntityUI]()
     @IBOutlet weak var tableView: UITableView!
     
@@ -82,7 +83,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let alert = UIAlertController(title: "Add new task", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add task", style: .default) { (action) in
             let newTask = ListEntityUI(title: textField.text ?? "", isCompleted: false, creationDate: Date() + 86400, achievedDate: nil)
-            self.coreDataManager.addItem(item: newTask)
+            self.coreDataManager.makeRandomGoals()
+          //  self.coreDataManager.addItem(item: newTask)
             self.loadData()
         }
         
@@ -131,6 +133,11 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         return newListEntity
     }
     
+    func mapGoals(goal: GoalEntity) -> GoalEntityUI {
+        let newGoalEntity = GoalEntityUI(mapGoalEntityUI: goal)
+        return newGoalEntity
+    }
+    
     func loadSortedData() {
         let todaysSortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
         let sortDescriptors = [todaysSortDescriptor]
@@ -138,15 +145,24 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func loadData(pred: NSPredicate? = nil) {
-        coreDataManager.generateRandomData()
+        //coreDataManager.generateRandomData()
+        coreDataManager.makeRandomGoals()
         let filteredFetchResult = coreDataManager.loadData(predicate: pred)
-        let goalData = coreDataManager.loadGoalData()
+        let filteredGoalData = coreDataManager.loadGoalData(predicate: pred)
+        let goalData = coreDataManager.makeRandomGoals()
+      //  let goalData = coreDataManager.loadGoalData()
         print(goalData)
         listEntityArray = []
         for item in filteredFetchResult {
             let newMap = map(item: item)
             listEntityArray.append(newMap)
         }
+//        goalEntityArray = []
+//        for goal in filteredGoalData {
+//            let goalMap = mapGoals(goal: goal)
+//            goalEntityArray.append(contentsOf: goalMap)
+//        }
+        
         tableView.reloadData()
     }
     
