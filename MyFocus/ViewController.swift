@@ -83,8 +83,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let alert = UIAlertController(title: "Add new task", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add task", style: .default) { (action) in
             let newTask = ListEntityUI(title: textField.text ?? "", isCompleted: false, creationDate: Date() + 86400, achievedDate: nil)
-            self.coreDataManager.makeRandomGoals()
-          //  self.coreDataManager.addItem(item: newTask)
+        self.coreDataManager.makeRandomGoal()
+           self.coreDataManager.addItem(item: newTask)
             self.loadData()
         }
         
@@ -145,31 +145,19 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func loadData(pred: NSPredicate? = nil) {
-        //coreDataManager.generateRandomData()
-        coreDataManager.makeRandomGoals()
+        coreDataManager.generateRandomData()
         let filteredFetchResult = coreDataManager.loadData(predicate: pred)
         let filteredGoalData = coreDataManager.loadGoalData(predicate: pred)
-        let goalData = coreDataManager.makeRandomGoals()
-      //  let goalData = coreDataManager.loadGoalData()
-        print(goalData)
         listEntityArray = []
         for item in filteredFetchResult {
             let newMap = map(item: item)
             listEntityArray.append(newMap)
         }
-//        goalEntityArray = []
-//        for goal in filteredGoalData {
-//            let goalMap = mapGoals(goal: goal)
-//            goalEntityArray.append(contentsOf: goalMap)
-//        }
-        
+        // the loop will be based on the goal
         tableView.reloadData()
     }
-    
-    func mapGoalsAndTasks<ListEntityUI,GoalEntityUI>(_ items: [ListEntityUI], _ goals: (ListEntityUI) -> (GoalEntityUI)) -> [GoalEntityUI] {
-        
-   return []
-    }
+
+
     
     func saveData() {
         coreDataManager.saveData()

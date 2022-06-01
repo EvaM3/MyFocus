@@ -82,22 +82,12 @@ class CoreDataManager {
     
     
     func generateRandomData() {
-        var randomTasks = [TaskEntity]()
-        for _ in 0...Int.random(in: 1...3) {
-            randomTasks.append(makeRandomTask())
-        }
         var randomGoals = [GoalEntity]()
         for _ in 0...Int.random(in: 1...3) {
-           randomGoals.append(makeRandomGoals())
+            randomGoals.append(makeRandomGoal())
         }
-        let randomGoal = GoalEntity(context: persistentContainer.viewContext)
-        randomGoal.title = "HII"
-        randomGoal.creationDate = Date()
-        for randomTask in randomTasks {
-            randomGoal.addToTasks(randomTask)
-        }
-        self.saveData()
         
+        self.saveData()
     }
     
     func makeRandomTask() -> TaskEntity {
@@ -108,13 +98,19 @@ class CoreDataManager {
         return randomTask
     }
     
-    func makeRandomGoals() -> GoalEntity {
+    func makeRandomGoal() -> GoalEntity {
+        var randomTasks = [TaskEntity]()
+        for _ in 0...Int.random(in: 1...2) {
+            randomTasks.append(makeRandomTask())
+        }
         let randomGoal = GoalEntity(context: persistentContainer.viewContext)
         randomGoal.title = "Write the essay \(UUID().uuidString)"
         randomGoal.creationDate = Date()
         randomGoal.achievedDate = nil
+        for randomTask in randomTasks {
+            randomGoal.addToTasks(randomTask)
+        }
         return randomGoal
+        
     }
-     
-    
 }
