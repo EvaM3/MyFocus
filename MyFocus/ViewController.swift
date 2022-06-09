@@ -154,10 +154,34 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             listEntityArray.append(newMap)
         }
         // the loop will be based on the goal
+        for goal in filteredGoalData {
+            let goalMap = mapGoals(goal: goal)
+            goalEntityArray.append(goalMap)
+        }
         tableView.reloadData()
     }
 
-
+    func getDate(dateFromCurrent: Int) -> (Int, Int, Int) {
+        let currentDate = Date()
+        let calendar = Calendar.current
+        var year = 0
+        var month = 0
+        var day = 0
+        let toDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+     
+        return (calendar.component(.year, from: toDate!),
+                calendar.component(.month, from: toDate!),
+                calendar.component(.day, from: toDate!))
+    }
+    
+    func daysOfWeekAndMonth() {
+        let date = Date()
+        let calendar = Calendar.current
+        let monthComponents = calendar.dateComponents([.day], from: date)
+        let dayOfMonth = monthComponents.day
+        let weekComponents = calendar.dateComponents([.weekday], from: date)
+        let dayOfWeek = weekComponents.weekday
+    }
     
     func saveData() {
         coreDataManager.saveData()
