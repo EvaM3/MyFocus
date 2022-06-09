@@ -83,8 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let alert = UIAlertController(title: "Add new task", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add task", style: .default) { (action) in
             let newTask = ListEntityUI(title: textField.text ?? "", isCompleted: false, creationDate: Date() + 86400, achievedDate: nil)
-        self.coreDataManager.makeRandomGoal()
-           self.coreDataManager.addItem(item: newTask)
+            self.coreDataManager.addItem(item: newTask)
             self.loadData()
         }
         
@@ -157,6 +156,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         for goal in filteredGoalData {
             let goalMap = mapGoals(goal: goal)
             goalEntityArray.append(goalMap)
+            
+            
         }
         tableView.reloadData()
     }
@@ -181,6 +182,12 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let dayOfMonth = monthComponents.day
         let weekComponents = calendar.dateComponents([.weekday], from: date)
         let dayOfWeek = weekComponents.weekday
+    }
+    
+    
+    func getYesterdayDate() -> Date {
+        let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+        return yesterdayDate
     }
     
     func saveData() {

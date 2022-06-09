@@ -83,34 +83,72 @@ class CoreDataManager {
     
     func generateRandomData() {
         var randomGoals = [GoalEntity]()
-        for _ in 0...Int.random(in: 1...3) {
-            randomGoals.append(makeRandomGoal())
+        for i in 0...Int.random(in: 1..<3) {
+            var currentDate: Date
+            switch i {
+            case 0:
+                currentDate = Date()
+            case 1:
+                currentDate = getYesterdayDate()
+            case 2:
+                currentDate = getTomorrowDate()
+            default:
+                currentDate = getYesterdayDate()
+            }
+            randomGoals.append(makeRandomGoal(createDate: currentDate))
+            
         }
         
         self.saveData()
+        let goals = randomGoals.map { goalEntity in
+            mapToGoal(entity: goalEntity)
+        }
     }
     
-    func makeRandomTask() -> TaskEntity {
+    func makeRandomTask(createDate: Date) -> TaskEntity {
         let randomTask = TaskEntity(context: persistentContainer.viewContext)
         randomTask.name = "Finish the book \(UUID().uuidString)"
-        randomTask.creationDate = Date()
+        randomTask.creationDate = createDate
         randomTask.achievedDate = nil
         return randomTask
     }
     
-    func makeRandomGoal() -> GoalEntity {
+    func makeRandomGoal(createDate: Date) -> GoalEntity {
         var randomTasks = [TaskEntity]()
         for _ in 0...Int.random(in: 1...2) {
-            randomTasks.append(makeRandomTask())
+            randomTasks.append(makeRandomTask(createDate: createDate))
         }
         let randomGoal = GoalEntity(context: persistentContainer.viewContext)
         randomGoal.title = "Write the essay \(UUID().uuidString)"
-        randomGoal.creationDate = Date()
+        randomGoal.creationDate = createDate
         randomGoal.achievedDate = nil
         for randomTask in randomTasks {
             randomGoal.addToTasks(randomTask)
         }
         return randomGoal
-        
     }
+    
+    func mapToGoal(entity: GoalEntity) -> Goal {
+        var goalTasks: [Task] = []
+        if let tasks = entity.tasks?.array as? [TaskEntity] {
+            for task in tasks {
+                var newTask: Task = Task(id: task.id , title: task.name, completed: task.completed, creationDate: task.creationDate, achievedDate: task.achievedDate)
+                goalTasks.append(newTask)
+            }
+        }
+      
+        var goal: Goal = Goal(tasks: goalTasks, title: entity.title ?? "")
+        return goal
+    }
+    
+    func getYesterdayDate() -> Date {
+        let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
+        return yesterdayDate
+    }
+    
+    func getTomorrowDate() -> Date {
+        let tomorrowDate = Calendar.current.date(byAdding: .day, value: +1 , to: Date()) ?? Date() + 86400
+        return tomorrowDate
+    }
+    
 }

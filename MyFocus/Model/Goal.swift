@@ -25,7 +25,7 @@ struct Goal: Identifiable {
     
     
     init(tasks: [Task], title: String) {
-        self.id = UUID()
+        self.id = UUID()  // 
         self.goalTasks = tasks
         self.goalTitle = title
         self.goalCompleted = false
