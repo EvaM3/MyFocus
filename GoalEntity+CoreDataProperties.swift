@@ -23,8 +23,9 @@ extension GoalEntity {
     @NSManaged public var id: UUID?
     @NSManaged public var tasks: NSOrderedSet?
 
-    public var defaultAchievedDate: Date {
-    achievedDate ?? Date()
+    
+    public var defaultAchievedDate: Date? {
+     achievedDate
     }
     
     public var defaultCreationDate: Date {
@@ -35,12 +36,16 @@ extension GoalEntity {
     title ?? "Unknown"
 }
     
-    var setId: UUID {
+   public var defaultId: UUID {
         id ?? UUID()
     }
     
-    public var defaultTasks: NSOrderedSet {
-        tasks ?? NSOrderedSet()
+    public var defaultTasks: NSOrderedSet? {
+       tasks
+    }
+    
+    public var isCompleted: Bool {
+        completed
     }
 }
 

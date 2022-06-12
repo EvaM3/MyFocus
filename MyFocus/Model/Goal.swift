@@ -31,6 +31,9 @@ struct Goal: Identifiable {
         self.goalCompleted = false
         self.goalCreationDate = Date()
         self.goalAchievedDate = nil
+        
+        
+   
     }
     
     
