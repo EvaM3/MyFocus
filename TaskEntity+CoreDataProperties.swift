@@ -22,6 +22,24 @@ extension TaskEntity {
     @NSManaged public var name: String?
     @NSManaged public var id: UUID?
 
+    
+    public var taskAchievedDate: Date? {
+        achievedDate
+    }
+    
+    public var taskCreationDate: Date? {
+        creationDate ?? Date()
+    }
+    
+    public var taskName: String? {
+        name ?? "Unknown"
+    }
+    
+    public var taskId: UUID {
+        id ?? UUID()
+    }
+    
+    
 }
 
 extension TaskEntity : Identifiable {

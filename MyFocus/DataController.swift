@@ -132,7 +132,7 @@ class CoreDataManager {
         var goalTasks: [Task] = []
         if let tasks = entity.tasks?.array as? [TaskEntity] {
             for task in tasks {
-                var newTask: Task = Task(id: task.id , title: task.name, completed: task.completed, creationDate: task.creationDate, achievedDate: task.achievedDate)
+                let newTask: Task = Task(id: task.taskId, title: task.taskName ?? "Unknown", completed: task.completed, creationDate: task.taskCreationDate ?? Date(), achievedDate: task.taskAchievedDate)
                 goalTasks.append(newTask)
             }
         }
