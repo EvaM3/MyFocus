@@ -2,7 +2,7 @@
 //  GoalsEntity+CoreDataProperties.swift
 //  MyFocus
 //
-//  Created by Eva Sira Madarasz on 22/05/2022.
+//  Created by Eva Madarasz on 22/05/2022.
 //
 //
 

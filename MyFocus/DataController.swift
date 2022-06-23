@@ -136,10 +136,32 @@ class CoreDataManager {
                 goalTasks.append(newTask)
             }
         }
-      
         var goal: Goal = Goal(tasks: goalTasks, title: entity.title ?? "")
         return goal
     }
+    
+    func mapToGoalEntity(goal: Goal) -> GoalEntity {
+        var taskEntities: [TaskEntity] = []
+        
+        for task in goal.tasks {
+        let newTaskEntity = mapToTaskEntity(item: task)
+            taskEntities.append(newTaskEntity)
+        }
+        let newGoal = GoalEntity(context: persistentContainer.viewContext)
+        newGoal.title = goal.title
+        newGoal.creationDate = goal.creationDate
+        newGoal.achievedDate = goal.achievedDate
+        return newGoal
+    }
+    
+    func mapToTaskEntity(item: Task) -> TaskEntity {
+        let newItem = TaskEntity(context: persistentContainer.viewContext)
+        newItem.name = item.title
+        newItem.creationDate = item.creationDate
+        newItem.achievedDate = item.achievedDate
+       return newItem
+    }
+    
     
     func getYesterdayDate() -> Date {
         let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
