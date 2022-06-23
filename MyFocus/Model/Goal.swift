@@ -24,16 +24,14 @@ struct Goal: Identifiable {
     var achievedDate: Date? { goalAchievedDate}
     
     
-    init(tasks: [Task], title: String) {
-        self.id = UUID()  // 
+    init(id: UUID = UUID(), tasks: [Task], title: String, completed: Bool = false, creationDate: Date, achievedDate: Date? = nil) {
+        self.id = id
         self.goalTasks = tasks
         self.goalTitle = title
-        self.goalCompleted = false
-        self.goalCreationDate = Date()
-        self.goalAchievedDate = nil
-        
-        
-   
+        self.goalCompleted = completed
+        self.goalCreationDate = creationDate
+        self.goalAchievedDate = achievedDate
+      
     }
     
     

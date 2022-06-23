@@ -145,7 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     func loadData(pred: NSPredicate? = nil) {
         coreDataManager.generateRandomData()
-        let filteredFetchResult = coreDataManager.loadData(predicate: pred)
+        let filteredFetchResult = coreDataManager.loadGoal(predicate: pred)
         let filteredGoalData = coreDataManager.loadGoalData(predicate: pred)
         listEntityArray = []
         for item in filteredFetchResult {

@@ -34,15 +34,20 @@ class CoreDataManager {
         }
     }
     
-    func loadData(predicate: NSPredicate? = nil) -> [TaskEntity] {
-        let request : NSFetchRequest<TaskEntity> = TaskEntity.fetchRequest()
+    func loadGoal(predicate: NSPredicate? = nil) -> [Goal] {
+        let request : NSFetchRequest<GoalEntity> =  GoalEntity.fetchRequest()
         request.predicate = predicate
         do {
-            return try persistentContainer.viewContext.fetch(request)
+            let goalEntities = try persistentContainer.viewContext.fetch(request)
+            let goals = goalEntities.map { goalEntity in
+                mapToGoal(entity: goalEntity)
+            }
+            return goals
         } catch {
             print("Error loading data \(error)")
             return []
         }
+      
     }
     
     func loadGoalData(predicate: NSPredicate? = nil) -> [GoalEntity] {
@@ -65,19 +70,19 @@ class CoreDataManager {
     }
     
     func deleteData(at index: Int) {
-        let loadedData = loadData()
+        let loadedData = loadGoal()
         let selectedTask = loadedData[index]
-        persistentContainer.viewContext.delete(selectedTask)
+      //  persistentContainer.viewContext.delete(selectedTask)
         self.saveData()
     }
-    
+
     func updateData(at index: Int, title: String) {
-        let loadedData = loadData()
+        let loadedData = loadGoal()
         let selectedTask = loadedData[index]
-        selectedTask.name = title
-        
+     //   selectedTask.name = title
+
         self.saveData()
-        
+
     }
     
     
@@ -100,9 +105,6 @@ class CoreDataManager {
         }
         
         self.saveData()
-        let goals = randomGoals.map { goalEntity in
-            mapToGoal(entity: goalEntity)
-        }
     }
     
     func makeRandomTask(createDate: Date) -> TaskEntity {
@@ -136,7 +138,8 @@ class CoreDataManager {
                 goalTasks.append(newTask)
             }
         }
-        var goal: Goal = Goal(tasks: goalTasks, title: entity.title ?? "")
+        let goal: Goal = Goal(id: entity.defaultId , tasks: goalTasks, title: entity.defaultTitle, completed: entity.isCompleted, creationDate: entity.defaultCreationDate, achievedDate: entity.defaultAchievedDate)
+        
         return goal
     }
     
@@ -144,22 +147,29 @@ class CoreDataManager {
         var taskEntities: [TaskEntity] = []
         
         for task in goal.tasks {
-        let newTaskEntity = mapToTaskEntity(item: task)
+            let newTaskEntity = mapToTaskEntity(item: task)
             taskEntities.append(newTaskEntity)
         }
         let newGoal = GoalEntity(context: persistentContainer.viewContext)
+        newGoal.id = goal.id
         newGoal.title = goal.title
         newGoal.creationDate = goal.creationDate
         newGoal.achievedDate = goal.achievedDate
+        newGoal.completed = goal.completed
+        newGoal.insertIntoTasks(taskEntities, at: NSIndexSet(indexesIn: NSRange(location: 0, length: taskEntities.count)))
+        
         return newGoal
     }
     
     func mapToTaskEntity(item: Task) -> TaskEntity {
         let newItem = TaskEntity(context: persistentContainer.viewContext)
+        newItem.id = item.id
         newItem.name = item.title
         newItem.creationDate = item.creationDate
         newItem.achievedDate = item.achievedDate
-       return newItem
+        newItem.completed = item.completed
+        
+        return newItem
     }
     
     
