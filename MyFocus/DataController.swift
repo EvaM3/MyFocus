@@ -34,6 +34,7 @@ class CoreDataManager {
         }
     }
     
+    
     func loadGoal(predicate: NSPredicate? = nil) -> [Goal] {
         let request : NSFetchRequest<GoalEntity> =  GoalEntity.fetchRequest()
         request.predicate = predicate
@@ -47,8 +48,8 @@ class CoreDataManager {
             print("Error loading data \(error)")
             return []
         }
-      
     }
+  
     
     func loadGoalData(predicate: NSPredicate? = nil) -> [GoalEntity] {
         let request: NSFetchRequest<GoalEntity> = GoalEntity.fetchRequest()
@@ -60,6 +61,7 @@ class CoreDataManager {
             return []
         }
     }
+    
     
     func addItem(item: ListEntityUI) {
         let newItem = TaskEntity(context: persistentContainer.viewContext)

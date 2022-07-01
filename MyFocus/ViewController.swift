@@ -6,6 +6,8 @@
 //
 
 import UIKit
+
+
 struct ListEntityUI {
     var title: String
     var isCompleted: Bool?
@@ -14,12 +16,16 @@ struct ListEntityUI {
     
 }
 
+
+
 extension ListEntityUI {
     init(mapListEntityUI : TaskEntity) {
         self.title = mapListEntityUI.name ?? ""
         self.isCompleted = mapListEntityUI.completed
         self.achievedDate = mapListEntityUI.achievedDate
         self.creationDate = mapListEntityUI.creationDate
+        
+      
     }
 }
 
@@ -41,6 +47,39 @@ extension GoalEntityUI {
     }
 }
 
+extension ListEntityUI {
+    
+    enum GoalsAndTasks {
+        case task
+        case goal
+        case empty
+    }
+    
+    var goal : GoalsAndTasks {
+        switch self {
+        case is Goal:
+            return .goal
+        default:
+            return .empty
+        }
+    }
+    var task : GoalsAndTasks {
+        switch self {
+        case is Task:
+            return .task
+        default:
+            return .empty
+        }
+    }
+    
+}
+
+
+var goalArray : Array = [GoalEntityUI]()
+var taskArray : Array = [ListEntityUI]()
+
+
+
 class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
@@ -57,6 +96,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     let coreDataManager = CoreDataManager()
     var goalEntityArray = [GoalEntityUI]()
     var listEntityArray = [ListEntityUI]()
+   
+    
     @IBOutlet weak var tableView: UITableView!
     
     
@@ -126,16 +167,16 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     
-    func map(item: TaskEntity) -> ListEntityUI {
-        
-        let newListEntity = ListEntityUI(mapListEntityUI: item)
-        return newListEntity
-    }
-    
-    func mapGoals(goal: GoalEntity) -> GoalEntityUI {
-        let newGoalEntity = GoalEntityUI(mapGoalEntityUI: goal)
-        return newGoalEntity
-    }
+//    func map(item: TaskEntity) -> ListEntityUI {
+//
+//        let newListEntity = ListEntityUI(mapListEntityUI: item)
+//        return newListEntity
+//    }
+//
+//    func mapGoals(goal: GoalEntity) -> GoalEntityUI {
+//        let newGoalEntity = GoalEntityUI(mapGoalEntityUI: goal)
+//        return newGoalEntity
+//    }
     
     func loadSortedData() {
         let todaysSortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
@@ -145,19 +186,17 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     func loadData(pred: NSPredicate? = nil) {
         coreDataManager.generateRandomData()
-        let filteredFetchResult = coreDataManager.loadGoal(predicate: pred)
-        let filteredGoalData = coreDataManager.loadGoalData(predicate: pred)
+        let filteredGoals = coreDataManager.loadGoal(predicate: pred)
+//        let filteredGoalData = coreDataManager.loadGoalData(predicate: pred)
+//        let newGoals = coreDataManager.loadGoal()
+       
         listEntityArray = []
-        for item in filteredFetchResult {
-            let newMap = map(item: item)
+        
+        for item in filteredGoals {
+            let newMap = map(item: )
             listEntityArray.append(newMap)
         }
-        for goal in filteredGoalData {
-            let goalMap = mapGoals(goal: goal)
-            goalEntityArray.append(goalMap)
-            
-            
-        }
+        
         tableView.reloadData()
     }
     
