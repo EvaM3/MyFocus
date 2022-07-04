@@ -8,75 +8,48 @@
 import UIKit
 
 
-struct ListEntityUI {
+struct ListElement {
+    
+      enum ListEntityType {
+          case task
+          case goal
+      }
+    
+    var type: ListEntityType
     var title: String
-    var isCompleted: Bool?
-    var creationDate: Date?
+    var isCompleted: Bool
+    var creationDate: Date
     var achievedDate: Date?
-    
+
 }
 
 
 
-extension ListEntityUI {
-    init(mapListEntityUI : TaskEntity) {
-        self.title = mapListEntityUI.name ?? ""
-        self.isCompleted = mapListEntityUI.completed
-        self.achievedDate = mapListEntityUI.achievedDate
-        self.creationDate = mapListEntityUI.creationDate
-        
-      
-    }
-}
-
-struct GoalEntityUI {
-    var achievedDate: Date?
-    var completed: Bool
-    var creationDate: Date?
-    var title: String?
-    var tasks: NSOrderedSet?
-}
-
-extension GoalEntityUI {
-    init (mapGoalEntityUI : GoalEntity) {
-        self.title = mapGoalEntityUI.title ?? ""
-        self.completed = mapGoalEntityUI.completed
-        self.achievedDate = mapGoalEntityUI.achievedDate
-        self.creationDate = mapGoalEntityUI.creationDate
-        self.tasks =  mapGoalEntityUI.tasks
-    }
-}
-
-extension ListEntityUI {
-    
-    enum GoalsAndTasks {
-        case task
-        case goal
-        case empty
+extension ListElement {
+    init(from task : Task) {
+        self.type = .task
+        self.title = task.title
+        self.isCompleted = task.completed
+        self.achievedDate = task.achievedDate
+        self.creationDate = task.creationDate
+     
     }
     
-    var goal : GoalsAndTasks {
-        switch self {
-        case is Goal:
-            return .goal
-        default:
-            return .empty
-        }
+    init(from goal : Goal) {
+        self.type = .goal
+        self.title = goal.title
+        self.isCompleted = goal.completed
+        self.achievedDate = goal.achievedDate
+        self.creationDate = goal.creationDate
+     
     }
-    var task : GoalsAndTasks {
-        switch self {
-        case is Task:
-            return .task
-        default:
-            return .empty
-        }
-    }
-    
 }
 
 
-var goalArray : Array = [GoalEntityUI]()
-var taskArray : Array = [ListEntityUI]()
+
+
+
+
 
 
 
@@ -94,8 +67,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     let coreDataManager = CoreDataManager()
-    var goalEntityArray = [GoalEntityUI]()
-    var listEntityArray = [ListEntityUI]()
+    var listEntityArray = [ListElement]()
    
     
     @IBOutlet weak var tableView: UITableView!
@@ -123,7 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         var textField = UITextField()
         let alert = UIAlertController(title: "Add new task", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add task", style: .default) { (action) in
-            let newTask = ListEntityUI(title: textField.text ?? "", isCompleted: false, creationDate: Date() + 86400, achievedDate: nil)
+            let newTask = ListElement(type: .goal, title: textField.text ?? "", isCompleted: false, creationDate: Date() + 86400, achievedDate: nil)
             self.coreDataManager.addItem(item: newTask)
             self.loadData()
         }
