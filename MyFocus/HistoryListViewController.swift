@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HistoryListViewController.swift
 //  MyFocus
 //
 //  Created by Eva Madarasz on 02/12/2021.
@@ -10,20 +10,18 @@ import UIKit
 
 struct ListElement {
     
-      enum ListEntityType {
-          case task
-          case goal
-      }
+    enum ListEntityType {
+        case task
+        case goal
+    }
     
     var type: ListEntityType
     var title: String
     var isCompleted: Bool
     var creationDate: Date
     var achievedDate: Date?
-
+    
 }
-
-
 
 extension ListElement {
     init(from task : Task) {
@@ -32,7 +30,7 @@ extension ListElement {
         self.isCompleted = task.completed
         self.achievedDate = task.achievedDate
         self.creationDate = task.creationDate
-     
+        
     }
     
     init(from goal : Goal) {
@@ -41,7 +39,7 @@ extension ListElement {
         self.isCompleted = goal.completed
         self.achievedDate = goal.achievedDate
         self.creationDate = goal.creationDate
-     
+        
     }
 }
 
@@ -50,10 +48,7 @@ extension ListElement {
 
 
 
-
-
-
-class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class HistoryListViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     override func viewDidLoad() {
         tableView.dataSource = self
@@ -68,7 +63,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
-   
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -81,6 +76,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
         let item = listEntityArray[indexPath.row]
         cell.textLabel?.text = item.title
+        cell.detailTextLabel?.text = item.type == .goal ? "Goal" : "Task"
         return cell
     }
     
@@ -138,17 +134,17 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         return sheet
     }
     
+    func mapGoal(goal: Goal) -> [ListElement] {
+        var elementArray = [ListElement]()
+        let newGoalEntity = ListElement(from: goal)
+        elementArray.append(newGoalEntity)
+        for task in goal.tasks {
+            let taskListElement = ListElement(from: task)
+            elementArray.append(taskListElement)
+        }
+        return elementArray
+    }
     
-//    func map(item: TaskEntity) -> ListEntityUI {
-//
-//        let newListEntity = ListEntityUI(mapListEntityUI: item)
-//        return newListEntity
-//    }
-//
-//    func mapGoals(goal: GoalEntity) -> GoalEntityUI {
-//        let newGoalEntity = GoalEntityUI(mapGoalEntityUI: goal)
-//        return newGoalEntity
-//    }
     
     func loadSortedData() {
         let todaysSortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
@@ -157,16 +153,12 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func loadData(pred: NSPredicate? = nil) {
-        coreDataManager.generateRandomData()
+        listEntityArray.removeAll()
+        //coreDataManager.generateRandomData()
         let filteredGoals = coreDataManager.loadGoal(predicate: pred)
-//        let filteredGoalData = coreDataManager.loadGoalData(predicate: pred)
-//        let newGoals = coreDataManager.loadGoal()
-       
-        listEntityArray = []
-        
-        for item in filteredGoals {
-            let newMap = map(item: )
-            listEntityArray.append(newMap)
+        for goal in filteredGoals {
+            let elements = mapGoal(goal: goal)
+            listEntityArray.append(contentsOf: elements)
         }
         
         tableView.reloadData()
