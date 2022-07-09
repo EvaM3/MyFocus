@@ -49,6 +49,8 @@ extension ListElement {
 
 
 class HistoryListViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+  
+    
     
     override func viewDidLoad() {
         tableView.dataSource = self
@@ -74,64 +76,30 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
-        let item = listEntityArray[indexPath.row]
-        cell.textLabel?.text = item.title
-        cell.detailTextLabel?.text = item.type == .goal ? "Goal" : "Task"
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        self.present(changeCancelAndEditTasks(indexPath: indexPath), animated: true)
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Today\(section)"
+//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let table = UITableView(frame: .zero, style: .grouped)
+        self.tableView.sectionHeaderHeight = 50
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
+        let label = UILabel()
+               label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        label.text = "Today,\(getTodaysDate())"
+               label.font = .systemFont(ofSize: 20)
+               label.textAlignment = .center
+               label.textColor = .black
+               label.backgroundColor = .lightGray
+               headerView.addSubview(label)
+               
+               return headerView
     }
     
-    
-    
-    @IBAction func addButtonTapped(_ sender: Any) {
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add new task", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add task", style: .default) { (action) in
-            let newTask = ListElement(type: .goal, title: textField.text ?? "", isCompleted: false, creationDate: Date() + 86400, achievedDate: nil)
-            self.coreDataManager.addItem(item: newTask)
-            self.loadData()
-        }
-        
-        alert.addAction(action)
-        alert.addTextField { (alertTextField) in alertTextField.placeholder = "New task here"
-            textField = alertTextField
-        }
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func updateTasks(indexPath: IndexPath) -> UIAlertController {
-        let item = listEntityArray[indexPath.row]
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Update task", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Update your task", style: .default, handler: { _ in
-            self.coreDataManager.updateData(at: indexPath.row , title: textField.text ?? "")
-            self.loadData()
-        }))
-        
-        
-        alert.addTextField { (alertTextField) in alertTextField.placeholder = "New task here"
-            textField = alertTextField
-        }
-        alert.textFields?.first?.text = item.title
-        return alert
-    }
-    
-    func changeCancelAndEditTasks(indexPath: IndexPath) -> UIAlertController {
-        let sheet = UIAlertController(title: "Change task", message: nil, preferredStyle: .alert)
-        sheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        sheet.addAction(UIAlertAction(title: "Edit", style: .default, handler: { _ in
-            self.present(self.updateTasks(indexPath: indexPath), animated: true)
-        } ))
-        sheet.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.coreDataManager.deleteData(at: indexPath.row)
-            self.loadData()
-        }))
-        
-        return sheet
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
     }
     
     func mapGoal(goal: Goal) -> [ListElement] {
@@ -167,6 +135,11 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     func getYesterdayDate() -> Date {
         let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
         return yesterdayDate
+    }
+    
+    func getTodaysDate() -> Date {
+        let todayDate = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date() - 86400
+        return todayDate
     }
     
     func saveData() {
