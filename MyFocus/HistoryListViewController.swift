@@ -66,6 +66,25 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
     
+    let calendar = Calendar.current
+
+    struct SectionItem {
+        let sectionCreationDate : Date
+    }
+    
+    
+    var sections = Dictionary<String, Array<SectionItem>>()
+    var sortedSections = [String]()
+    
+    
+    
+    func saveDate() -> Date {
+    let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let dateObject = dateFormatter.date(from: dateFormatter.dateFormat)!
+        return dateObject
+        
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -88,7 +107,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
         let label = UILabel()
                label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-        label.text = "Today,\(getTodaysDate())"
+               label.text = "Today,\(getTodaysDate())"
                label.font = .systemFont(ofSize: 20)
                label.textAlignment = .center
                label.textColor = .black
@@ -141,6 +160,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         let todayDate = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date() - 86400
         return todayDate
     }
+    
     
     func saveData() {
         coreDataManager.saveData()
