@@ -60,11 +60,19 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        
     }
     
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
+    
+//    var dateArray: [ListElement] = []
+//    var listArray : [ListElement] = []
+    
+var dateArray = ["09-07-2022","10-07-2022","11-07-2022","12-07-2022"]
+ var listArray = [["Goal: Finish the essay","Tasks: Read the last pages over again","Write at least two mock pages","Correct the mistakes"],
+    ["Goal: Bake the cake", "Tasks: Go grocery shopping for ingredients", "Prepare the cream","Bake the biscuit","Finish it with icing"],
+    ["Goal: Do the housekeeping chores", "Tasks: Hoover everywhere","Clen kitchen and bathroom", "Dust off everywhere"]
+ ]
     
     let calendar = Calendar.current
 
@@ -98,11 +106,16 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Today\(section)"
-//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.dateArray[0]
+        
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.dateArray.count
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let table = UITableView(frame: .zero, style: .grouped)
+      //  let table = UITableView(frame: .zero, style: .grouped)
         self.tableView.sectionHeaderHeight = 50
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
         let label = UILabel()
@@ -116,10 +129,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
                
                return headerView
     }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
+  
+   
     
     func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
