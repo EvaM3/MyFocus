@@ -49,10 +49,11 @@ extension ListElement {
 
 
 class HistoryListViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
-  
+    
     
     
     override func viewDidLoad() {
+        saveDate()
         tableView.dataSource = self
         tableView.delegate = self
         super.viewDidLoad()
@@ -64,18 +65,20 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
+    //
+    //    var dateArray: [ListElement] = []
+    //    var listArray : [ListElement] = []
     
-//    var dateArray: [ListElement] = []
-//    var listArray : [ListElement] = []
+    var dateArray = ["09-07-2022","10-07-2022","11-07-2022","12-07-2022"]
+    var listArray = [["Goal: Finish the essay","Tasks: Read the last pages over again","Write at least two mock pages","Correct the mistakes"],
+                     ["Goal: Bake the cake", "Tasks: Go grocery shopping for ingredients", "Prepare the cream","Bake the biscuit","Finish it with icing"],
+                     ["Goal: Do the housekeeping chores", "Tasks: Hoover everywhere","Clean kitchen and bathroom", "Dust off everywhere"],
+                     []
+    ]
     
-var dateArray = ["09-07-2022","10-07-2022","11-07-2022","12-07-2022"]
- var listArray = [["Goal: Finish the essay","Tasks: Read the last pages over again","Write at least two mock pages","Correct the mistakes"],
-    ["Goal: Bake the cake", "Tasks: Go grocery shopping for ingredients", "Prepare the cream","Bake the biscuit","Finish it with icing"],
-    ["Goal: Do the housekeeping chores", "Tasks: Hoover everywhere","Clen kitchen and bathroom", "Dust off everywhere"]
- ]
     
     let calendar = Calendar.current
-
+    
     struct SectionItem {
         let sectionCreationDate : Date
     }
@@ -83,54 +86,62 @@ var dateArray = ["09-07-2022","10-07-2022","11-07-2022","12-07-2022"]
     
     var sections = Dictionary<String, Array<SectionItem>>()
     var sortedSections = [String]()
-    
+    var formattedDate = Date().formatted(date: .numeric, time: .omitted)
     
     
     func saveDate() -> Date {
-    let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        let dateObject = dateFormatter.date(from: dateFormatter.dateFormat)!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateObject = dateFormatter.date(from:"2022-07-14")!
+        let stringObject = dateFormatter.string(from: Date())
+        let componentDate = Calendar.current.dateComponents([.year, .month, .day], from: Date())
+        let dateFromComponent = componentDate.date
+        let componentDate2 = Calendar.current.dateComponents([.year, .month, .day], from: Date()+1)
+        let dateFromComponent2 = componentDate2.date
+        if dateFromComponent == dateFromComponent2 {
+            print("They are equal")
+        } else {
+            print("They are not equal")
+        }
+        print(stringObject)
         return dateObject
-        
     }
     
     @IBOutlet weak var tableView: UITableView!
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listEntityArray.count
+        return listArray[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
+        cell.detailTextLabel?.text =  listArray[indexPath.section][indexPath.row]
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.dateArray[0]
-        
-    }
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dateArray.count
     }
-
+    
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-      //  let table = UITableView(frame: .zero, style: .grouped)
+        //  let table = UITableView(frame: .zero, style: .grouped)
         self.tableView.sectionHeaderHeight = 50
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
         let label = UILabel()
-               label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
-               label.text = "Today,\(getTodaysDate())"
-               label.font = .systemFont(ofSize: 20)
-               label.textAlignment = .center
-               label.textColor = .black
-               label.backgroundColor = .lightGray
-               headerView.addSubview(label)
-               
-               return headerView
+        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        label.text = self.dateArray[section]
+        label.font = .systemFont(ofSize: 20)
+        label.textAlignment = .center
+        label.textColor = .black
+        label.backgroundColor = .yellow
+        headerView.addSubview(label)
+        
+        return headerView
     }
-  
-   
+    
+    
     
     func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
