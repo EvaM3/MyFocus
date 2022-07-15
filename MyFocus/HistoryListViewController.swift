@@ -126,16 +126,15 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        //  let table = UITableView(frame: .zero, style: .grouped)
         self.tableView.sectionHeaderHeight = 50
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
         let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-10, height: headerView.frame.height-10)
+        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-5, height: headerView.frame.height-5)
         label.text = self.dateArray[section]
         label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
         label.textColor = .black
-        label.backgroundColor = .yellow
+        label.backgroundColor = .green
         headerView.addSubview(label)
         
         return headerView
