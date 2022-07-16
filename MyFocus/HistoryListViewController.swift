@@ -70,7 +70,13 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     //    var listArray : [ListElement] = []
     
     var dateArray = ["09-07-2022","10-07-2022","11-07-2022","12-07-2022"]
-    var listArray = [["Goal: Finish the essay","Tasks: Read the last pages over again","Write at least two mock pages","Correct the mistakes"],
+    var listArray = [[
+        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Read the last pages over again", completed: false, creationDate: Date())], title: " Finish the essay", creationDate: Date()))],
+        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Go grocery shopping for ingredients", completed: false, creationDate: Date())], title: "Bake the cake", creationDate: Date()))],
+        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Clean kitchen and bathroom", completed: false, creationDate: Date())], title: "Do the housekeeping chores", creationDate: Date()))]
+    ]]
+    
+    var listArray2 = [["Goal: Finish the essay","Tasks: Read the last pages over again","Write at least two mock pages","Correct the mistakes"],
                      ["Goal: Bake the cake", "Tasks: Go grocery shopping for ingredients", "Prepare the cream","Bake the biscuit","Finish it with icing"],
                      ["Goal: Do the housekeeping chores", "Tasks: Hoover everywhere","Clean kitchen and bathroom", "Dust off everywhere"],
                      []
