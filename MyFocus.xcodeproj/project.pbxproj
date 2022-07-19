@@ -23,6 +23,7 @@
 		A0A647EE275960CC003428B7 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647ED275960CC003428B7 /* Task.swift */; };
 		A0A647F027596157003428B7 /* TaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647EF27596157003428B7 /* TaskTests.swift */; };
 		A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BA56BA2835A0FD0078517B /* DataController.swift */; };
+		A0BBFA9F2886DC4200C7A2CF /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BBFA9E2886DC4200C7A2CF /* CustomCell.swift */; };
 		A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0E3E11327DA9F4C00085853 /* FocusData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		A0A647ED275960CC003428B7 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A0A647EF27596157003428B7 /* TaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTests.swift; sourceTree = "<group>"; };
 		A0BA56BA2835A0FD0078517B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		A0BBFA9E2886DC4200C7A2CF /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		A0E3E11427DA9F4C00085853 /* FocusData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FocusData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,6 +120,7 @@
 				A0A647CE27595DBE003428B7 /* HistoryListViewController.swift */,
 				A0BA56BA2835A0FD0078517B /* DataController.swift */,
 				A0A647D027595DBE003428B7 /* Main.storyboard */,
+				A0BBFA9E2886DC4200C7A2CF /* CustomCell.swift */,
 				A0A647D327595DBF003428B7 /* Assets.xcassets */,
 				A0A647D527595DBF003428B7 /* LaunchScreen.storyboard */,
 				A0A647D827595DBF003428B7 /* Info.plist */,
@@ -255,6 +258,7 @@
 				A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */,
 				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
 				A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */,
+				A0BBFA9F2886DC4200C7A2CF /* CustomCell.swift in Sources */,
 				A00588B1283A689A00F19F12 /* GoalEntity+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
