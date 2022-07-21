@@ -56,6 +56,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         saveDate()
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(GoalCell.self, forCellReuseIdentifier: "goalCell")
+        tableView.register(TaskCell.self, forCellReuseIdentifier: "taskCell")
         super.viewDidLoad()
         loadData()
         DispatchQueue.main.async {
@@ -121,9 +123,16 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = listArray[indexPath.section][indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
-        cell.textLabel?.text =  element.title
-        return cell
+        switch element.type {
+        
+        case .goal:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
+          return cell
+        case .task:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
+            return cell
+        }
+    
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -146,19 +155,9 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         return headerView
     }
     
-    func goalCell(goal: Goal) -> [ListElement] {
-        var elementArray = [ListElement]()
-       // var goalElement = ListElement(from: goal)
-        var goalElement = ListElement.ListEntityType.goal
-        switch goalElement {
-        case .task:
-            <#code#>
-        case .goal:
-            
-        }
-      
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        <#code#>
     }
-    
     
     func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
