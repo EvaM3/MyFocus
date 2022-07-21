@@ -63,6 +63,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
+    let customCell = GoalCell()
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
     //
@@ -112,9 +113,11 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listArray[section].count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let element = listArray[indexPath.section][indexPath.row]
@@ -143,6 +146,18 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         return headerView
     }
     
+    func goalCell(goal: Goal) -> [ListElement] {
+        var elementArray = [ListElement]()
+       // var goalElement = ListElement(from: goal)
+        var goalElement = ListElement.ListEntityType.goal
+        switch goalElement {
+        case .task:
+            <#code#>
+        case .goal:
+            
+        }
+      
+    }
     
     
     func mapGoal(goal: Goal) -> [ListElement] {
