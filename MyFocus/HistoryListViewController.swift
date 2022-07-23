@@ -137,6 +137,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     
     }
     
+   
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dateArray.count
     }
