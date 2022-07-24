@@ -10,7 +10,7 @@ import UIKit
 
 final class CheckBox: UIView {
     
- private var isChecked = false
+ var isChecked = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,14 +34,13 @@ final class CheckBox: UIView {
             backgroundColor = .systemBackground
         }
     }
-    
-   
 }
 
 
 class GoalCell: UITableViewCell {
 
-let historyVC = HistoryListViewController()
+    @IBOutlet weak var title: UILabel!
+    
     let checkBox1 = CheckBox(frame: CGRect(x: 50, y: 100, width: 40, height: 40))
    
     override func prepareForReuse() {
@@ -50,8 +49,9 @@ let historyVC = HistoryListViewController()
         self.addSubview(bgview)
         self.addSubview(checkBox1)
         
-        let gesture = UIGestureRecognizer(target: self, action: #selector(didTapCheckbox))
-        checkBox1.addGestureRecognizer(gesture)
+        
+//        let gesture = UIGestureRecognizer(target: self, action: #selector(didTapCheckbox))
+//        checkBox1.addGestureRecognizer(gesture)
     }
     
     @objc func didTapCheckbox() {
@@ -59,8 +59,9 @@ let historyVC = HistoryListViewController()
     }
     
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 20.0
+    func configureCell(item: ListElement) {
+        checkBox1.isChecked = item.isCompleted
+        title.text = item.title
     }
     
     

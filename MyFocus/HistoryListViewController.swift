@@ -65,7 +65,6 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         }
     }
     
-    let customCell = GoalCell()
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
     
@@ -128,8 +127,11 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         switch element.type {
         
         case .goal:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath)
-          return cell
+            if let cell: GoalCell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalCell {
+                cell.configureCell(item: element)
+                return cell
+            }
+          return UITableViewCell()
         case .task:
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
             return cell
@@ -137,7 +139,10 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     
     }
     
-   
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 20.0
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dateArray.count
