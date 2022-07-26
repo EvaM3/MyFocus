@@ -39,6 +39,7 @@ final class CheckBox: UIView {
 
 class GoalCell: UITableViewCell {
 
+ 
     @IBOutlet weak var title: UILabel!
     
     let checkBox1 = CheckBox(frame: CGRect(x: 50, y: 100, width: 40, height: 40))

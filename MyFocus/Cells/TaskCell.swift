@@ -11,35 +11,39 @@ import UIKit
 
 class TaskCell: UITableViewCell {
     
-    
     var isChecked = false
+    
     @IBOutlet weak var title: UILabel!
     
     
+    let historyVC = HistoryListViewController()
+    let checkBox2 = CheckBox(frame: CGRect(x: 50, y: 100, width: 20, height: 20))
     
-let historyVC = HistoryListViewController()
-let checkBox2 = CheckBox(frame: CGRect(x: 50, y: 100, width: 20, height: 20))
+    
+    @objc func didTapCheckbox() {
+        checkBox2.toggle()
+    }
     
     
     func configureCell(item: ListElement) {
         checkBox2.isChecked = item.isCompleted
         title.text = item.title
     }
- 
     
-        override func prepareForReuse() {
-            let bgview = UIView.init(frame: self.frame)
-            bgview.backgroundColor = .blue
-            self.addSubview(bgview)
-            self.addSubview(checkBox2)
+    
+    override func prepareForReuse() {
+        let bgview = UIView.init(frame: self.frame)
+        bgview.backgroundColor = .blue
+        self.addSubview(bgview)
+        self.addSubview(checkBox2)
     }
     
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state

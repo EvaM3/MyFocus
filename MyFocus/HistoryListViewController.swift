@@ -136,7 +136,6 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
             let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
             return cell
         }
-    
     }
     
     
@@ -144,10 +143,12 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         return 20.0
     }
     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dateArray.count
     }
     
+   
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         self.tableView.sectionHeaderHeight = 50
@@ -194,10 +195,12 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         tableView.reloadData()
     }
     
+    
     func getYesterdayDate() -> Date {
         let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
         return yesterdayDate
     }
+    
     
     func getTodaysDate() -> Date {
         let todayDate = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date() - 86400
