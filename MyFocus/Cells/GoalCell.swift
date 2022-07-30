@@ -62,7 +62,7 @@ class GoalCell: UITableViewCell {
     
     func configureCell(item: ListElement) {
         checkBox1.isChecked = item.isCompleted
-        title.text = item.title
+       // title.text = item.title
     }
     
     

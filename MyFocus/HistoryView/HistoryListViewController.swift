@@ -63,6 +63,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+        setupTableHeaderView()
     }
     
     let coreDataManager = CoreDataManager()
@@ -149,22 +150,32 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     }
     
    
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.tableView.sectionHeaderHeight = 50
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
-        let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-5, height: headerView.frame.height-5)
-        label.text = self.dateArray[section]
-        label.font = .systemFont(ofSize: 20)
-        label.textAlignment = .center
-        label.textColor = .black
-        label.backgroundColor = .green
-        headerView.addSubview(label)
-        
-        return headerView
-    }
+//
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        self.tableView.sectionHeaderHeight = 40
+//        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
+//        let label = UILabel()
+//        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-5, height: headerView.frame.height-5)
+//        label.text = self.dateArray[section]
+//        label.font = .systemFont(ofSize: 20)
+//        label.textAlignment = .center
+//        label.textColor = .black
+//        label.backgroundColor = .green
+//        headerView.addSubview(label)
+//
+//        return headerView
+//    }
   
+    private func setupTableHeaderView() {
+        let header = HistoryGoalsHeaderView(frame: .zero)
+        
+        var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        size.width = UIScreen.main.bounds.width
+        header.frame.size = size
+        
+        tableView.tableHeaderView = header
+    }
+    
     func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
         let newGoalEntity = ListElement(from: goal)
