@@ -20,10 +20,10 @@ class TaskCell: UITableViewCell {
     let checkBox2 = CheckBox(frame: CGRect(x: 50, y: 100, width: 20, height: 20))
     
     
-    @objc func didTapCheckbox() {
-        checkBox2.toggle()
-    }
-    
+//    @objc func didTapCheckbox() {
+//        checkBox2.toggle()
+//    }
+//    
     
     func configureCell(item: ListElement) {
         checkBox2.isChecked = item.isCompleted
