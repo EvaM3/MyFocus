@@ -11,31 +11,63 @@ import UIKit
 
 class TaskCell: UITableViewCell {
     
-    var isChecked = false
     
     @IBOutlet weak var title: UILabel!
     
     
     let historyVC = HistoryListViewController()
-    let checkBox2 = CheckBox(frame: CGRect(x: 50, y: 100, width: 20, height: 20))
     
     
-//    @objc func didTapCheckbox() {
-//        checkBox2.toggle()
-//    }
-//    
+class TaskCheckBox: UIButton {
     
-    func configureCell(item: ListElement) {
-        checkBox2.isChecked = item.isCompleted
-        title.text = item.title
+    
+    let checkBoxImage = UIImage(systemName: "checkmark.rectangle.fill")!.withTintColor(.systemMint, renderingMode: .alwaysOriginal)
+    let uncheckedBoxImage = UIImage(systemName: "checkmark.rectangle")!.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+    
+    
+ 
+    
+    
+  // Bool for checking
+    var isChecked: Bool = false {
+            didSet{
+                if isChecked == true {
+                    self.setImage(checkBoxImage, for: [])
+                } else {
+                    self.setImage(uncheckedBoxImage, for: [])
+                }
+            }
+        }
+    
+    override func awakeFromNib() {
+        self.isUserInteractionEnabled = false
     }
+ 
+   // later for button
+    
+    func buttonClicked(sender: UIButton) {
+            if sender == self {
+                if isChecked == true {
+                    isChecked = false
+                } else {
+                    isChecked = true
+                }
+            }
+        }
+}
+  
+  
+//    func configureCell(item: ListElement) {
+//        checkBoxImage.isChecked = item.isCompleted
+//        title.text = item.title
+//    }
     
     
     override func prepareForReuse() {
         let bgview = UIView.init(frame: self.frame)
         bgview.backgroundColor = .blue
         self.addSubview(bgview)
-        self.addSubview(checkBox2)
+      
     }
     
     
@@ -49,13 +81,4 @@ class TaskCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func toggle() {
-        self.isChecked = !isChecked
-        
-        if self.isChecked {
-            backgroundColor = .systemMint
-        } else {
-            backgroundColor = .systemBackground
-        }
-    }
 }

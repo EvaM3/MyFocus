@@ -157,7 +157,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-5, height: headerView.frame.height-5)
         label.text = self.dateArray[section]
-        label.font = .systemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
         label.textColor = .black
         label.backgroundColor = .green
