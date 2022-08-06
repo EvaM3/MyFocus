@@ -8,6 +8,20 @@
 import UIKit
 
 
+
+class SummaryCell: UITableViewCell {
+    
+    @IBOutlet weak var title: UILabel!
+    
+let historyVC = HistoryListViewController()
+    
+    func configureCell(item: ListElement) {
+        title.textAlignment = .left
+        title.text = item.title
+    }
+}
+
+
 let date = Date()
 let calendar = Calendar.current
 
@@ -25,4 +39,3 @@ func getMonthlySummary() {
         print("day: \(day), month: \(month), year: \(year)")
     }
 }
-
