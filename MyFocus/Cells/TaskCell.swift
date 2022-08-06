@@ -65,7 +65,7 @@ class TaskCheckBox: UIButton {
     
     override func prepareForReuse() {
         let bgview = UIView.init(frame: self.frame)
-        bgview.backgroundColor = .blue
+       // bgview.backgroundColor = .blue
         self.addSubview(bgview)
       
     }

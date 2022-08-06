@@ -152,7 +152,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
    
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.tableView.sectionHeaderHeight = 40
+        self.tableView.sectionHeaderHeight = 30
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
         let label = UILabel()
         label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-5, height: headerView.frame.height-5)
