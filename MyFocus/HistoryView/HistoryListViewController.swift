@@ -13,6 +13,7 @@ struct ListElement {
     enum ListEntityType {
         case task
         case goal
+        case summary
     }
     
     var type: ListEntityType
@@ -41,6 +42,7 @@ extension ListElement {
         self.creationDate = goal.creationDate
         
     }
+
 }
 
 
@@ -63,20 +65,18 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-       // setupTableHeaderView()
+      
     }
     
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
     
+
     
-    //
-    //    var dateArray: [ListElement] = []
-    //    var listArray : [ListElement] = []
-    
-    var dateArray = ["09-07-2022","10-07-2022","11-07-2022","12-07-2022"]
+    var dateArray = ["July 2022","Today","10-07-2022","11-07-2022","12-07-2022"]
     var listArray = [
-        [ListElement.init(from: Goal(tasks: [], title: " Finish the essay", creationDate: Date())), ListElement.init(from: Task(id: UUID(), title: "Read the last pages over again", completed: false, creationDate: Date()))],
+        [ListElement(type: .summary, title: "One of 2 is done", isCompleted: true, creationDate: Date())],
+        [ListElement.init(from: Goal(tasks: [], title: " Finish the essay", creationDate: Date())), ListElement.init(from: Task(id: UUID(), title: "Read the last pages over again", completed: true, creationDate: Date()))],
         [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Go grocery shopping for ingredients", completed: false, creationDate: Date())], title: "Bake the cake", creationDate: Date()))],
         [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Clean kitchen and bathroom", completed: false, creationDate: Date())], title: "Do the housekeeping chores", creationDate: Date()))],
         []
@@ -129,33 +129,42 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         
         case .goal:
             if let cell: GoalCell = tableView.dequeueReusableCell(withIdentifier: "goalCell", for: indexPath) as? GoalCell {
-                cell.configureCell(item: element)
+                cell.configureCheckMarkedCell(item: element)
+              //  Calendar.current.isDateInToday(<#T##date: Date##Date#>)
                 return cell
             }
           return UITableViewCell()
         case .task:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath)
-            return cell
+            if let cell: TaskCell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? TaskCell {
+                cell.configureCheckMarkedCell(item: element)
+                return cell
+            }
+          return UITableViewCell()
         }
     }
     
-    
-   // func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-      //  return 20.0
-//    }
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let element = listArray[indexPath.section][indexPath.row]
+        switch element.type {
+        case .goal:
+            return 60
+            
+        case .task:
+            return 40
+          
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.dateArray.count
     }
     
-   
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        self.tableView.sectionHeaderHeight = 30
+        tableView.sectionHeaderTopPadding = 0
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
         let label = UILabel()
-        label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width-5, height: headerView.frame.height-5)
+        label.frame = headerView.frame
         label.text = self.dateArray[section]
         label.font = .systemFont(ofSize: 15)
         label.textAlignment = .center
@@ -164,18 +173,10 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         headerView.addSubview(label)
 
         return headerView
+       
     }
-  
-    private func setupTableHeaderView() {
-        let header = HistoryGoalsHeaderView(frame: .zero)
-        
-        var size = header.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        size.width = UIScreen.main.bounds.width
-        header.frame.size = size
-        
-        tableView.tableHeaderView = header
-    }
-    
+
+//    
     func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
         let newGoalEntity = ListElement(from: goal)

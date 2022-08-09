@@ -9,24 +9,39 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="GoalCell" customModule="MyFocus" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="GoalCell" customModule="MyFocus" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmX-89-eRf">
-                        <rect key="frame" x="148" y="12" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmX-89-eRf">
+                        <rect key="frame" x="68" y="4" width="244" height="52"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KO8-4k-W7o">
+                        <rect key="frame" x="8" y="4" width="52" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="KO8-4k-W7o" secondAttribute="height" multiplier="1:1" id="vd7-3a-UuV"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="KO8-4k-W7o" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="45w-ov-hEV"/>
+                    <constraint firstItem="YmX-89-eRf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="GPi-NT-l4z"/>
+                    <constraint firstAttribute="trailing" secondItem="YmX-89-eRf" secondAttribute="trailing" constant="8" id="JS9-8j-JtH"/>
+                    <constraint firstItem="YmX-89-eRf" firstAttribute="leading" secondItem="KO8-4k-W7o" secondAttribute="trailing" constant="8" id="RsF-jV-bCg"/>
+                    <constraint firstAttribute="bottom" secondItem="KO8-4k-W7o" secondAttribute="bottom" constant="4" id="dh5-JG-aIq"/>
+                    <constraint firstItem="KO8-4k-W7o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="mXl-Qa-qs6"/>
+                    <constraint firstAttribute="bottom" secondItem="YmX-89-eRf" secondAttribute="bottom" constant="4" id="wew-mb-Q5H"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="checkMark" destination="KO8-4k-W7o" id="6cw-DV-eLc"/>
                 <outlet property="title" destination="YmX-89-eRf" id="0rf-AG-GZh"/>
             </connections>
             <point key="canvasLocation" x="139" y="70"/>
