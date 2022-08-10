@@ -9,15 +9,10 @@ import UIKit
 
 
 
-
-
-
 class HistoryListViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
-    
-
     
     var dateArray = ["July 2022","Today","10-07-2022","11-07-2022","12-07-2022"]
     var listArray = [
@@ -43,20 +38,6 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
       
     }
     
-  
-    
-    
-    let calendar = Calendar.current
-    
-    struct SectionItem {
-        let sectionCreationDate : Date
-    }
-    
-    
-    var sections = Dictionary<String, Array<SectionItem>>()
-    var sortedSections = [String]()
-    var formattedDate = Date().formatted(date: .numeric, time: .omitted)
-    
     
     func saveDate() -> Date {
         let dateFormatter = DateFormatter()
@@ -75,6 +56,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         print(stringObject)
         return dateObject
     }
+    
+ // MARK: Tableview functions:
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -96,12 +79,14 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
                 return cell
             }
           return UITableViewCell()
+            
         case .task:
             if let cell: TaskCell = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as? TaskCell {
                 cell.configureCheckMarkedCell(item: element)
                 return cell
             }
           return UITableViewCell()
+            
         case .summary:
             <#code#>
         }
@@ -142,7 +127,9 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
        
     }
 
-//    
+    
+    // MARK: Data loading functions
+    
     func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
         let newGoalEntity = ListElement(from: goal)
@@ -158,8 +145,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
     func loadSortedData() {
         let todaysSortDescriptor = NSSortDescriptor(key: "creationDate", ascending: true)
         let sortDescriptors = [todaysSortDescriptor]
-        
     }
+    
     
     func loadData(pred: NSPredicate? = nil) {
         listEntityArray.removeAll()
@@ -169,20 +156,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
             let elements = mapGoal(goal: goal)
             listEntityArray.append(contentsOf: elements)
         }
-        
         tableView.reloadData()
-    }
-    
-    
-    func getYesterdayDate() -> Date {
-        let yesterdayDate = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date() - 86400
-        return yesterdayDate
-    }
-    
-    
-    func getTodaysDate() -> Date {
-        let todayDate = Calendar.current.date(byAdding: .day, value: 0, to: Date()) ?? Date() - 86400
-        return todayDate
     }
     
     
@@ -191,4 +165,5 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         self.loadData()
     }
 }
+
 
