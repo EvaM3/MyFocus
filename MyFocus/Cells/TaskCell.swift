@@ -17,7 +17,7 @@ class TaskCell: UITableViewCell {
     
     @IBOutlet weak var checkMark: UIImageView!
     
-    
+    var listElement = ListElement.self
     
   
     func configureCheckMarkedCell(item: ListElement) {

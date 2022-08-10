@@ -8,50 +8,25 @@
 import UIKit
 
 
-struct ListElement {
-    
-    enum ListEntityType {
-        case task
-        case goal
-        case summary
-    }
-    
-    var type: ListEntityType
-    var title: String
-    var isCompleted: Bool
-    var creationDate: Date
-    var achievedDate: Date?
-    
-}
-
-extension ListElement {
-    init(from task : Task) {
-        self.type = .task
-        self.title = task.title
-        self.isCompleted = task.completed
-        self.achievedDate = task.achievedDate
-        self.creationDate = task.creationDate
-        
-    }
-    
-    init(from goal : Goal) {
-        self.type = .goal
-        self.title = goal.title
-        self.isCompleted = goal.completed
-        self.achievedDate = goal.achievedDate
-        self.creationDate = goal.creationDate
-        
-    }
-
-}
-
-
 
 
 
 
 class HistoryListViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
+    let coreDataManager = CoreDataManager()
+    var listEntityArray = [ListElement]()
+    
+
+    
+    var dateArray = ["July 2022","Today","10-07-2022","11-07-2022","12-07-2022"]
+    var listArray = [
+        [ListElement(type: .summary, title: "One of 2 is done", isCompleted: true, creationDate: Date())],
+        [ListElement.init(from: Goal(tasks: [], title: " Finish the essay", creationDate: Date())), ListElement.init(from: Task(id: UUID(), title: "Read the last pages over again", completed: true, creationDate: Date()))],
+        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Go grocery shopping for ingredients", completed: false, creationDate: Date())], title: "Bake the cake", creationDate: Date()))],
+        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Clean kitchen and bathroom", completed: false, creationDate: Date())], title: "Do the housekeeping chores", creationDate: Date()))],
+        []
+    ]
     
     
     override func viewDidLoad() {
@@ -68,20 +43,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
       
     }
     
-    let coreDataManager = CoreDataManager()
-    var listEntityArray = [ListElement]()
-    
-
-    
-    var dateArray = ["July 2022","Today","10-07-2022","11-07-2022","12-07-2022"]
-    var listArray = [
-        [ListElement(type: .summary, title: "One of 2 is done", isCompleted: true, creationDate: Date())],
-        [ListElement.init(from: Goal(tasks: [], title: " Finish the essay", creationDate: Date())), ListElement.init(from: Task(id: UUID(), title: "Read the last pages over again", completed: true, creationDate: Date()))],
-        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Go grocery shopping for ingredients", completed: false, creationDate: Date())], title: "Bake the cake", creationDate: Date()))],
-        [ListElement.init(from: Goal(tasks: [Task(id: UUID(), title: "Clean kitchen and bathroom", completed: false, creationDate: Date())], title: "Do the housekeeping chores", creationDate: Date()))],
-        []
-    ]
-    
+  
     
     
     let calendar = Calendar.current
@@ -140,6 +102,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
                 return cell
             }
           return UITableViewCell()
+        case .summary:
+            <#code#>
         }
     }
     
@@ -152,6 +116,8 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         case .task:
             return 40
           
+        case .summary:
+            <#code#>
         }
     }
     
