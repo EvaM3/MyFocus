@@ -23,6 +23,7 @@ class TaskCell: UITableViewCell {
     func configureCheckMarkedCell(item: ListElement) {
         title.textAlignment = .left
         title.text = item.title
+        
         if item.isCompleted {
             checkMark.image =  UIImage(systemName: "checkmark.rectangle.fill")!.withTintColor(.systemMint, renderingMode: .alwaysOriginal)
         } else {

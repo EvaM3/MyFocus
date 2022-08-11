@@ -11,6 +11,7 @@ import UIKit
 
 class HistoryListViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
     
+    
     let coreDataManager = CoreDataManager()
     var listEntityArray = [ListElement]()
     
@@ -30,12 +31,13 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         tableView.delegate = self
         tableView.register(UINib(nibName: "GoalCell", bundle: nil), forCellReuseIdentifier: "goalCell")
         tableView.register(UINib(nibName: "TaskCell",bundle: nil), forCellReuseIdentifier: "taskCell")
+        tableView.register(UINib(nibName: "MonthlySummaryCell",bundle: nil), forCellReuseIdentifier: "summaryCell")
         super.viewDidLoad()
         loadData()
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-      
+       
     }
     
     
@@ -56,6 +58,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
         print(stringObject)
         return dateObject
     }
+   
     
  // MARK: Tableview functions:
     
@@ -88,7 +91,11 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
           return UITableViewCell()
             
         case .summary:
-            <#code#>
+            if let cell: SummaryCell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as? SummaryCell {
+                cell.configureCell(item: element)
+                return cell
+            }
+          return UITableViewCell()
         }
     }
     
@@ -102,7 +109,7 @@ class HistoryListViewController: UIViewController, UITableViewDelegate,UITableVi
             return 40
           
         case .summary:
-            <#code#>
+            return 30
         }
     }
     

@@ -14,7 +14,7 @@ struct ListElement {
         case goal
         case summary
     }
-    
+  
     var type: ListEntityType
     var title: String
     var isCompleted: Bool
@@ -24,6 +24,9 @@ struct ListElement {
 }
 
 extension ListElement {
+    
+    
+    
     init(from task : Task) {
         self.type = .task
         self.title = task.title
@@ -39,7 +42,16 @@ extension ListElement {
         self.isCompleted = goal.completed
         self.achievedDate = goal.achievedDate
         self.creationDate = goal.creationDate
+       
         
     }
-
+   
+    init(goal: Goal) {
+        self.type = .summary
+        self.title = goal.title
+        self.isCompleted = goal.completed
+        self.achievedDate = goal.achievedDate
+        self.creationDate = goal.creationDate
+    }
+    
 }

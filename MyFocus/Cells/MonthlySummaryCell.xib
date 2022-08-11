@@ -10,12 +10,29 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MonthlySummaryCell"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SummaryCell" customModule="MyFocus" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="510" height="251"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tB6-hB-y9A">
+                    <rect key="frame" x="8" y="60" width="494" height="141"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="tB6-hB-y9A" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="81W-M1-J8f"/>
+                <constraint firstItem="tB6-hB-y9A" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="EPt-2x-irg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="tB6-hB-y9A" secondAttribute="trailing" constant="8" id="HQR-0c-lyH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="tB6-hB-y9A" secondAttribute="bottom" constant="16" id="JbA-al-XxV"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="title" destination="tB6-hB-y9A" id="oHw-Ki-3xD"/>
+            </connections>
             <point key="canvasLocation" x="207.24637681159422" y="-142.29910714285714"/>
         </view>
     </objects>

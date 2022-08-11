@@ -30,14 +30,7 @@
                             <constraint firstItem="O4E-Gm-W4F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hJd-nk-D5a"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="sFv-DB-Wxi">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="se5-P9-Q8o">
-                            <color key="tintColor" red="0.0048598507420000003" green="0.096086271109999996" blue="0.57499289509999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="addButtonTapped:" destination="BYZ-38-t0r" id="8ps-9E-AmT"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="sFv-DB-Wxi"/>
                     <connections>
                         <outlet property="tableView" destination="O4E-Gm-W4F" id="9xi-2M-B79"/>
                     </connections>
