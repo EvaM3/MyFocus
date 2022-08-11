@@ -66,8 +66,6 @@ class CoreDataManager {
     func addItem(item: ListElement) {
         let newItem = TaskEntity(context: persistentContainer.viewContext)
         newItem.name = item.title
-        newItem.creationDate = item.creationDate
-        newItem.achievedDate = item.achievedDate
         saveData()
     }
     

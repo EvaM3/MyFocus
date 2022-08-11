@@ -15,7 +15,7 @@ class SummaryCell: UITableViewCell {
     
     
     func configureCell(item: ListElement) {
-        title.textAlignment = .left
+        title.textAlignment = .center
         title.text = item.title
     }
 }

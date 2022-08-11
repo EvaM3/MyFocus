@@ -29,8 +29,6 @@
 		A0A79B5E28A3304100A135F9 /* ListItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A79B5D28A3304100A135F9 /* ListItem+Extensions.swift */; };
 		A0A8CF4F289DDE7000B528DA /* MonthlySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8CF4E289DDE7000B528DA /* MonthlySummaryCell.swift */; };
 		A0A8CF51289DDFB300B528DA /* MonthlySummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A8CF50289DDFB300B528DA /* MonthlySummaryCell.xib */; };
-		A0B7922628955735007D782F /* HistoryGoalsHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B7922528955735007D782F /* HistoryGoalsHeaderView.swift */; };
-		A0B79228289558A3007D782F /* HistoryGoalsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0B79227289558A3007D782F /* HistoryGoalsHeaderView.xib */; };
 		A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BA56BA2835A0FD0078517B /* DataController.swift */; };
 		A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0E3E11327DA9F4C00085853 /* FocusData.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -72,8 +70,6 @@
 		A0A79B5D28A3304100A135F9 /* ListItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListItem+Extensions.swift"; sourceTree = "<group>"; };
 		A0A8CF4E289DDE7000B528DA /* MonthlySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySummaryCell.swift; sourceTree = "<group>"; };
 		A0A8CF50289DDFB300B528DA /* MonthlySummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthlySummaryCell.xib; sourceTree = "<group>"; };
-		A0B7922528955735007D782F /* HistoryGoalsHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGoalsHeaderView.swift; sourceTree = "<group>"; };
-		A0B79227289558A3007D782F /* HistoryGoalsHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryGoalsHeaderView.xib; sourceTree = "<group>"; };
 		A0BA56BA2835A0FD0078517B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		A0E3E11427DA9F4C00085853 /* FocusData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FocusData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -181,8 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				A0A647CE27595DBE003428B7 /* HistoryListViewController.swift */,
-				A0B7922528955735007D782F /* HistoryGoalsHeaderView.swift */,
-				A0B79227289558A3007D782F /* HistoryGoalsHeaderView.xib */,
 				A0A79B5D28A3304100A135F9 /* ListItem+Extensions.swift */,
 			);
 			path = HistoryView;
@@ -270,7 +264,6 @@
 			files = (
 				A0A8CF51289DDFB300B528DA /* MonthlySummaryCell.xib in Resources */,
 				A03BAC45288B72F2007F78DF /* GoalCell.xib in Resources */,
-				A0B79228289558A3007D782F /* HistoryGoalsHeaderView.xib in Resources */,
 				A03BAC49288B735B007F78DF /* TaskCell.xib in Resources */,
 				A0A647D727595DBF003428B7 /* LaunchScreen.storyboard in Resources */,
 				A0A647D427595DBF003428B7 /* Assets.xcassets in Resources */,
@@ -295,7 +288,6 @@
 				A00588B6283ABC2000F19F12 /* TaskEntity+CoreDataProperties.swift in Sources */,
 				A03BAC44288B72F2007F78DF /* GoalCell.swift in Sources */,
 				A00588B2283A689A00F19F12 /* GoalEntity+CoreDataProperties.swift in Sources */,
-				A0B7922628955735007D782F /* HistoryGoalsHeaderView.swift in Sources */,
 				A0A647EE275960CC003428B7 /* Task.swift in Sources */,
 				A0A647CF27595DBE003428B7 /* HistoryListViewController.swift in Sources */,
 				A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */,
