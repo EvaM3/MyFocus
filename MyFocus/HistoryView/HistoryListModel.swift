@@ -39,6 +39,38 @@ struct HistoryListModel {
         }
         return elementArray
     }
+    
+    func sortedDates() {
+    var convertedSections: [Date] = []
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd MM, yyyy"
+    
+    for day in sections {
+        let date = dateFormatter.date(from: day)
+        if let date = date {
+            convertedSections.append(date)
+        }
+    }
+        var converted = convertedSections.sorted(by: { $0.compare($1) == .orderedDescending })
+    }
+    
+    
+    mutating func sortedGoals(goal: Goal) {
+        var goalsSorted: [ListElement] = []
+        let goalEntity = ListElement(from: goal)
+    
+        for goal in sectionRows {
+            goalsSorted.append(goalEntity)
+         //   goalsSorted(type(of: creationDate))
+        }
+        
+        
+        //            let sortedGoals = sectionRows.sort(using: { $0.date.compare($1.date) == NSComparisonResult.OrderedDescending})
+    }
+    
+    
+
+
 }
  
 
