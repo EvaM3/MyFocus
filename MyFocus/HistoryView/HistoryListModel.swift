@@ -6,12 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
 
 
 struct HistoryListModel {
     
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var dataManager = CoreDataManager()
+    
+    
     var sections = [String]()
     var sectionRows =  [[ListElement]]()
     
@@ -41,15 +45,27 @@ struct HistoryListModel {
     }
     
     func generateData(from: [Goal]) {
+        var context = dataManager.persistentContainer.viewContext
+        let goalItem = GoalEntity(context: context)
+        let goalItemTitle = goalItem.title
+        let goalItemTasks = goalItem.defaultTasks
+        let goalitemCompleted = goalItem.completed
+        let goalitemCreation = goalItem.creationDate
+        
+      //  var goalData = [[CoreDataManager.mapToGoal]]
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []
+        var generatedGoals: [Goal] = []
         
         let sortedGoals = from.sorted { $0.creationDate > $1.creationDate }
+        for goal in sortedGoals {
+            generatedRows.append(mapGoal(goal: goal))
+        }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MM, yyyy"
         for goal in sortedGoals {
             let currentCreationDate = dateFormatter.string(from: goal.creationDate)
-            generatedSections.append(currentCreationDate)
+           // generatedSections.append(currentCreationDate)
             generatedRows.append(mapGoal(goal: goal))
         }
         
