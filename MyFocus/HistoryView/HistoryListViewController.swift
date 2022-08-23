@@ -14,7 +14,7 @@ class HistoryListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    let listModel = HistoryListModel()
+    var listModel = HistoryListModel()
    
     
     
@@ -26,6 +26,7 @@ class HistoryListViewController: UIViewController {
         tableView.register(UINib(nibName: "MonthlySummaryCell",bundle: nil), forCellReuseIdentifier: "summaryCell")
         super.viewDidLoad()
         DispatchQueue.main.async {
+            self.listModel.loadData()
             self.tableView.reloadData()
         }
        
