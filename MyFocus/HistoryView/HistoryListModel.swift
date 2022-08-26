@@ -37,6 +37,7 @@ struct HistoryListModel {
     }
     
     mutating func generateData(from: [Goal]) {
+        var monthlySummary : String = ""
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []
         

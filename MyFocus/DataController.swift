@@ -183,4 +183,11 @@ class CoreDataManager {
         return tomorrowDate
     }
     
+    func getCurrentMonth() -> DateInterval {
+        let calendar: Calendar = Calendar.current
+        guard let monthInterval = calendar.dateInterval(of: .month, for: Date()) else { return DateInterval() }
+        return monthInterval
+    }
+  
+
 }
