@@ -35,9 +35,23 @@ struct HistoryListModel {
         }
         return elementArray
     }
+ 
+  
+    
+    func monthlySummary(done: Goal, from: DateInterval) {
+        print("From\(from) goals \(done) is completed.")
+    }
+  
+    for goal in done {
+        for from in from {
+            monthlySummary(done: Goal, from: DateInterval)
+        }
+    }
+    
+    
     
     mutating func generateData(from: [Goal]) {
-        var monthlySummary : String = ""
+       // var monthlySummary : String = ""
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []
         
