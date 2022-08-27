@@ -19,7 +19,7 @@ struct HistoryListModel {
     var sectionRows =  [[ListElement]]()
     
     mutating func loadData() {
-        //dataManager.generateRandomData()
+        dataManager.generateRandomData()
         generateData(from: dataManager.loadGoal())
     }
     
@@ -38,15 +38,15 @@ struct HistoryListModel {
  
   
     
-    func monthlySummary(done: Goal, from: DateInterval) {
-        print("From\(from) goals \(done) is completed.")
-    }
-  
-    for goal in done {
-        for from in from {
-            monthlySummary(done: Goal, from: DateInterval)
-        }
-    }
+//    func monthlySummary(done: Goal, from: DateInterval) {
+//        print("From\(from) goals \(done) is completed.")
+//    }
+//  
+//    for goal in done {
+//        for from in from {
+//            monthlySummary(done: Goal, from: DateInterval)
+//        }
+//    }
     
     
     

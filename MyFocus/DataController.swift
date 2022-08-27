@@ -189,5 +189,6 @@ class CoreDataManager {
         return monthInterval
     }
   
+  
 
 }
