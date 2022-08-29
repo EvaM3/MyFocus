@@ -6,7 +6,7 @@
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="tasks" optional="YES" transient="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TaskEntity"/>
+        <relationship name="tasks" transient="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TaskEntity"/>
     </entity>
     <entity name="TaskEntity" representedClassName="TaskEntity" syncable="YES">
         <attribute name="achievedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -16,7 +16,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="GoalEntity" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="TaskEntity" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="GoalEntity" positionX="0" positionY="0" width="128" height="119"/>
+        <element name="TaskEntity" positionX="0" positionY="0" width="128" height="104"/>
     </elements>
 </model>

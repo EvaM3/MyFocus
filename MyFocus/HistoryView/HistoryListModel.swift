@@ -13,7 +13,9 @@ import UIKit
 struct HistoryListModel {
     
     var dataManager = CoreDataManager()
-    
+    var currentSummaryYearAndMonth: String?
+    var totalGoalsCounter = 0
+    var completedGoalsCounter = 0
     
     var sections = [String]()
     var sectionRows =  [[ListElement]]()
@@ -35,23 +37,24 @@ struct HistoryListModel {
         }
         return elementArray
     }
- 
-  
     
-//    func monthlySummary(done: Goal, from: DateInterval) {
-//        print("From\(from) goals \(done) is completed.")
-//    }
-//  
-//    for goal in done {
-//        for from in from {
-//            monthlySummary(done: Goal, from: DateInterval)
-//        }
-//    }
-    
-    
+
+    mutating func addToSummary(goal: Goal) -> Bool {
+        var summaryCreationRequired = true
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM, yyyy"
+        currentSummaryYearAndMonth = dateFormatter.string(from: goal.creationDate)
+        
+        
+        totalGoalsCounter += 1
+        
+        if goal.completed  {
+            completedGoalsCounter += 1
+        }
+        return summaryCreationRequired
+    }
     
     mutating func generateData(from: [Goal]) {
-       // var monthlySummary : String = ""
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []
         
@@ -59,9 +62,16 @@ struct HistoryListModel {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MM, yyyy"
         for goal in sortedGoals {
+            
+            if addToSummary(goal: goal) {
+                generatedSections.append(currentSummaryYearAndMonth ?? "")
+                generatedRows.append([ListElement(summary: "From \(totalGoalsCounter) goals \(completedGoalsCounter) is completed")])
+            }
+            
             let currentCreationDate = dateFormatter.string(from: goal.creationDate)
             generatedSections.append(currentCreationDate)
             generatedRows.append(mapGoal(goal: goal))
+            
         }
         
         self.sections = generatedSections

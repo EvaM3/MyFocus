@@ -1,8 +1,8 @@
 //
-//  GoalsEntity+CoreDataProperties.swift
+//  GoalEntity+CoreDataProperties.swift
 //  MyFocus
 //
-//  Created by Eva Madarasz on 22/05/2022.
+//  Created by Eva Sira Madarasz on 28/08/2022.
 //
 //
 
@@ -19,8 +19,8 @@ extension GoalEntity {
     @NSManaged public var achievedDate: Date?
     @NSManaged public var completed: Bool
     @NSManaged public var creationDate: Date?
-    @NSManaged public var title: String?
     @NSManaged public var id: UUID?
+    @NSManaged public var title: String?
     @NSManaged public var tasks: NSOrderedSet?
 
     

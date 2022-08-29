@@ -112,6 +112,7 @@ class CoreDataManager {
         randomTask.name = "Finish the book \(UUID().uuidString)"
         randomTask.creationDate = createDate
         randomTask.achievedDate = nil
+        self.saveData()
         return randomTask
     }
     
