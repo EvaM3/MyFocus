@@ -93,10 +93,10 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         let label = UILabel()
         label.frame = headerView.frame
         label.text = self.listModel.sections[section]
-        label.font = .systemFont(ofSize: 15)
+        label.font = .systemFont(ofSize: 20)
         label.textAlignment = .center
         label.textColor = .black
-        label.backgroundColor = .green
+        label.backgroundColor = .systemMint
         headerView.addSubview(label)
 
         return headerView
