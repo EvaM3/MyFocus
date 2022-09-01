@@ -14,6 +14,7 @@ struct HistoryListModel {
     
     var dataManager = CoreDataManager()
     var currentSummaryYearAndMonth: String?
+    var currentYearAndMonth: String?
     var totalGoalsCounter = 0
     var completedGoalsCounter = 0
     
@@ -44,12 +45,16 @@ struct HistoryListModel {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM, yyyy"
         currentSummaryYearAndMonth = dateFormatter.string(from: goal.creationDate)
+        currentYearAndMonth =  dataManager.getCurrentMonth()
         
         
         totalGoalsCounter += 1
         
-        if goal.completed  {
+        if goal.completed && currentSummaryYearAndMonth == dataManager.getCurrentMonth() {
             completedGoalsCounter += 1
+        } else {
+            completedGoalsCounter = 0
+            totalGoalsCounter = 0
         }
         return summaryCreationRequired
     }
