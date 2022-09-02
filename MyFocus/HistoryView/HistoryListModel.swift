@@ -90,6 +90,14 @@ struct HistoryListModel {
         self.sectionRows = generatedRows
     }
     
+    mutating func generateTodaysGoal(from: [Goal]) {
+        var todaysSection: String = "Today"
+        var todaysRows: [[ListElement]] = []
+        let date = Date()
+        let calendar = Calendar.current
+        let today = calendar.component(.day, from: date)
+        
+    
 }
 
-
+}
