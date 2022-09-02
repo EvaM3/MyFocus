@@ -38,26 +38,33 @@ struct HistoryListModel {
         }
         return elementArray
     }
+   
     
-
-    mutating func addToSummary(goal: Goal) -> Bool {
-        var summaryCreationRequired = true
+    mutating func addToSummary(goal: Goal) -> (yearAndMonth: String, totalCount: Int, completedCount: Int)? {
+        
+        var summary: (yearAndMonth: String, totalCount: Int, completedCount: Int)?
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM, yyyy"
-        currentSummaryYearAndMonth = dateFormatter.string(from: goal.creationDate)
-        currentYearAndMonth =  dataManager.getCurrentMonth()
-        
+        if currentSummaryYearAndMonth == nil {
+            currentSummaryYearAndMonth = dateFormatter.string(from: goal.creationDate)
+        } else {
+            let currentGoalYearAndMonth = dateFormatter.string(from: goal.creationDate)
+            if currentSummaryYearAndMonth != currentGoalYearAndMonth,
+            let currentSummaryYearAndMonth = currentSummaryYearAndMonth {
+                summary = (yearAndMonth: currentSummaryYearAndMonth, totalCount: totalGoalsCounter, completedCount: completedGoalsCounter)
+                self.currentSummaryYearAndMonth = currentGoalYearAndMonth
+                completedGoalsCounter = 0
+                totalGoalsCounter = 0
+        }
+        }
         
         totalGoalsCounter += 1
-        
-        if goal.completed && currentSummaryYearAndMonth == dataManager.getCurrentMonth() {
+        if goal.completed {
             completedGoalsCounter += 1
-        } else {
-            completedGoalsCounter = 0
-            totalGoalsCounter = 0
         }
-        return summaryCreationRequired
+        return summary
     }
+    
     
     mutating func generateData(from: [Goal]) {
         var generatedSections: [String] = []
@@ -68,9 +75,9 @@ struct HistoryListModel {
         dateFormatter.dateFormat = "dd MM, yyyy"
         for goal in sortedGoals {
             
-            if addToSummary(goal: goal) {
-                generatedSections.append(currentSummaryYearAndMonth ?? "")
-                generatedRows.append([ListElement(summary: "From \(totalGoalsCounter) goals \(completedGoalsCounter) is completed")])
+            if  let summary = addToSummary(goal: goal) {
+                generatedSections.append(summary.yearAndMonth)
+                generatedRows.append([ListElement(summary: "From \(summary.totalCount) goals \(summary.completedCount) is completed")])
             }
             
             let currentCreationDate = dateFormatter.string(from: goal.creationDate)

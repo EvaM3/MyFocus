@@ -184,14 +184,7 @@ class CoreDataManager {
         return tomorrowDate
     }
     
-    func getCurrentMonth() -> String {
-        let calendar: Calendar = Calendar.current
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/yyyy"
-        let currentMonth = dateFormatter.string(from: date)
-        return currentMonth
-    }
+  
   
   
 
