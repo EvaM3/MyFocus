@@ -90,13 +90,21 @@ struct HistoryListModel {
         self.sectionRows = generatedRows
     }
     
+    func isToday(date1: Date, date2: Date) -> Bool {
+        let diff = Calendar.current.dateComponents([.day], from: date1,to: date2)
+        if diff.day == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     mutating func generateTodaysGoal(from: [Goal]) {
         var todaysSection: String = "Today"
         var todaysRows: [[ListElement]] = []
-        let date = Date()
-        let calendar = Calendar.current
-        let today = calendar.component(.day, from: date)
+       
         
+      
     
 }
 
