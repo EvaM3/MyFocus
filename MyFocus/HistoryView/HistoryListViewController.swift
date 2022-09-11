@@ -38,12 +38,16 @@ class HistoryListViewController: UIViewController {
 extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return listModel.sectionRows[section].count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let element = listModel.sectionRows[indexPath.section][indexPath.row]
+        
+        
+        var element = listModel.sectionRows[indexPath.section][indexPath.row]
+        
         switch element.type {
         
         case .goal:
@@ -63,6 +67,11 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
                 cell.configureCell(item: element)
                 return cell
             }
+            
+            if indexPath.row == 0 {
+                element.type = .summary
+            }
+            
         }
         
         return UITableViewCell()
@@ -102,5 +111,10 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         return headerView
        
     }
+    
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return
+//    }
 
 }

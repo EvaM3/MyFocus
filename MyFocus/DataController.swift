@@ -180,12 +180,18 @@ class CoreDataManager {
     }
     
     func getTomorrowDate() -> Date {
-        let tomorrowDate = Calendar.current.date(byAdding: .day, value: +1 , to: Date()) ?? Date() + 86400
-        return tomorrowDate
+        let tomorrowsDate = Calendar.current.date(byAdding: .day, value: +1 , to: Date()) ?? Date() + 86400
+        return tomorrowsDate
     }
     
   
+    func getCurrentMonth() -> String {
+        let calendar: Calendar = Calendar.current
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/yyyy"
+        let currentMonth = dateFormatter.string(from: date)
+        return currentMonth
+    }
   
-  
-
 }

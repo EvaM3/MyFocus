@@ -10,6 +10,8 @@ import UIKit
 
 
 class SummaryCell: UITableViewCell {
+ 
+  
     
     @IBOutlet weak var title: UILabel!
     
