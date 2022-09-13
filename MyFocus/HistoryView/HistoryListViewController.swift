@@ -46,7 +46,7 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        var element = listModel.sectionRows[indexPath.section][indexPath.row]
+        let element = listModel.sectionRows[indexPath.section][indexPath.row]
         
         switch element.type {
         
@@ -68,9 +68,9 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
                 return cell
             }
             
-            if indexPath.row == 0 {
-                element.type = .summary
-            }
+//            if indexPath.row == 0 {
+//                element.type = .summary
+//            }
             
         }
         
