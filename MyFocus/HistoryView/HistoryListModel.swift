@@ -82,6 +82,14 @@ struct HistoryListModel {
     }
     
     
+    mutating func generateSummaryDate() -> String {
+        let date = Date()
+        dateFormatter.dateFormat = "MM/yyyy"
+        let currentMonth = dateFormatter.string(from: date)
+        return currentMonth
+      
+    }
+     
     
     mutating func generateData(from: [Goal]) {
         var generatedSections: [String] = []
@@ -104,6 +112,7 @@ struct HistoryListModel {
                     
                 }
             }
+            
             if Calendar.current.isDateInToday(goal.creationDate) {
                 generatedSections.append(todayString)
             } else {
@@ -113,12 +122,18 @@ struct HistoryListModel {
             generatedRows.append(mapGoal(goal: goal))
         }
         
+        
+        
+        
         let summary = addToSummary()
-        generatedSections.append(summary.yearAndMonth)
+        generatedSections.append(generateSummaryDate())
         generatedRows.append([ListElement(summary: "From \(summary.totalCount) goals \(summary.completedCount) is completed")])
         
         self.sections = generatedSections.reversed()
         self.sectionRows = generatedRows.reversed()
+        
+      
+        
         
     }
     
