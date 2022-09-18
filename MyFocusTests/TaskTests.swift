@@ -139,7 +139,7 @@ class TaskTests: XCTestCase {
     
     
     func makeSut() -> Task {
-      let sut = Task(title: title1, completed: false, creationDate: Date(), achievedDate: nil)
+        let sut = Task(id: UUID(), title: title1, completed: false, creationDate: Date(), achievedDate: nil)
         return sut
     }
 }

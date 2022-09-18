@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+
 
 
 
@@ -24,7 +24,7 @@ struct HistoryListModel {
     var sectionRows =  [[ListElement]]()
     
     mutating func loadData() {
-        //  dataManager.generateRandomData()
+         dataManager.generateRandomData()
         generateData(from: dataManager.loadGoal())
     }
     
