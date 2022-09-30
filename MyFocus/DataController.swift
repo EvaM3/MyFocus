@@ -9,11 +9,17 @@
 import CoreData
 
 
-class CoreDataManager {
+protocol CoreDataLoaderProtocol {
+    func loadGoal(predicate: NSPredicate?) -> [Goal]
+}
+
+
+
+class CoreDataManager: CoreDataLoaderProtocol {
     
     
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    private lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "FocusData")
         
         container.loadPersistentStores(completionHandler: { (NSPersistentStoreDescription, error) in

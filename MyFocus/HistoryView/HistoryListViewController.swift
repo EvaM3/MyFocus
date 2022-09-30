@@ -14,8 +14,8 @@ class HistoryListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var listModel = HistoryListModel()
-   
+    var listModel: HistoryListModelProtocol = HistoryListModel(dataManager: CoreDataManager())
+    
     
     
     override func viewDidLoad() {

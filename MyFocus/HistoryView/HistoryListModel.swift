@@ -8,11 +8,20 @@
 import Foundation
 
 
-
-
-struct HistoryListModel {
+protocol HistoryListModelProtocol  {
+    var sections: [String] { get }
+    var sectionRows: [[ListElement]] { get }
     
-    private var dataManager = CoreDataManager()
+   func loadData()
+}
+
+
+
+class HistoryListModel: HistoryListModelProtocol {
+  
+    
+    
+    private var dataManager: CoreDataLoaderProtocol
     private let dateFormatter = DateFormatter()
     private var currentSummaryYearAndMonth: String?
     private var currentYearAndMonth: String?
@@ -20,17 +29,22 @@ struct HistoryListModel {
     private var completedGoalsCounter = 0
     private let todayString = "Today"
     
+    
     var sections = [String]()
     var sectionRows =  [[ListElement]]()
     
-    mutating func loadData() {
-         dataManager.generateRandomData()
-        generateData(from: dataManager.loadGoal())
+    init(dataManager: CoreDataLoaderProtocol) {
+        self.dataManager = dataManager
+    }
+    
+    func loadData() {
+        //   dataManager.generateRandomData()
+        generateData(from: dataManager.loadGoal(predicate: nil))
     }
     
     // MARK: Data loading functions
     
-    func mapGoal(goal: Goal) -> [ListElement] {
+    private func mapGoal(goal: Goal) -> [ListElement] {
         var elementArray = [ListElement]()
         let newGoalEntity = ListElement(from: goal)
         elementArray.append(newGoalEntity)
@@ -41,7 +55,7 @@ struct HistoryListModel {
         return elementArray
     }
     
-    mutating func addToStats(goal: Goal) {
+    private func addToStats(goal: Goal) {
         totalGoalsCounter += 1
         
         if goal.completed {
@@ -50,13 +64,13 @@ struct HistoryListModel {
         
     }
     
-    mutating func resetStats() {
+    private func resetStats() {
         totalGoalsCounter = 0
         completedGoalsCounter = 0
     }
     
     
-    mutating func addToSummary() -> (yearAndMonth: String, totalCount: Int, completedCount: Int) {
+    private func addToSummary() -> (yearAndMonth: String, totalCount: Int, completedCount: Int) {
         let summary = (yearAndMonth: currentSummaryYearAndMonth ?? "", totalCount: totalGoalsCounter, completedCount: completedGoalsCounter)
         resetStats()
         //        let dateFormatter = DateFormatter()
@@ -75,23 +89,23 @@ struct HistoryListModel {
         //        }
         //
         //
-        //        totalGoalsCounter += 1
+        //       totalGoalsCounter += 1
         //
         //
         return summary
     }
     
     
-    mutating func generateSummaryDate() -> String {
+    private func generateSummaryDate() -> String {
         let date = Date()
         dateFormatter.dateFormat = "MM/yyyy"
         let currentMonth = dateFormatter.string(from: date)
         return currentMonth
-      
+        
     }
-     
     
-    mutating func generateData(from: [Goal]) {
+    
+    private func generateData(from: [Goal]) {
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []
         
@@ -132,7 +146,7 @@ struct HistoryListModel {
         self.sections = generatedSections.reversed()
         self.sectionRows = generatedRows.reversed()
         
-      
+        
         
         
     }

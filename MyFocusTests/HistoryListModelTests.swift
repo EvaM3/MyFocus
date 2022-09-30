@@ -9,29 +9,62 @@ import XCTest
 
 @testable import MyFocus
 
-class HistoryListModelTests: XCTestCase {
-  
-    var sut =  HistoryListModel()
-    let goal1 = "Train for the marathon"
-    let goal2 = "Finish the letter"
-    let goal3 = "Practice on the piano"
+class DataManagerSpy: CoreDataLoaderProtocol {
     
+    var stubbedGoals: [Goal]!
+    var invokedLoadGoal: Bool = false
+    var invokedLoadGoalCount = 0
+    var invokedLoadGoalParameter: NSPredicate? = nil
     
-    func test_initHistoryListModel() {
-        XCTAssertNotNil(sut.sectionRows)
-        XCTAssertNotNil(sut.sections)
-    }
-    
-    func test_mapGoal() {
-        XCTAssertNotNil(sut.mapGoal)
+    func loadGoal(predicate: NSPredicate?) -> [Goal] {
         
+        invokedLoadGoal = true
+        invokedLoadGoalCount += 1
+        invokedLoadGoalParameter = predicate
+        
+        return stubbedGoals
     }
-    
-    func test_mapGoal_whenMappedthenSuccess() {
-        XCTAssertNotNil(sut.mapGoal)
-      
-    }
-    
     
     
 }
+
+class HistoryListModelTests: XCTestCase {
+    
+    func test_init_hasNoEffectHistoryListModel() {
+        // ARRANGE, ACT:
+        let dataSpy = DataManagerSpy()
+        let sut = HistoryListModel(dataManager: dataSpy)
+        
+        // ASSERT:
+        XCTAssertTrue(sut.sectionRows.isEmpty)
+        XCTAssertTrue(sut.sections.isEmpty)
+        XCTAssertFalse(dataSpy.invokedLoadGoal)
+    }
+    
+    
+    
+    func test_loadData_calledMuliple_thenOutputIsSame() {
+        // ARRANGE:
+        let dataSpy = DataManagerSpy()
+        let sut = HistoryListModel(dataManager: dataSpy)
+        let referenceDate =  Date(timeIntervalSince1970: 0.0)
+        dataSpy.stubbedGoals = [Goal(tasks: [], title: "", creationDate: referenceDate)]
+        let expectedSections = ["01/1970", "01 01, 1970"]
+        
+        // ACT:
+        sut.loadData()
+        let firstSectionRows =  sut.sectionRows
+        XCTAssertEqual(expectedSections, sut.sections)
+        sut.loadData()
+        
+    
+        
+        // ASSERT:
+        XCTAssertEqual(dataSpy.invokedLoadGoalCount, 2)
+        XCTAssertEqual(expectedSections, sut.sections)
+        XCTAssertEqual(firstSectionRows, sut.sectionRows)
+        
+    }
+
+}
+

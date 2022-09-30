@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ListElement {
+struct ListElement: Equatable {
     
     enum ListEntityType {
         case task
