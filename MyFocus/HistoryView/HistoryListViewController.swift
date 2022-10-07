@@ -68,9 +68,6 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
                 return cell
             }
             
-//            if indexPath.row == 0 {
-//                element.type = .summary
-//            }
             
         }
         
@@ -111,10 +108,5 @@ extension HistoryListViewController: UITableViewDelegate, UITableViewDataSource 
         return headerView
        
     }
-    
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return
-//    }
 
 }
