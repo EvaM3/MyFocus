@@ -93,23 +93,74 @@ class HistoryListModelTests: XCTestCase {
         
     }
     
-    func test_WhenTwoGoalsLoaded_NumberOfSections() {
+    func test_twoGoals_inDifferentYears_notCompleted() {
         // ARRANGE:
         let dataSpy = DataManagerSpy()
+        var firstDate = Calendar.current.date(byAdding: .year, value: -22, to: Date()) ?? Date() - 86400
+        var secondDate = Calendar.current.date(byAdding: .year, value: -21, to: Date()) ?? Date() - 86400
         let sut = HistoryListModel(dataManager: dataSpy)
-        dataSpy.stubbedGoals = [Goal(tasks: [], title: "", creationDate: Date())]
-       
+        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: firstDate, achievedDate: Date())]
+        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: secondDate, achievedDate: Date())]
+        
         
         // ACT:
         sut.loadData()
-        dataSpy.stubbedGoals
-        sut.loadData()
-        dataSpy.stubbedGoals
         
         // ASSERT:
-        XCTAssertEqual(dataSpy.invokedLoadGoalCount, 2)
+        XCTAssertNotEqual(firstDate, secondDate)
+        XCTAssertEqual(dataSpy.invokedLoadGoalCount, 1)
+        XCTAssertTrue(dataSpy.invokedLoadGoal)
+        
+    }
+    
+    func test_twoGoals_in2020and2021_notCompleted() {
+        // ARRANGE:
+        let dataSpy = DataManagerSpy()
+        var firstDate = Calendar.current.date(byAdding: .year, value: -2, to: Date()) ?? Date() - 86400
+        var secondDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) ?? Date() - 86400
+        let sut = HistoryListModel(dataManager: dataSpy)
+        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: firstDate, achievedDate: Date())]
+        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: secondDate, achievedDate: Date())]
+        
+        
+        // ACT:
+        sut.loadData()
+        
+        // ASSERT:
+        XCTAssertNotEqual(firstDate, secondDate)
+        XCTAssertEqual(dataSpy.invokedLoadGoalCount, 1)
+        XCTAssertTrue(dataSpy.invokedLoadGoal)
+        
+    }
+    
+    func test_twoGoals_oneIsCompleted() {
+        // ARRANGE:
+        let dataSpy = DataManagerSpy()
+        var firstDate = Calendar.current.date(byAdding: .year, value: -2, to: Date()) ?? Date() - 86400
+        var secondDate = Calendar.current.date(byAdding: .year, value: -1, to: Date()) ?? Date() - 86400
+        let sut = HistoryListModel(dataManager: dataSpy)
+        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: true, creationDate: firstDate, achievedDate: Date())]
+        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: secondDate, achievedDate: Date())]
+        
+        
+        // ACT:
+        sut.loadData()
+        let firstGoal = dataSpy.stubbedGoals
+        let secondGoal = dataSpy.stubbedGoals
+        
+        
+        // ASSERT:
+        XCTAssertNotEqual(firstDate, secondDate)
+        XCTAssertEqual(dataSpy.invokedLoadGoalCount, 1)
+      
+        
        
+        
+    }
+    
+    
+    
     }
 
-}
+
 
