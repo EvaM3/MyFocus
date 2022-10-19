@@ -68,8 +68,86 @@ class HistoryListModelTests: XCTestCase {
         XCTAssertEqual(firstSectionRows, sut.sectionRows)
         
     }
+    // input: array of 2 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks, or is completed.
+    
+    // output:
+  
+    //----
+    // month and year of year x
+    // -----
+    // Summary in the given year of x year  "From 1 goals 0 is completed"
+//    -------
+//    Exact date (day,mont, year) for goal ( year x)
+    // -----
+    // The title for Listelement = goal in year x, the type is goal
+    //----
+    // month and year of year y
+    // -----
+    // Summary in the given year of  year  "From 1 goals 0 is completed"
+//    -------
+//    Exact date (day,mont, year) for goal ( year y)
+    // -----
+    // The title for Listelement = goal in year y, the type is goal
+    //sections:
+    // [month and year of year x,   Exact date (day,mont, year) for goal ( year x), month and year of year y,  Exact date (day,mont, year) for goal ( year y)]
+    // sectionRows:
+    //[[ Summary in the given year of x year  "From 1 goals 0 is completed"],[The title for Listelement = goal in year x, the type is goal],[Summary in the given year of  year y "From 1 goals 0 is completed"],[The title for Listelement = goal in year y, the type is goal]]
     
     
+    
+   
+    // input: array of 2 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks, one is completed.
+    
+    // output:
+  
+    //----
+    // month and year of year x
+    // -----
+    // Summary in the given year of x year  "From 1 goals 0 is completed"
+//    -------
+//    Exact date (day,mont, year) for goal ( year x)
+    // -----
+    // The title for Listelement = goal in year x, the type is goal
+    //----
+    // month and year of year y
+    // -----
+    // Summary in the given year of  year  "From 1 goals 1 is completed"
+//    -------
+//    Exact date (day,mont, year) for goal ( year y)
+    // -----
+    // The title for Listelement = goal in year y, the type is goal
+    //sections:
+    // [month and year of year x,   Exact date (day,mont, year) for goal ( year x), month and year of year y,  Exact date (day,mont, year) for goal ( year y)]
+    // sectionRows:
+    //[[ Summary in the given year of x year  "From 1 goals 0 is completed"],[The title for Listelement = goal in year x, the type is goal],[Summary in the given year of  year y "From 1 goals 1 is completed"],[The title for Listelement = goal in year y, the type is goal]]
+   
+    
+    
+    // input: array of 2 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks,  completed.
+    
+    // output:
+  
+    //----
+    // month and year of year x
+    // -----
+    // Summary in the given year of x year  "From 1 goals 1 is completed"
+//    -------
+//    Exact date (day,mont, year) for goal ( year x)
+    // -----
+    // The title for Listelement = goal in year x, the type is goal
+    //----
+    // month and year of year y
+    // -----
+    // Summary in the given year of  year  "From 1 goals 1 is completed"
+//    -------
+//    Exact date (day,mont, year) for goal ( year y)
+    // -----
+    // The title for Listelement = goal in year y, the type is goal
+    //sections:
+    // [month and year of year x,   Exact date (day,mont, year) for goal ( year x), month and year of year y,  Exact date (day,mont, year) for goal ( year y)]
+    // sectionRows:
+    //[[ Summary in the given year of x year  "From 1 goals 1 is completed"],[The title for Listelement = goal in year x, the type is goal],[Summary in the given year of  year y "From 1 goals 1 is completed"],[The title for Listelement = goal in year y, the type is goal]]
+   
     
     func test_loadData_withMultipeRows() {
         // ARRANGE:
@@ -145,6 +223,7 @@ class HistoryListModelTests: XCTestCase {
         
         // ACT:
         sut.loadData()
+    
         let firstGoal = dataSpy.stubbedGoals
         let secondGoal = dataSpy.stubbedGoals
         
@@ -152,8 +231,6 @@ class HistoryListModelTests: XCTestCase {
         // ASSERT:
         XCTAssertNotEqual(firstDate, secondDate)
         XCTAssertEqual(dataSpy.invokedLoadGoalCount, 1)
-      
-        
        
         
     }
