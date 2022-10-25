@@ -15,14 +15,14 @@ class DataManagerSpy: CoreDataLoaderProtocol {
     var invokedLoadGoal: Bool = false
     var invokedLoadGoalCount = 0
     var invokedLoadGoalParameter: NSPredicate? = nil
-   
+    
     
     func loadGoal(predicate: NSPredicate?) -> [Goal] {
         
         invokedLoadGoal = true
         invokedLoadGoalCount += 1
         invokedLoadGoalParameter = predicate
-    
+        
         
         return stubbedGoals
     }
@@ -60,7 +60,7 @@ class HistoryListModelTests: XCTestCase {
         XCTAssertEqual(expectedSections, sut.sections)
         sut.loadData()
         
-    
+        
         
         // ASSERT:
         XCTAssertEqual(dataSpy.invokedLoadGoalCount, 2)
@@ -69,25 +69,25 @@ class HistoryListModelTests: XCTestCase {
         
     }
     // MARK: - Goal date tests
-
+    
     // 1. :  input: array of 2 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks, or is completed.
     
     // output:
-  
+    
     //----
     // month and year of year x
     // -----
     // Summary in the given year of x year  "From 1 goals 0 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year x)
+    //    -------
+    //    Exact date (day,month, year) for goal ( year x)
     // -----
     // The title for Listelement = goal in year x, the type is goal
     //----
     // month and year of year y
     // -----
     // Summary in the given year of  year  "From 1 goals 0 is completed"
-//    -------
-//    Exact date (day,mont, year) for goal ( year y)
+    //    -------
+    //    Exact date (day,month, year) for goal ( year y)
     // -----
     // The title for Listelement = goal in year y, the type is goal
     //sections:
@@ -99,21 +99,21 @@ class HistoryListModelTests: XCTestCase {
     //  2. : input: array of 2 goals, first goal with month(creation Date) x, the second goal with month y(creation date). The months differ.
     
     // output:
-  
+    
     //----
     // month and year of month x
     // -----
     // Summary in the given month of x month and year  "From 1 goals 0 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( month x)
+    //    -------
+    //    Exact date (day,month, year) for goal ( month x)
     // -----
     // The title for Listelement = goal in month x, the type is goal
     //----
     // month and year of year y
     // -----
     // Summary in the given month of  month y  "From 1 goals 0 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( month y)
+    //    -------
+    //    Exact date (day,month, year) for goal ( month y)
     // -----
     // The title for Listelement = goal in month y, the type is goal
     //sections:
@@ -121,95 +121,80 @@ class HistoryListModelTests: XCTestCase {
     // sectionRows:
     //[[ Summary in the given month of x month  "From 1 goals 1 is completed"],[The title for Listelement = goal in month x, the type is goal],[Summary in the given month of month y "From 1 goals 1 is completed"],[The title for Listelement = goal in month y, the type is goal]]
     
-   
+    
     //  3. : input: array of 2 goals, first goal with month(creation Date) x, the second goal with month y(creation date).Year and month is the same.
     
     // output:
-  
+    
     //----
     // month and year of goal x.
     // -----
     // Summary in the given month of goal x (month and year)  "From 1 goals 0 is completed"
     // -----
     //    Exact date (day,month, year) for goal x
-//    -------
+    //    -------
     // The title for Listelement = goal x in month x, the type is goal
     //----
-    // month and year of goal y
-    // -----
-    // Summary in the given month of goal y (month and year)  "From 1 goals 0 is completed"
-    // -----
     //    Exact date (day,month, year) for goal y
-//    -------
+    //    -------
     // The title for Listelement = goal y in month y, the type is goal
     //----
-    //sections:
-    // [month and year of year x,   Exact date (day,month, year) for goal x( month and year x), month and year of year y,  Exact date (day,month, year) for goal ( month and year y)]
-    // sectionRows:
-    //[[ Summary in the given month and year of goal x "From 1 goals 1 is completed"],[The title for Listelement = goal in month and year x, the type is goal],[Summary in the given month and year for goal y "From 1 goals 1 is completed"],[The title for Listelement = goal in month and year y, the type is goal]]
+    // TODO: Write the sections and the sectionrows
     
-    
-   // MARK: - Completion tests
+    // MARK: - Completion tests
     //  4. : input: array of 2 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks, one is completed.
     
     // output:
-  
+    
     //----
     // month and year of year x
     // -----
     // Summary in the given year of x year  "From 1 goals 0 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year x)
+    //    -------
+    //    Exact date (day,month, year) for goal ( year x)
     // -----
     // The title for Listelement = goal in year x, the type is goal
     //----
     // month and year of year y
     // -----
     // Summary in the given year of  year  "From 1 goals 1 is completed"
-//    -------
-//    Exact date (day,mont, year) for goal ( year y)
+    //    -------
+    //    Exact date (day,mont, year) for goal ( year y)
     // -----
     // The title for Listelement = goal in year y, the type is goal
     //sections:
-    // [month and year of year x,   Exact date (day,mont, year) for goal ( year x), month and year of year y,  Exact date (day,mont, year) for goal ( year y)]
+    // [month and year of year x,   Exact date (day,mont, year) for goal ( year x), month and year of year y,  Exact date (day,month, year) for goal ( year y)]
     // sectionRows:
     //[[ Summary in the given year of x year  "From 1 goals 0 is completed"],[The title for Listelement = goal in year x, the type is goal],[Summary in the given year of  year y "From 1 goals 1 is completed"],[The title for Listelement = goal in year y, the type is goal]]
-   
     
     
-    //  5. : input: array of 3 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks, all of them completed and two of them in the same month.
+    
+    //  5. : input: array of 3 goals, first goal with year(creation Date) x, the second goal y(creation date). None of the goals has tasks, all of them completed and two of them in the same month and year.
     
     // output:
-  
+    
     //----
-    // month and year of year x
+    // month and year of goal x
     // -----
     // Summary in the given year of x year  "From 1 goals 1 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year and month x)
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month x)
     // -----
     // The title for Listelement = goal in year x, the type is goal
     //----
     // month and year of year y
     // -----
-    // Summary in the given year of  year  "From 1 goals 1 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year and month y)
+    // Summary in the given year of goal  "From 2 goals 2 is completed"
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month y)
     // -----
     // The title for Listelement = goal in year y, the type is goal
     // -----
-    // month and year of year z
-    // -----
-    // Summary in the given year of  goal z   "From 1 goals 1 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year z)
+    //    Exact date (day,month, year) for goal ( year z)
     // -----
     // The title for Listelement = goal in year z, the type is goal
-    //sections:
-    // [month and year of year x,   Exact date (day,month, year) for goal ( year x), month and year of year y,  Exact date (day,month, year) for goal ( year y)]
-    // sectionRows:
-    //[[ Summary for goal x with year and month x  "From 1 goals 1 is completed"],[The title for Listelement = goal in year and month x, the type is goal],[Summary for goal y with month and year y "From 1 goals 1 is completed"],[The title for Listelement = goal in year y, the type is goal]],
-    //[[ Summary for goal z with year and month z  "From 1 goals 1 is completed"],[The title for Listelement = goal in year and month z, the type is goal]
+    //-------
+    // TODO: Sections and sectionRows
     
     
     // MARK: - Task tests
@@ -218,53 +203,141 @@ class HistoryListModelTests: XCTestCase {
     //  6. : input: array of 2 goals, first goal with year and month(creation Date) for x with one task, the second goal with year and month for y(creation date) with two tasks.
     
     // output:
-  
+    
     //----
     // month and year of year x
     // -----
     // Summary in the given year of x year  "From 1 goals 1 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year and month x)
-    // -----
-    //    Exact date (day,month, year) for task x ( year and month x)
-    // -----
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month x)
+    // ---------
     // The title for Listelement = goal in year x, the type is goal
-    //----
+    // -----
+    // The title for Listelement = task 1 in  x, the type is task
+    // -----
     // month and year of year y
     // -----
     // Summary in the given year of y year  "From 1 goals 1 is completed"
-//    -------
-//    Exact date (day,month, year) for goal ( year and month y)
-    // -----
-    //    Exact date (day,month, year) for task y-1 ( year and month y)
-    // -----
-    //    Exact date (day,month, year) for task y-2 ( year and month y)
-    // -----
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month y)
+    // ---------
     // The title for Listelement = goal in year y, the type is goal
-    //sections:
-    // [month and year of year x,   Exact date (day,month, year) for goal ( year x), month and year of year y,  Exact date (day,month, year) for goal ( year y)]
-    // sectionRows:
-    //[[ Summary for goal x with year and month x  "From 1 goals 1 is completed"],[The title for Listelement = goal in year and month x, the type is goal],[Task x with exact date, status: completed],[Summary for goal y with month and year y "From 1 goals 1 is completed"],[The title for Listelement = goal in year y, the type is goal],[Task y-1 and y-2 with exact date, status: completed]]
+    // -----
+    // The title for Listelement = task 1 in  y, the type is task
+    // -----
+    // The title for Listelement = task 2 in  y, the type is task
+    // -----
     
-   
+    // TODO: Sections and sectionRows
+    
+    
     //  7. : input: array of 2 goals, first goal with year and month(creation Date) for x with three tasks, all of them completed. The second goal with year and month for y(creation date) with  no tasks and not completed.
     
     // output:
-    // TODO: Finish
-   
+    
+    // month and year of year x
+    // -----
+    // Summary in the given year of x year  "From 1 goals 1 is completed"
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month x)
+    // ---------
+    // The title for Listelement = goal in year x, the type is goal
+    // -----
+    // The title for Listelement = task 1 in  x, the type is task
+    // -----
+    // The title for Listelement = task 2 in  x, the type is task
+    // -----
+    // The title for Listelement = task 3 in  x, the type is task
+    // -----
+    // month and year of year y
+    // -----
+    // Summary in the given year of y year  "From 1 goals 0 is completed"
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month y)
+    // ---------
+    // The title for Listelement = goal in year y, the type is goal
+    
+    
+    
+    // TODO: Sections and sectionRows
+    
     // MARK: - Invalid state tests
     //  8. : goal is completed, but the tasks are not. In the summary no mention of the tasks.
+    
+    // output:
+    
+    // month and year of year x
+    // -----
+    // Summary in the given year of x year  "From 1 goals 1 is completed"
+    //    -------
+    //    Exact date (day,month, year) for goal ( year and month x)
+    // ---------
+    // The title for Listelement = goal in year x, the type is goal
+    
+    // The title for Listelement = task 1 in  x, the type is task(not completed)
+    // --------
+    // The title for Listelement = task 2 in  x, the type is task(not completed)
+    
+    
+    
+    
     //  9. : The goal is on day A and the task(creationDate) is on day B. Section for day A includes the goal and the task.
+    
+    
+    // output:
+    
+    // month and year of year A
+    // --------
+    // Summary in the given year of A year  "From 1 goals 1 is completed"
+    // --------
+    //    Exact date (day,month, year) for goal ( year and month A)
+    // ---------
+    // The title for Listelement = goal in day A, the type is goal
+    
+    // The title for Listelement = task 1 in day A, the type is task
+    // ---------
+    // month and year of year B
+    // --------
+    // Summary in the given year of B year  "From 1 goals 0 is completed"  - not sure if goal is needed, but since there is no task without a goal, I added it.
+    // ---------
+    //    Exact date (day,month, year) for goal ( year and month B)
+    // ---------
+    // The title for Listelement = goal in year B, the type is goal
+    // ---------
+    // The title for Listelement = task 1 in  B, the type is task
+    
+    
     //  10. : CreationDate and achievedDate differs, but it still goes to the creationDate as completed(Goal).
-    // TODO: Finish
-   
+    
+    // output:
+    
+    // month and year of year x
+    // -----
+    // Summary in the given year of x year  "From 1 goals 1 is completed"
+    //    -------
+    //    Exact date (day,month, year) for goal(creationDate) ( year and month x)
+    // ---------
+    // The title for Listelement = goal in year x, the type is goal
+    // ---------
+    // The title for Listelement = task 1 in  x, the type is task
+    // ---------
+    // month and year of year y
+    // -----
+    // Summary in the given year of y year  "From 1 goals 0 is completed"
+    //    -------
+    //    Exact date (day,month, year) for goal(achievedDate) ( year and month y)
+    // ---------
+    // The title for Listelement = goal in year y, the type is goal - the task goes to x, meaning to creation date.
+    
+    //    TODO: Sections and sectionRows
+    
     
     func test_loadData_withMultipeRows() {
         // ARRANGE:
         let dataSpy = DataManagerSpy()
         let sut = HistoryListModel(dataManager: dataSpy)
         dataSpy.stubbedGoals = [Goal(tasks: [], title: "", creationDate: Date())]
-    
+
         
         // ACT:
         sut.loadData()
@@ -333,7 +406,7 @@ class HistoryListModelTests: XCTestCase {
         
         // ACT:
         sut.loadData()
-    
+        
         let firstGoal = dataSpy.stubbedGoals
         let secondGoal = dataSpy.stubbedGoals
         
@@ -341,13 +414,13 @@ class HistoryListModelTests: XCTestCase {
         // ASSERT:
         XCTAssertNotEqual(firstDate, secondDate)
         XCTAssertEqual(dataSpy.invokedLoadGoalCount, 1)
-       
+        
         
     }
     
     
     
-    }
+}
 
 
 
