@@ -39,7 +39,7 @@ class HistoryListModel: HistoryListModelProtocol {
     }
     
     func loadData() {
-        //   dataManager.generateRandomData()
+        //dataManager.generateRandomData()
         generateData(from: dataManager.loadGoal(predicate: nil))
     }
     
