@@ -9,7 +9,11 @@ import Foundation
 
 
 
-struct Goal: Identifiable {
+struct Goal: Identifiable, Equatable {
+    static func == (lhs: Goal, rhs: Goal) -> Bool {
+        return true
+    }
+    
     var id: UUID
     
     private var goalTasks: [Task]
