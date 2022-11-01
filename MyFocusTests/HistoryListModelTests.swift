@@ -97,26 +97,38 @@ class HistoryListModelTests: XCTestCase {
     // sectionRows:
     //[[ Summary in the given year of x year  "From 1 goals 0 is completed"],[The title for Listelement = goal in year x, the type is goal],[Summary in the given year of  year y "From 1 goals 0 is completed"],[The title for Listelement = goal in year y, the type is goal]]
     
+    
     func test_twoGoals_NoTasksNotCompleted_ThenSuccess() {
+        
         // ARRANGE:
         let dataSpy = DataManagerSpy()
         let sut = HistoryListModel(dataManager: dataSpy)
-        let currentDate = Date()
-        dataSpy.stubbedGoals = [Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: currentDate, achievedDate: Date())]
-        let firstGoal = dataSpy.stubbedGoals
+        // setting up the input values
+        let firstDate = Date(timeIntervalSince1970: 0.0)
+        let secondDate = Date(timeIntervalSinceReferenceDate: 0.0)
+        let firstGoal = Goal(id: UUID(), tasks: [], title: "A", completed: false, creationDate:firstDate, achievedDate: Date())
+        let secondGoal = Goal(id: UUID(), tasks: [], title: "B", completed: false, creationDate: secondDate, achievedDate: Date())
+        let arrayOfGoals = [firstGoal,secondGoal]
+        dataSpy.stubbedGoals = arrayOfGoals
+        // Expected values
+        let expectedSections = [String]()
+        let expectedSectionRows = [[ListElement]]()
+        
         
         // ACT:
+        // Providing a method on the test subject
         sut.loadData()
-        let goalSectionRows = sut.sectionRows
-        XCTAssertEqual(goalSectionRows, sut.sectionRows)
-        
-        
+       
+       
         
         
         // ASSERT:
-        XCTAssertEqual(goalSectionRows, sut.sectionRows)
+        // Verifying the outputs
         XCTAssertTrue(dataSpy.invokedLoadGoal)
-        XCTAssertEqual(firstGoal, dataSpy.stubbedGoals)
+        XCTAssertFalse(firstGoal.completed)
+        XCTAssertFalse(secondGoal.completed)
+        XCTAssertTrue(firstGoal.tasks.isEmpty)
+        XCTAssertTrue(secondGoal.tasks.isEmpty)
       
         
     }
@@ -145,6 +157,25 @@ class HistoryListModelTests: XCTestCase {
     // [month and year of year x,   Exact date (day,month, year) for goal ( month x), month and year of year y,  Exact date (day,month, year) for goal ( month y)]
     // sectionRows:
     //[[ Summary in the given month of x month  "From 1 goals 1 is completed"],[The title for Listelement = goal in month x, the type is goal],[Summary in the given month of month y "From 1 goals 1 is completed"],[The title for Listelement = goal in month y, the type is goal]]
+    
+    
+    func test_twoGoals_WhenNotInTheSameMonth_ThenSuccess() {
+        
+        // ARRANGE:
+        let dataSpy = DataManagerSpy()
+        let sut = HistoryListModel(dataManager: dataSpy)
+        let firstGoalSection = ["3/2022"]
+        let secondGoalSection = ["8/2022"]
+        
+        // ACT:
+        sut.loadData()
+        
+        // ASSERT:
+        XCTAssertTrue(dataSpy.invokedLoadGoal)
+        XCTAssertNotEqual(firstGoalSection, secondGoalSection)
+    }
+    
+    
     
     
     //  3. : input: array of 2 goals, first goal with month(creation Date) x, the second goal with month y(creation date).Year and month is the same.
@@ -322,7 +353,7 @@ class HistoryListModelTests: XCTestCase {
     // Sections:
     // [month and year of year x, Exact date (day,month, year) for goal ( year and month x)]
     // SectiionRows:
-    // [[Summary in the given year of x year  "From 1 goals 1 is completed"],[ The title for Listelement = goal in year x, the type is goal],[The title for Listelement = task 1 in  x, the type is task(not completed)],[The title for Listelement = task 2 in  x, the type is task(not completed)]]
+    // [[Summary in the given year of x year  "From 1 goals 1 is completed"],[ The title for Listelement = goal in year x, the type is goal],[The title for Listelement = task 1 in  x, the type is task(not completed),The title for Listelement = task 2 in  x, the type is task(not completed)]]
     
     
     
