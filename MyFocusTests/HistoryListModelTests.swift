@@ -129,6 +129,9 @@ class HistoryListModelTests: XCTestCase {
         XCTAssertFalse(secondGoal.completed)
         XCTAssertTrue(firstGoal.tasks.isEmpty)
         XCTAssertTrue(secondGoal.tasks.isEmpty)
+        XCTAssertEqual(expectedSections.count, 0)
+        XCTAssertEqual(expectedSectionRows.count, 0)
+        
       
         
     }
@@ -157,6 +160,34 @@ class HistoryListModelTests: XCTestCase {
     // [month and year of year x,   Exact date (day,month, year) for goal ( month x), month and year of year y,  Exact date (day,month, year) for goal ( month y)]
     // sectionRows:
     //[[ Summary in the given month of x month  "From 1 goals 1 is completed"],[The title for Listelement = goal in month x, the type is goal],[Summary in the given month of month y "From 1 goals 1 is completed"],[The title for Listelement = goal in month y, the type is goal]]
+    
+    
+    func test_twoGoals_withDifferentMonths() {
+        
+        // setting up the input values
+        // ARRANGE:
+        let dataSpy = DataManagerSpy()
+        let sut = HistoryListModel(dataManager: dataSpy)
+        let thisMonth = Date()
+        let lastMonth = Calendar.current.date(byAdding: .month, value: -1, to: thisMonth)!
+        let firstGoal = Goal(id: UUID(), tasks: [], title: "A", completed: false, creationDate:thisMonth, achievedDate: Date())
+        let secondGoal = Goal(id: UUID(), tasks: [], title: "B", completed: false, creationDate: lastMonth, achievedDate: Date())
+        
+        // ACT:
+        // Providing a method on the test subject
+        sut.loadData()
+       
+        
+        // ASSERT:
+        // Verifying the outputs
+        XCTAssertTrue(dataSpy.invokedLoadGoal)
+        XCTAssertNotEqual(firstGoal.creationDate, secondGoal.creationDate)
+        
+    }
+    
+    
+    
+    
     
     
     func test_twoGoals_WhenNotInTheSameMonth_ThenSuccess() {
