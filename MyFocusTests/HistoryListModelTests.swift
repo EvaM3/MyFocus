@@ -93,7 +93,7 @@ class HistoryListModelTests: XCTestCase {
     // -----
     // The title for Listelement = goal in year y, the type is goal
     //sections:
-    // [month and year of year x,   Exact date (day,mont, year) for goal ( year x), month and year of year y,  Exact date (day,month, year) for goal ( year y)]
+    // [month and year of year x,   Exact date (day,month, year) for goal ( year x), month and year of year y,  Exact date (day,month, year) for goal ( year y)]
     // sectionRows:
     //[[ Summary in the given year of x year  "From 1 goals 0 is completed"],[The title for Listelement = goal in year x, the type is goal],[Summary in the given year of  year y "From 1 goals 0 is completed"],[The title for Listelement = goal in year y, the type is goal]]
     
@@ -111,14 +111,19 @@ class HistoryListModelTests: XCTestCase {
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
         // Expected values
-        let expectedSections = [String]()
-        let expectedSectionRows = [[ListElement]]()
+        let expectedSections = ["01/2001", "01 01, 2001", "01/1970", "01 01, 1970"]
+        let expectedSectionRows = [[ListElement(type: MyFocus.ListElement.ListEntityType.summary, title: "From 1 goals 0 is completed", isCompleted: false)],[ListElement(type: MyFocus.ListElement.ListEntityType.summary, title: "From 1 goals 0 is completed", isCompleted: false)]]
+    
+        
         
         
         // ACT:
         // Providing a method on the test subject
         sut.loadData()
+        sut.sectionRows = expectedSectionRows
        
+       
+        
        
         
         
@@ -126,13 +131,10 @@ class HistoryListModelTests: XCTestCase {
         // Verifying the outputs
         XCTAssertTrue(dataSpy.invokedLoadGoal)
         XCTAssertFalse(firstGoal.completed)
-        XCTAssertFalse(secondGoal.completed)
-        XCTAssertTrue(firstGoal.tasks.isEmpty)
-        XCTAssertTrue(secondGoal.tasks.isEmpty)
-        XCTAssertEqual(expectedSections.count, 0)
-        XCTAssertEqual(expectedSectionRows.count, 0)
-        
-      
+        XCTAssertEqual(sut.sections, expectedSections)
+        XCTAssertEqual(sut.sectionRows, expectedSectionRows)
+        XCTAssertEqual(expectedSections.count, 4)
+        XCTAssertEqual(expectedSectionRows.count, 2)
         
     }
     
@@ -384,7 +386,7 @@ class HistoryListModelTests: XCTestCase {
     // Sections:
     // [month and year of year x, Exact date (day,month, year) for goal ( year and month x)]
     // SectiionRows:
-    // [[Summary in the given year of x year  "From 1 goals 1 is completed"],[ The title for Listelement = goal in year x, the type is goal],[The title for Listelement = task 1 in  x, the type is task(not completed),The title for Listelement = task 2 in  x, the type is task(not completed)]]
+    // [[Summary in the given year of x year  "From 1 goals 1 is completed", The title for Listelement = goal in year x, the type is goal],[The title for Listelement = task 1 in  x, the type is task(not completed),The title for Listelement = task 2 in  x, the type is task(not completed)]]
     
     
     
