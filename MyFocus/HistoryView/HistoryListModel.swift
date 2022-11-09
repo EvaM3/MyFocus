@@ -121,7 +121,7 @@ class HistoryListModel: HistoryListModelProtocol {
         let summary = addToSummary()
         generatedSections.append(self.currentSummaryYearAndMonth ?? "")
         generatedRows.append([ListElement(summary: "From \(summary.totalCount) goals \(summary.completedCount) is completed")])
-        
+        resetStats()
         self.sections = generatedSections.reversed()
         self.sectionRows = generatedRows.reversed()
         
