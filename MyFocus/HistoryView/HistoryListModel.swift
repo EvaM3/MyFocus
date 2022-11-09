@@ -75,25 +75,7 @@ class HistoryListModel: HistoryListModelProtocol {
         let summary = (yearAndMonth: currentSummaryYearAndMonth ?? "", totalCount: totalGoalsCounter, completedCount: completedGoalsCounter)
         
         resetStats()
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateFormat = "MM, yyyy"
-        //        if currentSummaryYearAndMonth == nil {
-        //            currentSummaryYearAndMonth = dateFormatter.string(from: goal.creationDate)
-        //        } else {
-        //            let currentGoalYearAndMonth = dateFormatter.string(from: goal.creationDate)
-        //            if currentSummaryYearAndMonth != currentGoalYearAndMonth,
-        //               let currentSummaryYearAndMonth = currentSummaryYearAndMonth {
-        //                summary = (yearAndMonth: currentSummaryYearAndMonth, totalCount: totalGoalsCounter, completedCount: completedGoalsCounter)
-        //                self.currentSummaryYearAndMonth = currentGoalYearAndMonth
-        //                completedGoalsCounter = 0
-        //                totalGoalsCounter = 0
-        //            }
-        //        }
-        //
-        //
-        //       totalGoalsCounter += 1
-        //
-        //
+       
         return summary
     }
     
@@ -129,6 +111,7 @@ class HistoryListModel: HistoryListModelProtocol {
                 let currentCreationDate = goalSectionDateFormatter.string(from: goal.creationDate)
                 generatedSections.append(currentCreationDate)
             }
+            addToStats(goal: goal)
             generatedRows.append(mapGoal(goal: goal))
         }
         
