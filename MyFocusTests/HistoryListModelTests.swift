@@ -75,7 +75,7 @@ class HistoryListModelTests: XCTestCase {
         XCTAssertEqual(expectedSections, sut.sections)
         XCTAssertEqual(firstSectionRows, sut.sectionRows)
     }
-   
+    
     func test_twoGoals_NoTasksNotCompleted_ThenSuccess() {
         
         // ARRANGE:
@@ -96,19 +96,19 @@ class HistoryListModelTests: XCTestCase {
         
         
         // ACT:
-     
+        
         sut.loadData()
         
         
         // ASSERT:
-      
+        
         XCTAssertTrue(dataSpy.invokedLoadGoal)
         XCTAssertEqual(sut.sections, expectedSections)
         XCTAssertEqual(sut.sectionRows, expectedSectionRows)
         
     }
     
-
+    
     
     func test_twoGoals_withDifferentMonths() {
         
@@ -129,14 +129,14 @@ class HistoryListModelTests: XCTestCase {
                                    [ListElement(summary: "From 1 goals 0 is completed")],
                                    [ListElement(from: firstGoal)]]
         
-    
+        
         // ACT:
-       
+        
         sut.loadData()
         
         
         // ASSERT:
-       
+        
         XCTAssertTrue(dataSpy.invokedLoadGoal)
         XCTAssertNotEqual(firstGoal.creationDate, secondGoal.creationDate)
         XCTAssertEqual(sut.sections, expectedSections)
@@ -148,7 +148,7 @@ class HistoryListModelTests: XCTestCase {
     
     func test_WhenYearAndMonthIsTheSameThenSuccess() {
         
-    
+        
         // ARRANGE:
         
         let dataSpy = DataManagerSpy()
@@ -166,7 +166,7 @@ class HistoryListModelTests: XCTestCase {
                                    [ListElement(from: firstGoal)]]
         
         // ACT:
-       
+        
         sut.loadData()
         
         
@@ -177,7 +177,7 @@ class HistoryListModelTests: XCTestCase {
         XCTAssertNotEqual(firstGoal.creationDate, secondGoal.creationDate)
         XCTAssertEqual(sut.sections, expectedSections)
         XCTAssertEqual(sut.sectionRows, expectedSectionRows)
-     
+        
     }
     
     
@@ -214,7 +214,7 @@ class HistoryListModelTests: XCTestCase {
     }
     
     
-   
+    
     
     func test_ThreeGoalsNoTasksAllCompletedTwoInTheSameMonthAndYear() {
         
@@ -253,7 +253,7 @@ class HistoryListModelTests: XCTestCase {
     
     func test_firstGoalWithOneTaskSecondWithTwoTasks() {
         
-       
+        
         // ARRANGE:
         
         let dataSpy = DataManagerSpy()
@@ -270,14 +270,14 @@ class HistoryListModelTests: XCTestCase {
         let expectedSections = ["02/1970", "01 02, 1970", "01/1970", "01 01, 1970"]
         let expectedSectionRows =  [[ListElement(summary: "From 1 goals 1 is completed")],
                                     [ListElement(from: secondGoal), ListElement(from: secondGoalFirstTask), ListElement(from:
-                                        secondGoalSecondTask)],
+                                                                                                                            secondGoalSecondTask)],
                                     [ListElement(summary: "From 1 goals 1 is completed")],
                                     [ListElement(from: firstGoal), ListElement(from: firstGoalFirstTask)]]
         
         
         
         // ACT:
-       
+        
         sut.loadData()
         
         // ASSERT:
@@ -392,7 +392,7 @@ class HistoryListModelTests: XCTestCase {
     
     func test_GoalIsCompletedTasksNot() {
         
-
+        
         // ARRANGE:
         let dataSpy = DataManagerSpy()
         let sut = HistoryListModel(dataManager: dataSpy)
@@ -405,14 +405,14 @@ class HistoryListModelTests: XCTestCase {
         let expectedSections = ["01/1970", "01 01, 1970"]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 1 is completed")],
                                    [ListElement(from: testGoal), ListElement(from: testGoalFirstTask), ListElement(from: testGoalSecondTask)]]
-     
+        
         
         // ACT:
-       
+        
         sut.loadData()
         
         // ASSERT:
-       
+        
         XCTAssertTrue(dataSpy.invokedLoadGoal)
         XCTAssertEqual(sut.sections, expectedSections)
         XCTAssertEqual(sut.sectionRows, expectedSectionRows)
@@ -464,16 +464,16 @@ class HistoryListModelTests: XCTestCase {
         let expectedSections = ["01/1970", "01 01, 1970"]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 1 is completed")],
                                    [ListElement(from: testGoal), ListElement(from: testGoalTask)]]
-     
+        
         
         
         // ACT:
-       
+        
         sut.loadData()
         
         
         // ASSERT:
-       
+        
         XCTAssertTrue(dataSpy.invokedLoadGoal)
         XCTAssertEqual(sut.sections, expectedSections)
         XCTAssertEqual(sut.sectionRows, expectedSectionRows)
@@ -507,6 +507,41 @@ class HistoryListModelTests: XCTestCase {
     
     
     
+    func test_GoalWhereCreationAndAchievedDateDiffers() {
+        
+        // ARRANGE:
+        
+        let dataSpy = DataManagerSpy()
+        let sut = HistoryListModel(dataManager: dataSpy)
+        let goalDate = Date(timeIntervalSince1970: 0.0)
+        let achievedDate = goalDate.adding(day: 1)
+        let testGoal = Goal(id: UUID(), tasks: [], title: "Goal", completed: true, creationDate:goalDate, achievedDate: achievedDate)
+        let arrayOfGoals = [testGoal]
+        dataSpy.stubbedGoals = arrayOfGoals
+        let expectedSections = ["01/1970", "01 01, 1970"]
+        let expectedSectionRows = [[ListElement(summary: "From 1 goals 1 is completed")],
+                                   [ListElement(from: testGoal)]]
+        
+        
+        // ACT:
+        
+        sut.loadData()
+        
+        
+        // ASSERT:
+        
+        XCTAssertTrue(dataSpy.invokedLoadGoal)
+        XCTAssertEqual(sut.sections, expectedSections)
+        XCTAssertEqual(sut.sectionRows, expectedSectionRows)
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     // MARK: - Today's test
     
     // 11: Input is one goal, the date is today. The goal is not completed.
@@ -525,8 +560,38 @@ class HistoryListModelTests: XCTestCase {
     // Sections:
     // [month and year of month x,Exact date (Today) for goal(creationDate) ( year and month x)]
     // Sectionrows:
-    //[[Summary in the given month of x month  "From 1 goals 0 is completed"],[The title for Listelement = goal in today(Date()), the type is goal]]
- 
+    // [[Summary in the given month of x month  "From 1 goals 0 is completed"],[The title for Listelement = goal in today(Date()), the type is goal]]
+    
+    
+    func test_todaysDateGoalNotCompleted() {
+        
+        // ARRANGE:
+        
+        let dataSpy = DataManagerSpy()
+        let sut = HistoryListModel(dataManager: dataSpy)
+        let goalDate = Date()
+        let testGoal = Goal(id: UUID(), tasks: [], title: "Goal", completed: false, creationDate:goalDate, achievedDate: Date())
+        let arrayOfGoals = [testGoal]
+        dataSpy.stubbedGoals = arrayOfGoals
+        let expectedSections = ["11/2022", "Today"]
+        let expectedSectionRows = [[ListElement(summary: "From 1 goals 0 is completed")],
+                                   [ListElement(from: testGoal)]]
+        
+        // ACT:
+        
+        sut.loadData()
+        
+        
+        // ASSERT:
+        
+        XCTAssertTrue(dataSpy.invokedLoadGoal)
+        XCTAssertEqual(sut.sections, expectedSections)
+        XCTAssertEqual(sut.sectionRows, expectedSectionRows)
+        
+        
+    }
+    
+    
 }
 
 
@@ -543,4 +608,5 @@ extension Date {
     func adding(month: Int) -> Date {
         Calendar(identifier: .gregorian).date(byAdding: .month, value: month, to: self)!
     }
+    
 }
