@@ -80,8 +80,6 @@ class HistoryListModel: HistoryListModelProtocol {
     }
     
    
-    
-    
     private func generateData(from: [Goal]) {
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []

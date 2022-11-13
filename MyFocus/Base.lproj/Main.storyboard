@@ -47,7 +47,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686.95652173913049" y="70.982142857142847"/>
+            <point key="canvasLocation" x="772" y="-209"/>
+        </scene>
+        <!--TodayViewController-->
+        <scene sceneID="4lu-ho-F1P">
+            <objects>
+                <viewController title="TodayViewController" id="hh4-WI-0DV" customClass="TodaysViewController" customModule="MyFocus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ssV-sG-a97">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="ocE-3H-LK0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oX8-Da-4Lp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1616" y="-198"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jl1-oR-JeK">
@@ -65,7 +80,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjg-5L-gMx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-306" y="64"/>
+            <point key="canvasLocation" x="-317" y="-218"/>
         </scene>
     </scenes>
     <resources>

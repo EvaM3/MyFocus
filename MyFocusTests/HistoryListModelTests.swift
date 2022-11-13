@@ -351,7 +351,7 @@ class HistoryListModelTests: XCTestCase {
         
         
         // ACT:
-        // Providing a method on the test subject
+       
         sut.loadData()
         
         // ASSERT:

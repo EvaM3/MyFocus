@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A00416C62921B1A500E9B965 /* TodaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00416C52921B1A500E9B965 /* TodaysView.swift */; };
 		A00588B1283A689A00F19F12 /* GoalEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00588AF283A689A00F19F12 /* GoalEntity+CoreDataClass.swift */; };
 		A00588B2283A689A00F19F12 /* GoalEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00588B0283A689A00F19F12 /* GoalEntity+CoreDataProperties.swift */; };
 		A00588B5283ABC2000F19F12 /* TaskEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00588B3283ABC2000F19F12 /* TaskEntity+CoreDataClass.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A00416C52921B1A500E9B965 /* TodaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysView.swift; sourceTree = "<group>"; };
 		A00588AF283A689A00F19F12 /* GoalEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A00588B0283A689A00F19F12 /* GoalEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GoalEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A00588B3283ABC2000F19F12 /* TaskEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A00416C42921B02600E9B965 /* TodayView */ = {
+			isa = PBXGroup;
+			children = (
+				A00416C52921B1A500E9B965 /* TodaysView.swift */,
+			);
+			path = TodayView;
+			sourceTree = "<group>";
+		};
 		A03BAC4A288B73C7007F78DF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +153,7 @@
 		A0A647C927595DBE003428B7 /* MyFocus */ = {
 			isa = PBXGroup;
 			children = (
+				A00416C42921B02600E9B965 /* TodayView */,
 				A0B7922428955564007D782F /* HistoryView */,
 				A0A647EC275960A8003428B7 /* Model */,
 				A0A647CA27595DBE003428B7 /* AppDelegate.swift */,
@@ -304,6 +315,7 @@
 				A0A79B5E28A3304100A135F9 /* ListItem+Extensions.swift in Sources */,
 				A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */,
 				A0A8CF4F289DDE7000B528DA /* MonthlySummaryCell.swift in Sources */,
+				A00416C62921B1A500E9B965 /* TodaysView.swift in Sources */,
 				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
 				A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */,
 				A00588B1283A689A00F19F12 /* GoalEntity+CoreDataClass.swift in Sources */,
