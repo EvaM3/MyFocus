@@ -573,7 +573,7 @@ class HistoryListModelTests: XCTestCase {
         let testGoal = Goal(id: UUID(), tasks: [], title: "Goal", completed: false, creationDate:goalDate, achievedDate: Date())
         let arrayOfGoals = [testGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["11/2022", "Today"]
+        let expectedSections = [makeExactDate(), "Today"]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 0 is completed")],
                                    [ListElement(from: testGoal)]]
         
@@ -590,7 +590,31 @@ class HistoryListModelTests: XCTestCase {
         
         
     }
+ 
+    func makeExactDate() -> String {
+     
+        let formatted = Date().formatted(
+            .dateTime
+                .year().month(.defaultDigits)
+        )
+       
+        
+//        let formatter = RelativeDateTimeFormatter()
+//        formatter.dateTimeStyle = .numeric
+//        let currentDate = Date()
+//        formatter.localizedString(for: currentDate, relativeTo: currentDate)
+
+            return formatted
+    }
     
+    func makeSummaryDate(goal: Goal) -> String {
+        
+        let formatted = Date().formatted(
+            .dateTime
+                .day().month()
+        )
+        return formatted
+    }
     
 }
 
@@ -608,5 +632,7 @@ extension Date {
     func adding(month: Int) -> Date {
         Calendar(identifier: .gregorian).date(byAdding: .month, value: month, to: self)!
     }
+
+    
     
 }
