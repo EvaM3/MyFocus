@@ -43,6 +43,7 @@
                     <navigationItem key="navigationItem" id="sFv-DB-Wxi"/>
                     <connections>
                         <outlet property="tableView" destination="O4E-Gm-W4F" id="9xi-2M-B79"/>
+                        <segue destination="hh4-WI-0DV" kind="show" id="E23-WB-QGe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -56,13 +57,47 @@
                     <view key="view" contentMode="scaleToFill" id="ssV-sG-a97">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="9ab-L5-Vy1">
+                                <rect key="frame" x="0.0" y="158" width="414" height="738"/>
+                                <subviews>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="66" translatesAutoresizingMaskIntoConstraints="NO" id="5be-ma-WkC">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5be-ma-WkC" id="aQc-Gc-ZVY">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="66" id="AYn-8W-CeP"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="c6d-As-Q3X">
+                                        <rect key="frame" x="20" y="100" width="374" height="638"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="c6d-As-Q3X" firstAttribute="leading" secondItem="9ab-L5-Vy1" secondAttribute="leading" constant="20" symbolic="YES" id="ddf-NJ-EIp"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ocE-3H-LK0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="9ab-L5-Vy1" secondAttribute="bottom" id="8Yy-gS-vxk"/>
+                            <constraint firstItem="9ab-L5-Vy1" firstAttribute="top" secondItem="ocE-3H-LK0" secondAttribute="top" constant="70" id="aDl-GX-Uiw"/>
+                            <constraint firstItem="9ab-L5-Vy1" firstAttribute="leading" secondItem="ssV-sG-a97" secondAttribute="leading" id="ehc-mB-OP9"/>
+                            <constraint firstItem="ocE-3H-LK0" firstAttribute="trailing" secondItem="9ab-L5-Vy1" secondAttribute="trailing" id="vjj-3G-mYS"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="DaG-Jg-SSm"/>
+                    <connections>
+                        <outlet property="tableView" destination="c6d-As-Q3X" id="kuA-0Z-smI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oX8-Da-4Lp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1616" y="-198"/>
+            <point key="canvasLocation" x="2061" y="-218"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jl1-oR-JeK">
