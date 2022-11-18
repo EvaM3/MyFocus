@@ -90,7 +90,7 @@ class HistoryListModelTests: XCTestCase {
         let secondGoal = Goal(id: UUID(), tasks: [], title: "B", completed: false, creationDate: secondDate, achievedDate: Date())
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["01/2001", "01 01, 2001", "01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal), makeExactDate(goal: secondGoal), makeSummaryDate(goal: firstGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 0 is completed")],
                                    [ListElement(from: secondGoal)],
                                    [ListElement(summary: "From 1 goals 0 is completed")],
@@ -125,7 +125,7 @@ class HistoryListModelTests: XCTestCase {
         let secondGoal = Goal(id: UUID(), tasks: [], title: "B", completed: false, creationDate: secondMonth, achievedDate: Date())
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["02/1970", "01 02, 1970", "01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal), makeExactDate(goal: secondGoal), makeSummaryDate(goal: firstGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 0 is completed")],
                                    [ListElement(from: secondGoal)],
                                    [ListElement(summary: "From 1 goals 0 is completed")],
@@ -162,7 +162,7 @@ class HistoryListModelTests: XCTestCase {
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
         // Expected values
-        let expectedSections = ["01/1970", "08 01, 1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal), makeExactDate(goal: secondGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 2 goals 0 is completed")],
                                    [ListElement(from: secondGoal)],
                                    [ListElement(from: firstGoal)]]
@@ -195,7 +195,7 @@ class HistoryListModelTests: XCTestCase {
         let secondGoal = Goal(id: UUID(), tasks: [], title: "B", completed: false, creationDate: secondMonth, achievedDate: Date())
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["02/1970", "01 02, 1970", "01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal),makeExactDate(goal: secondGoal), makeSummaryDate(goal: firstGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 0 is completed")],
                                    [ListElement(from: secondGoal)],
                                    [ListElement(summary: "From 1 goals 1 is completed")],
@@ -232,7 +232,7 @@ class HistoryListModelTests: XCTestCase {
         let thirdGoal = Goal(id: UUID(), tasks: [], title: "C", completed: true, creationDate: secondMonthSecondWeek, achievedDate: Date())
         let arrayOfGoals = [firstGoal,secondGoal,thirdGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["02/1970", "08 02, 1970", "01 02, 1970", "01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal),makeExactDate(goal: thirdGoal), makeExactDate(goal: secondGoal), makeSummaryDate(goal: firstGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 2 goals 2 is completed")],
                                    [ListElement(from: thirdGoal)],
                                    [ListElement(from: secondGoal)],
@@ -269,7 +269,7 @@ class HistoryListModelTests: XCTestCase {
         let secondGoal = Goal(id: UUID(), tasks: [secondGoalFirstTask, secondGoalSecondTask], title: "Second", completed: true, creationDate: secondDate, achievedDate: Date())
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["02/1970", "01 02, 1970", "01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal),makeExactDate(goal: secondGoal), makeSummaryDate(goal: firstGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows =  [[ListElement(summary: "From 1 goals 1 is completed")],
                                     [ListElement(from: secondGoal), ListElement(from: secondGoalFirstTask), ListElement(from:
                                                                                                                             secondGoalSecondTask)],
@@ -344,7 +344,7 @@ class HistoryListModelTests: XCTestCase {
         let secondGoal = Goal(id: UUID(), tasks: [], title: "Second", completed: false, creationDate: secondDate, achievedDate: Date())
         let arrayOfGoals = [firstGoal,secondGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["02/1970", "01 02, 1970", "01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: secondGoal), makeExactDate(goal: secondGoal), makeSummaryDate(goal: firstGoal), makeExactDate(goal: firstGoal)]
         let expectedSectionRows =  [[ListElement(summary: "From 1 goals 0 is completed")],
                                     [ListElement(from: secondGoal)],
                                     [ListElement(summary: "From 1 goals 1 is completed")],
@@ -404,7 +404,7 @@ class HistoryListModelTests: XCTestCase {
         let testGoal = Goal(id: UUID(), tasks: [testGoalFirstTask,testGoalSecondTask], title: "First", completed: true, creationDate:goalDate, achievedDate: Date())
         let arrayOfGoals = [testGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: testGoal), makeExactDate(goal: testGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 1 is completed")],
                                    [ListElement(from: testGoal), ListElement(from: testGoalFirstTask), ListElement(from: testGoalSecondTask)]]
         
@@ -463,7 +463,7 @@ class HistoryListModelTests: XCTestCase {
         let testGoal = Goal(id: UUID(), tasks: [testGoalTask], title: "Goal", completed: true, creationDate:goalDate, achievedDate: Date())
         let arrayOfGoals = [testGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: testGoal), makeExactDate(goal: testGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 1 is completed")],
                                    [ListElement(from: testGoal), ListElement(from: testGoalTask)]]
         
