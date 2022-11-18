@@ -34,6 +34,8 @@ class DataManagerSpy: CoreDataLoaderProtocol {
 
 class HistoryListModelTests: XCTestCase {
     
+    var dateFormatterHelper = DateFormattingHelper()
+    
     func test_init_hasNoEffectHistoryListModel() {
         // ARRANGE, ACT:
         
@@ -518,7 +520,7 @@ class HistoryListModelTests: XCTestCase {
         let testGoal = Goal(id: UUID(), tasks: [], title: "Goal", completed: true, creationDate:goalDate, achievedDate: achievedDate)
         let arrayOfGoals = [testGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = ["01/1970", "01 01, 1970"]
+        let expectedSections = [makeSummaryDate(goal: testGoal), makeExactDate(goal: testGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 1 is completed")],
                                    [ListElement(from: testGoal)]]
         
@@ -573,7 +575,7 @@ class HistoryListModelTests: XCTestCase {
         let testGoal = Goal(id: UUID(), tasks: [], title: "Goal", completed: false, creationDate:goalDate, achievedDate: Date())
         let arrayOfGoals = [testGoal]
         dataSpy.stubbedGoals = arrayOfGoals
-        let expectedSections = [makeExactDate(), "Today"]
+        let expectedSections = [makeSummaryDate(goal: testGoal), makeExactDate(goal: testGoal)]
         let expectedSectionRows = [[ListElement(summary: "From 1 goals 0 is completed")],
                                    [ListElement(from: testGoal)]]
         
@@ -590,32 +592,15 @@ class HistoryListModelTests: XCTestCase {
         
         
     }
- 
-    func makeExactDate() -> String {
-     
-        let formatted = Date().formatted(
-            .dateTime
-                .year().month(.defaultDigits)
-        )
-       
-        
-//        let formatter = RelativeDateTimeFormatter()
-//        formatter.dateTimeStyle = .numeric
-//        let currentDate = Date()
-//        formatter.localizedString(for: currentDate, relativeTo: currentDate)
-
-            return formatted
-    }
     
     func makeSummaryDate(goal: Goal) -> String {
-        
-        let formatted = Date().formatted(
-            .dateTime
-                .day().month()
-        )
-        return formatted
+        dateFormatterHelper.makeFormattedSummaryDate(date: goal.creationDate)
     }
     
+    func makeExactDate(goal: Goal) -> String {
+        dateFormatterHelper.makeFormattedExactDate(date: goal.creationDate)
+    }
+ 
 }
 
 

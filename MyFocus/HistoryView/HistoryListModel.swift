@@ -12,23 +12,21 @@ protocol HistoryListModelProtocol  {
     var sections: [String] { get }
     var sectionRows: [[ListElement]] { get }
     
-   func loadData()
+    func loadData()
 }
 
 
 
 class HistoryListModel: HistoryListModelProtocol {
-  
+    
     
     
     private var dataManager: CoreDataLoaderProtocol
-    private let goalSectionDateFormatter = DateFormatter()
-    private let summarySectionDateFormatter = DateFormatter()
+    private let dateFormattingHelper = DateFormattingHelper()
     private var currentSummaryYearAndMonth: String?
     private var currentYearAndMonth: String?
     private var totalGoalsCounter = 0
     private var completedGoalsCounter = 0
-    private let todayString = "Today"
     
     
     var sections = [String]()
@@ -75,23 +73,21 @@ class HistoryListModel: HistoryListModelProtocol {
         let summary = (yearAndMonth: currentSummaryYearAndMonth ?? "", totalCount: totalGoalsCounter, completedCount: completedGoalsCounter)
         
         resetStats()
-       
+        
         return summary
     }
     
-   
+    
     private func generateData(from: [Goal]) {
         var generatedSections: [String] = []
         var generatedRows: [[ListElement]] = []
         
         let sortedGoals = from.sorted { $1.creationDate > $0.creationDate }
-        self.summarySectionDateFormatter.dateFormat = "MM/yyyy"
-        self.goalSectionDateFormatter.dateFormat = "dd MM, yyyy"
         for goal in sortedGoals {
             if self.currentSummaryYearAndMonth == nil {
-                self.currentSummaryYearAndMonth = summarySectionDateFormatter.string(from: goal.creationDate)
+                self.currentSummaryYearAndMonth = dateFormattingHelper.makeFormattedSummaryDate(date: goal.creationDate)
             } else {
-                let currentGoalYearAndMonth = summarySectionDateFormatter.string(from: goal.creationDate)
+                let currentGoalYearAndMonth = dateFormattingHelper.makeFormattedSummaryDate(date: goal.creationDate)
                 if currentSummaryYearAndMonth != currentGoalYearAndMonth,
                    let currentSummaryYearAndMonth = currentSummaryYearAndMonth {
                     let summary = addToSummary()
@@ -103,12 +99,9 @@ class HistoryListModel: HistoryListModelProtocol {
                 }
             }
             
-            if Calendar.current.isDateInToday(goal.creationDate) {
-                generatedSections.append(todayString)
-            } else {
-                let currentCreationDate = goalSectionDateFormatter.string(from: goal.creationDate)
-                generatedSections.append(currentCreationDate)
-            }
+            let currentCreationDate = dateFormattingHelper.makeFormattedExactDate(date: goal.creationDate)
+            generatedSections.append(currentCreationDate)
+            
             addToStats(goal: goal)
             generatedRows.append(mapGoal(goal: goal))
         }

@@ -72,12 +72,9 @@ extension TodaysViewController: UITableViewDataSource, UITableViewDelegate {
         }
     
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        <#code#>
-    }
-    
+
+
+
+
 }
-    
-
-
 }

@@ -18,6 +18,7 @@
 		A03BAC49288B735B007F78DF /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03BAC47288B735B007F78DF /* TaskCell.xib */; };
 		A043CDF127680B9900FF2580 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF027680B9900FF2580 /* Goal.swift */; };
 		A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF227680BD800FF2580 /* GoalTests.swift */; };
+		A096C10A2926C9C100E498F6 /* DateFormattingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096C1092926C9C100E498F6 /* DateFormattingHelper.swift */; };
 		A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CA27595DBE003428B7 /* AppDelegate.swift */; };
 		A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CC27595DBE003428B7 /* SceneDelegate.swift */; };
 		A0A647CF27595DBE003428B7 /* HistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CE27595DBE003428B7 /* HistoryListViewController.swift */; };
@@ -58,6 +59,7 @@
 		A03BAC47288B735B007F78DF /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		A043CDF027680B9900FF2580 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		A043CDF227680BD800FF2580 /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
+		A096C1092926C9C100E498F6 /* DateFormattingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattingHelper.swift; sourceTree = "<group>"; };
 		A0A647C727595DBE003428B7 /* MyFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A647CA27595DBE003428B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0A647CC27595DBE003428B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -126,6 +128,14 @@
 			path = MyFocusItems;
 			sourceTree = "<group>";
 		};
+		A096C1082926C99C00E498F6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A096C1092926C9C100E498F6 /* DateFormattingHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A0A647BE27595DBE003428B7 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +163,7 @@
 		A0A647C927595DBE003428B7 /* MyFocus */ = {
 			isa = PBXGroup;
 			children = (
+				A096C1082926C99C00E498F6 /* Helpers */,
 				A00416C42921B02600E9B965 /* TodayView */,
 				A0B7922428955564007D782F /* HistoryView */,
 				A0A647EC275960A8003428B7 /* Model */,
@@ -316,6 +327,7 @@
 				A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */,
 				A0A8CF4F289DDE7000B528DA /* MonthlySummaryCell.swift in Sources */,
 				A00416C62921B1A500E9B965 /* TodaysView.swift in Sources */,
+				A096C10A2926C9C100E498F6 /* DateFormattingHelper.swift in Sources */,
 				A043CDF127680B9900FF2580 /* Goal.swift in Sources */,
 				A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */,
 				A00588B1283A689A00F19F12 /* GoalEntity+CoreDataClass.swift in Sources */,
