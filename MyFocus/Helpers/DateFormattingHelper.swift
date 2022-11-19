@@ -2,7 +2,7 @@
 //  DateFormattingHelper.swift
 //  MyFocus
 //
-//  Created by Eva Sira Madarasz on 17/11/2022.
+//  Created by Eva Madarasz on 17/11/2022.
 //
 
 import Foundation

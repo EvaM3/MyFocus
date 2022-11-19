@@ -34,6 +34,7 @@
 		A0A8CF4F289DDE7000B528DA /* MonthlySummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A8CF4E289DDE7000B528DA /* MonthlySummaryCell.swift */; };
 		A0A8CF51289DDFB300B528DA /* MonthlySummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0A8CF50289DDFB300B528DA /* MonthlySummaryCell.xib */; };
 		A0BA56BB2835A0FD0078517B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BA56BA2835A0FD0078517B /* DataController.swift */; };
+		A0E0904D29298F48000072B2 /* DateFormattingHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0904C29298F48000072B2 /* DateFormattingHelperTests.swift */; };
 		A0E3E11527DA9F4C00085853 /* FocusData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A0E3E11327DA9F4C00085853 /* FocusData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		A0A8CF4E289DDE7000B528DA /* MonthlySummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlySummaryCell.swift; sourceTree = "<group>"; };
 		A0A8CF50289DDFB300B528DA /* MonthlySummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthlySummaryCell.xib; sourceTree = "<group>"; };
 		A0BA56BA2835A0FD0078517B /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		A0E0904C29298F48000072B2 /* DateFormattingHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattingHelperTests.swift; sourceTree = "<group>"; };
 		A0E3E11427DA9F4C00085853 /* FocusData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FocusData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,6 +189,7 @@
 				A0A647EF27596157003428B7 /* TaskTests.swift */,
 				A043CDF227680BD800FF2580 /* GoalTests.swift */,
 				A0A6616228D3AAB200FEF3B6 /* HistoryListModelTests.swift */,
+				A0E0904C29298F48000072B2 /* DateFormattingHelperTests.swift */,
 			);
 			path = MyFocusTests;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				A0A647F027596157003428B7 /* TaskTests.swift in Sources */,
 				A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */,
 				A0A647E527595E1B003428B7 /* MyFocusTests.swift in Sources */,
+				A0E0904D29298F48000072B2 /* DateFormattingHelperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
