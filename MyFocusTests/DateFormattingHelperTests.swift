@@ -13,7 +13,6 @@ import XCTest
 
 class DateFormattingHelperTests: XCTest {
     
-    var dateFormatterHelper = DateFormattingHelper()
     
     
     func test_init_hasNoEffectDateFormattingHelper() {
@@ -30,6 +29,7 @@ class DateFormattingHelperTests: XCTest {
         
     }
     
+    
     func test_sectionsNotEqual() {
         
         // ARRANGE, ACT:
@@ -41,4 +41,29 @@ class DateFormattingHelperTests: XCTest {
         XCTAssertNotEqual(sut.makeFormattedExactDate(date: Date()), sut.makeFormattedSummaryDate(date: Date()))
         
     }
+    
+    
+    func test_exactDateIsReferenceDate() {
+        
+        // ARRANGE, ACT:
+        let sut = DateFormattingHelper()
+        let referenceDate = sut.makeFormattedExactDate(date: Date())
+        
+        // ASSERT:
+        
+        XCTAssertEqual(referenceDate,sut.makeFormattedExactDate(date: Date()))
+        
+    }
+    
+    func test_summarySectionDate() {
+        
+        // ARRANGE, ACT:
+        let sut = DateFormattingHelper()
+        let summaryDate = "MM/yyyy"
+        
+        // ASSERT:
+        XCTAssertEqual(summaryDate, sut.makeFormattedSummaryDate(date: Date()))
+    }
+
+    
 }
