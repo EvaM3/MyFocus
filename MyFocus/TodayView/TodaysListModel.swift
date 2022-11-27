@@ -12,16 +12,32 @@ class TodaysListModel {
 
 var goalTitle = String()
 var taskTitle = String()
+    
 var sections = [String]()
 var sectionRows =  [[ListElement]]()
   
     
-    func addGoal(goal: Goal) -> ListElement {
+    
+    
+  func addGoal(goal: Goal) -> String {
         
-        let newGoal = ListElement(from: goal)
+        var newGoal = goalTitle
+        newGoal.append(contentsOf: taskTitle)
+        
     
         return newGoal
     }
     
+    func addTask(task: Task) -> String {
+        var newTask = taskTitle
+        
+        return taskTitle
+    }
     
+    
+    func noGoalWithoutTask() {
+        if goalTitle.isEmpty {
+            
+        }
+    }
 }
