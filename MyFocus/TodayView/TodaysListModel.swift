@@ -7,37 +7,68 @@
 
 import Foundation
 
+protocol TodayListModel {
+    func createGoal(with title: String)
+    func addTask(with title: String)
+    func loadData()
+    func updateGoal(with title: String, completed: Bool)
+    func update(taskID: UUID, with title: String, completed: Bool)
+    func deleteGoal()
+    func deleteTask(taskID: UUID)
+}
 
 class TodaysListModel {
 
-var goalTitle = String()
-var taskTitle = String()
-    
-var sections = [String]()
-var sectionRows =  [[ListElement]]()
-  
+   private var goal: Goal? = nil
     
     
     
-  func addGoal(goal: Goal) -> String {
-        
-        var newGoal = goalTitle
-        newGoal.append(contentsOf: taskTitle)
-        
     
-        return newGoal
-    }
-    
-    func addTask(task: Task) -> String {
-        var newTask = taskTitle
-        
-        return taskTitle
-    }
-    
-    
-    func noGoalWithoutTask() {
-        if goalTitle.isEmpty {
-            
+    func createGoal(with title: String) {
+        guard goal == nil else {
+            return
         }
+        goal = Goal(tasks: [], title: title, creationDate: Date())
+    
     }
+    
+    
+    func addTask(with title: String) {
+        
+    // check if there is a goal else return
+    // check if the goal has 3 max. tasks, if yes, return
+    // create a new task with the title(parameter)
+    // append new task to the goal
+        
+    }
+   
+    func loadData() {
+        
+    }
+    
+    func updateGoal(with title: String, completed: Bool) {
+      // check if there is a goal else return
+      // update goal title, complete status
+        
+    }
+    
+    func update(taskID: UUID, with title: String, completed: Bool) {
+        // check if there is a goal else return
+        // update task title, complete status update
+        
+    }
+    
+    
+    func deleteGoal() {
+        // check if there is a goal else return
+        // delete the goal
+    }
+    
+    
+    func deleteTask(taskID: UUID) {
+        // check if there is a goal else return
+        // delete the task
+    }
+    
+
 }

@@ -35,7 +35,7 @@ struct Goal: Identifiable, Equatable {
         self.goalCompleted = completed
         self.goalCreationDate = creationDate
         self.goalAchievedDate = achievedDate
-      
+        
     }
     
     
@@ -78,6 +78,10 @@ struct Goal: Identifiable, Equatable {
         
     }
     
+    mutating func update(title: String) {
+        goalTitle = title
+        
+    }
     
     mutating func undoCompleteGoal() {
         
