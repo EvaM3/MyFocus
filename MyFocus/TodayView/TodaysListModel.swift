@@ -34,7 +34,17 @@ class TodaysListModel {
     
     
     func addTask(with title: String) {
+        guard goal == nil else {
+            return
+        }
+        goal = Goal(tasks: [], title: title, creationDate: Date())
         
+        if goal?.tasks.count ?? 1 <= 3 {
+            return
+        }
+        var newTask = Task(id: UUID(), title: title, completed: false, creationDate: Date())
+    
+      
     // check if there is a goal else return
     // check if the goal has 3 max. tasks, if yes, return
     // create a new task with the title(parameter)
@@ -47,12 +57,23 @@ class TodaysListModel {
     }
     
     func updateGoal(with title: String, completed: Bool) {
+        guard goal == nil else {
+            return
+        }
+        goal = Goal(tasks: [], title: title, creationDate: Date())
+        updateGoal(with: title, completed: false)
       // check if there is a goal else return
       // update goal title, complete status
         
     }
     
     func update(taskID: UUID, with title: String, completed: Bool) {
+        guard goal == nil else {
+            return
+        }
+        goal = Goal(tasks: [], title: title, creationDate: Date())
+        update(taskID: UUID(), with: title, completed: false)
+        
         // check if there is a goal else return
         // update task title, complete status update
         
@@ -60,12 +81,20 @@ class TodaysListModel {
     
     
     func deleteGoal() {
+        guard goal == nil else {
+            return
+        }
+        
         // check if there is a goal else return
         // delete the goal
     }
     
     
     func deleteTask(taskID: UUID) {
+        guard goal == nil else {
+            return
+        }
+    
         // check if there is a goal else return
         // delete the task
     }
