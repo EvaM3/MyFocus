@@ -62,6 +62,7 @@ class TodaysListModel {
         }
         goal = Goal(tasks: [], title: title, creationDate: Date())
         updateGoal(with: title, completed: false)
+    
       // check if there is a goal else return
       // update goal title, complete status
         
@@ -80,10 +81,12 @@ class TodaysListModel {
     }
     
     
-    func deleteGoal() {
+    func deleteGoal(title: String) {
         guard goal == nil else {
             return
         }
+        goal = Goal(tasks: [], title: title, creationDate: Date())
+        goal?.delete(title: title)
         
         // check if there is a goal else return
         // delete the goal

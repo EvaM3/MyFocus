@@ -83,6 +83,11 @@ struct Goal: Identifiable, Equatable {
         
     }
     
+    mutating func delete(title: String) {
+        goalTitle = title
+        goalTitle.removeAll()
+    }
+    
     mutating func undoCompleteGoal() {
         
         unCompleteGoal()
