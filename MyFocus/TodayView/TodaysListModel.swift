@@ -18,55 +18,58 @@ protocol TodayListModel {
 }
 
 class TodaysListModel {
-
-   private var goal: Goal? = nil
+    
+    private var goal: Goal? = nil
     
     
     
     
     func createGoal(with title: String) {
+        // checking if there is already a goal, to avoid overriding.
         guard goal == nil else {
             return
         }
         goal = Goal(tasks: [], title: title, creationDate: Date())
-    
+        
     }
     
     
     func addTask(with title: String) {
-        guard goal == nil else {
+        guard var unwrappedGoal = goal else {
             return
         }
-        goal = Goal(tasks: [], title: title, creationDate: Date())
         
-        if goal?.tasks.count ?? 1 <= 3 {
+        if unwrappedGoal.tasks.count >= 4 {  // move it into line 38 (first guard)
             return
         }
-        var newTask = Task(id: UUID(), title: title, completed: false, creationDate: Date())
-    
-      
-    // check if there is a goal else return
-    // check if the goal has 3 max. tasks, if yes, return
-    // create a new task with the title(parameter)
-    // append new task to the goal
+        
+        unwrappedGoal.addTask(title: title)
+        goal = unwrappedGoal
+        
+        // check if there is a goal else return
+        // check if the goal has 3 max. tasks, if yes, return
+        // create a new task with the title(parameter)
+        // append new task to the goal
         
     }
-   
+    
     func loadData() {
         
     }
     
     func updateGoal(with title: String, completed: Bool) {
-        guard goal == nil else {
+        guard var unwrappedGoal = goal else {
             return
         }
-        goal = Goal(tasks: [], title: title, creationDate: Date())
-        updateGoal(with: title, completed: false)
-    
-      // check if there is a goal else return
-      // update goal title, complete status
-        
+        if unwrappedGoal.title != title {
+            unwrappedGoal.update(title: title)
+        }
+        if unwrappedGoal.completed != completed {
+            unwrappedGoal.completed ? unwrappedGoal.undoCompleteGoal() :  unwrappedGoal.completeGoal()
+        }
+        goal = unwrappedGoal
     }
+    
     
     func update(taskID: UUID, with title: String, completed: Bool) {
         guard goal == nil else {
@@ -86,7 +89,6 @@ class TodaysListModel {
             return
         }
         goal = Goal(tasks: [], title: title, creationDate: Date())
-        goal?.delete(title: title)
         
         // check if there is a goal else return
         // delete the goal
@@ -97,10 +99,11 @@ class TodaysListModel {
         guard goal == nil else {
             return
         }
-    
+        
+        
         // check if there is a goal else return
         // delete the task
     }
     
-
+    
 }

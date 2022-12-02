@@ -83,10 +83,7 @@ struct Goal: Identifiable, Equatable {
         
     }
     
-    mutating func delete(title: String) {
-        goalTitle = title
-        goalTitle.removeAll()
-    }
+    
     
     mutating func undoCompleteGoal() {
         
@@ -94,12 +91,14 @@ struct Goal: Identifiable, Equatable {
     }
     
     
-    mutating func deleteTask(index: Int) {
-        if index >= 0 && index < goalTasks.count {
-            goalTasks.remove(at: index)
-        } else {
+    mutating func deleteTask(id: UUID) {
+        
+        guard let foundIndex  = goalTasks.firstIndex(where: {$0.id == id}) else {
             return
         }
+        
+        goalTasks.remove(at: foundIndex)
+        
     }
     
     
