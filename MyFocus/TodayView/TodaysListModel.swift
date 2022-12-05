@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 protocol TodayListModel {
     func createGoal(with title: String)
     func addTask(with title: String)
@@ -25,6 +26,7 @@ class TodaysListModel {
     
     
     func createGoal(with title: String) {
+        // Ask DataController to create the goal.
         // checking if there is already a goal, to avoid overriding.
         guard goal == nil else {
             return
@@ -58,6 +60,7 @@ class TodaysListModel {
     }
     
     func updateGoal(with title: String, completed: Bool) {
+        // Ask DataController to update the goal.
         guard var unwrappedGoal = goal else {
             return
         }
@@ -72,11 +75,20 @@ class TodaysListModel {
     
     
     func update(taskID: UUID, with title: String, completed: Bool) {
-        guard goal == nil else {
+        // Ask DataController to update task.
+        guard var unwrappedGoal = goal else {
             return
         }
-        goal = Goal(tasks: [], title: title, creationDate: Date())
-        update(taskID: UUID(), with: title, completed: false)
+        if unwrappedGoal.title != title {
+            unwrappedGoal.update(title: title)
+        }
+        if unwrappedGoal.id != taskID {
+            unwrappedGoal.updateTask(id: taskID, title: title)
+        }
+        if unwrappedGoal.completed != completed {
+            unwrappedGoal.completed ? unwrappedGoal.undoCompleteGoal() :  unwrappedGoal.completeGoal()
+        }
+        goal = unwrappedGoal
         
         // check if there is a goal else return
         // update task title, complete status update
@@ -84,22 +96,19 @@ class TodaysListModel {
     }
     
     
-    func deleteGoal(title: String) {
-        guard goal == nil else {
-            return
-        }
-        goal = Goal(tasks: [], title: title, creationDate: Date())
-        
-        // check if there is a goal else return
-        // delete the goal
+    func deleteGoal() {
+        // Ask DataController to delete the goal.
+       goal = nil
+    
     }
     
     
     func deleteTask(taskID: UUID) {
-        guard goal == nil else {
+        // Ask DataController to delete the task.
+        guard var unwrappedGoal = goal else {
             return
         }
-        
+         unwrappedGoal.deleteTask(id: taskID)
         
         // check if there is a goal else return
         // delete the task

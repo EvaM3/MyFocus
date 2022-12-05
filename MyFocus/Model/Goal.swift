@@ -101,33 +101,36 @@ struct Goal: Identifiable, Equatable {
         
     }
     
-    
-    mutating func updateTask(index: Int, title: String) {
-        if index >= 0 && index < goalTasks.count {
-            goalTasks[index].updateTask(title: title)
-            undoCompleteGoal()
-        } else {
+    mutating func updateTask(id: UUID, title: String) {
+        guard let foundIndex  = goalTasks.firstIndex(where: {$0.id == id}) else {
             return
         }
+
+        goalTasks[foundIndex].updateTask(title: title)
+            undoCompleteGoal()
+        
+       
     }
     
     
-    mutating func undoCompleteTask(index: Int) {
-        if index >= 0 && index < goalTasks.count {
-            goalTasks[index].unDoCompleteTask()
-            undoCompleteGoal()
-        } else {
+    mutating func undoCompleteTask(id: UUID) {
+        guard let foundIndex  = goalTasks.firstIndex(where: {$0.id == id}) else {
             return
         }
+            goalTasks[foundIndex].unDoCompleteTask()
+            undoCompleteGoal()
+        
     }
     
-    mutating func completeTask(index: Int) {
-        if index >= 0 && index < goalTasks.count {
-            goalTasks[index].completeTask()
+    mutating func completeTask(id: UUID) {
+        guard let foundIndex  = goalTasks.firstIndex(where: {$0.id == id}) else {
+            return
+        }
+            goalTasks[foundIndex].completeTask()
             if allTasksAchieved() {
                 completeGoal()
             }
-        }
+        
     }
     
     func allTasksAchieved() -> Bool {
