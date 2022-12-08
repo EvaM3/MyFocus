@@ -92,7 +92,6 @@ class TodaysListModel {
         
         // check if there is a goal else return
         // update task title, complete status update
-        
     }
     
     
@@ -113,6 +112,4 @@ class TodaysListModel {
         // check if there is a goal else return
         // delete the task
     }
-    
-    
 }

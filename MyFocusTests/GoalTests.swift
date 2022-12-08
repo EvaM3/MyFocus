@@ -21,8 +21,7 @@ class GoalTests: XCTestCase {
         
     }
     
-    
-    
+   
     func test_initGoal() {
         
         var sut =  makeSut()
@@ -158,7 +157,7 @@ class GoalTests: XCTestCase {
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.addTask(title: TestTitles.tasktitle2.rawValue)
         sut.completeTask(id: UUID())
-        XCTAssertTrue(sut.tasks[0].completed)
+        XCTAssertFalse(sut.tasks[0].completed)
         XCTAssertFalse(sut.tasks[1].completed)
         
         // ACT:
@@ -504,7 +503,7 @@ class GoalTests: XCTestCase {
     
     
     func makeSut(tasks: [Task] = [], title: String = TestTitles.testGoaltitle.rawValue) -> Goal {
-        var sut = Goal(tasks: tasks, title: title, creationDate: Date())
+        var sut = Goal(id: UUID(), tasks: tasks, title: title, creationDate: Date())
         
         return sut
     }

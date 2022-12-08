@@ -19,6 +19,7 @@
 		A03BAC49288B735B007F78DF /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A03BAC47288B735B007F78DF /* TaskCell.xib */; };
 		A043CDF127680B9900FF2580 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF027680B9900FF2580 /* Goal.swift */; };
 		A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A043CDF227680BD800FF2580 /* GoalTests.swift */; };
+		A08CE55F29413B8400CF62DA /* TodaysListModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08CE55E29413B8400CF62DA /* TodaysListModelTests.swift */; };
 		A096C10A2926C9C100E498F6 /* DateFormattingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096C1092926C9C100E498F6 /* DateFormattingHelper.swift */; };
 		A0A647CB27595DBE003428B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CA27595DBE003428B7 /* AppDelegate.swift */; };
 		A0A647CD27595DBE003428B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A647CC27595DBE003428B7 /* SceneDelegate.swift */; };
@@ -62,6 +63,7 @@
 		A03BAC47288B735B007F78DF /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		A043CDF027680B9900FF2580 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		A043CDF227680BD800FF2580 /* GoalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalTests.swift; sourceTree = "<group>"; };
+		A08CE55E29413B8400CF62DA /* TodaysListModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysListModelTests.swift; sourceTree = "<group>"; };
 		A096C1092926C9C100E498F6 /* DateFormattingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattingHelper.swift; sourceTree = "<group>"; };
 		A0A647C727595DBE003428B7 /* MyFocus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFocus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A647CA27595DBE003428B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				A043CDF227680BD800FF2580 /* GoalTests.swift */,
 				A0A6616228D3AAB200FEF3B6 /* HistoryListModelTests.swift */,
 				A0E0904C29298F48000072B2 /* DateFormattingHelperTests.swift */,
+				A08CE55E29413B8400CF62DA /* TodaysListModelTests.swift */,
 			);
 			path = MyFocusTests;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				A0A6616328D3AAB200FEF3B6 /* HistoryListModelTests.swift in Sources */,
 				A0A647F027596157003428B7 /* TaskTests.swift in Sources */,
 				A043CDF327680BD800FF2580 /* GoalTests.swift in Sources */,
+				A08CE55F29413B8400CF62DA /* TodaysListModelTests.swift in Sources */,
 				A0A647E527595E1B003428B7 /* MyFocusTests.swift in Sources */,
 				A0E0904D29298F48000072B2 /* DateFormattingHelperTests.swift in Sources */,
 			);
