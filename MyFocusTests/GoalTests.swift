@@ -21,6 +21,8 @@ class GoalTests: XCTestCase {
         
     }
     
+    var indexId = UUID()
+    var secondId = Goal.ID()
    
     func test_initGoal() {
         
@@ -182,9 +184,9 @@ class GoalTests: XCTestCase {
         XCTAssertFalse(sut.tasks[1].completed)
         
         // ACT:
-        sut.completeTask(id: UUID())
+        sut.completeTask(id: indexId)
         XCTAssertFalse(sut.completed)
-        sut.completeTask(id: UUID())
+        sut.completeTask(id: indexId)
         
         // ASSERT:
         XCTAssertTrue(sut.completed)

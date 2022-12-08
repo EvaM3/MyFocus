@@ -20,7 +20,7 @@ protocol TodayListModel {
 
 class TodaysListModel {
     
-    private var goal: Goal? = nil
+   private var goal: Goal? = nil
     
     
     
