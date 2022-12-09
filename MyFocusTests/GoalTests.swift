@@ -21,8 +21,6 @@ class GoalTests: XCTestCase {
         
     }
     
-    var indexId = UUID()
-    var secondId = Goal.ID()
    
     func test_initGoal() {
         
@@ -83,7 +81,8 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut = makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
-        sut.completeTask(id: UUID())
+        let taskId = sut.tasks[0].id
+        sut.completeTask(id: taskId)
         XCTAssertTrue(sut.completed)
         XCTAssertNotNil(sut.achievedDate)
         
@@ -179,14 +178,16 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle3.rawValue)
+        let firstTaskId = sut.tasks[0].id
         sut.addTask(title: TestTitles.tasktitle4.rawValue)
+        let secondTaskId = sut.tasks[1].id
         XCTAssertFalse(sut.tasks[0].completed)
         XCTAssertFalse(sut.tasks[1].completed)
         
         // ACT:
-        sut.completeTask(id: indexId)
+        sut.completeTask(id: firstTaskId)
         XCTAssertFalse(sut.completed)
-        sut.completeTask(id: indexId)
+        sut.completeTask(id: secondTaskId)
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
@@ -203,10 +204,11 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle3.rawValue)
+        let taskId = sut.tasks[0].id
         XCTAssertFalse(sut.tasks[0].completed)
         
         // ACT:
-        sut.completeTask(id: UUID())
+        sut.completeTask(id: taskId)
         
         // ASSERT:
         XCTAssertTrue(sut.completed)
@@ -254,7 +256,8 @@ class GoalTests: XCTestCase {
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.addTask(title: TestTitles.tasktitle2.rawValue)
-        sut.completeTask(id: UUID())
+        let taskId = sut.tasks[0].id
+        sut.completeTask(id: taskId)
         
         
         // ACT:
@@ -277,7 +280,8 @@ class GoalTests: XCTestCase {
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.addTask(title: TestTitles.tasktitle2.rawValue)
-        sut.completeTask(id: UUID())
+        let taskId = sut.tasks[0].id
+        sut.completeTask(id: taskId)
         sut.completeGoal()
         
         
@@ -319,10 +323,11 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        let taskId = sut.tasks[0].id
         XCTAssertFalse(sut.tasks[0].completed)
         
         // ACT:
-        sut.deleteTask(id: UUID())
+        sut.deleteTask(id: taskId)
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
@@ -336,10 +341,12 @@ class GoalTests: XCTestCase {
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.addTask(title: TestTitles.tasktitle2.rawValue)
+        let taskId = sut.tasks[0].id
+        let secondTaskId = sut.tasks[1].id
         
         // ACT:
-        sut.deleteTask(id: UUID())
-        sut.deleteTask(id: UUID())
+        sut.deleteTask(id: taskId)
+        sut.deleteTask(id: secondTaskId)
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
@@ -368,11 +375,12 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
-        sut.completeTask(id: UUID())
+        let taskId = sut.tasks[0].id
+        sut.completeTask(id: taskId)
         XCTAssertTrue(sut.tasks[0].completed)
         
         // ACT:
-        sut.undoCompleteTask(id: UUID())
+        sut.undoCompleteTask(id: taskId)
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
@@ -386,11 +394,12 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        let taskId = sut.tasks[0].id
         sut.completeGoal()
         XCTAssertTrue(sut.tasks[0].completed)
         
         // ACT:
-        sut.undoCompleteTask(id: UUID())
+        sut.undoCompleteTask(id: taskId)
         
         // ASSERT:
         XCTAssertFalse(sut.completed)
@@ -433,10 +442,11 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut =  makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        let taskId = sut.tasks[0].id
         
         
         // ACT:
-        sut.updateTask(id: UUID(), title: TestTitles.tasktitle2.rawValue)
+        sut.updateTask(id: taskId, title: TestTitles.tasktitle2.rawValue)
         
         
         // ASSERT:
@@ -454,9 +464,10 @@ class GoalTests: XCTestCase {
         var sut = makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
         sut.addTask(title: TestTitles.tasktitle2.rawValue)
+        let taskId = sut.tasks[1].id
         
         // ACT:
-        sut.updateTask(id: UUID(), title: TestTitles.tasktitle3.rawValue)
+        sut.updateTask(id: taskId, title: TestTitles.tasktitle3.rawValue)
         
         
         // ASSERT:
@@ -475,11 +486,12 @@ class GoalTests: XCTestCase {
         // ARRANGE:
         var sut = makeSut()
         sut.addTask(title: TestTitles.tasktitle1.rawValue)
+        let taskId = sut.tasks[0].id
         sut.completeGoal()
         
         
         // ACT:
-        sut.updateTask(id: UUID(), title: TestTitles.tasktitle2.rawValue)
+        sut.updateTask(id: taskId, title: TestTitles.tasktitle2.rawValue)
         
         
         // ASSERT:

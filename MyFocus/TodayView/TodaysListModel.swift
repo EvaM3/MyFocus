@@ -20,19 +20,18 @@ protocol TodayListModel {
 
 class TodaysListModel {
     
-   private var goal: Goal? = nil
+    private var goal: Goal? = nil
     
     
     
     
     func createGoal(with title: String) {
-        // Ask DataController to create the goal.
         // checking if there is already a goal, to avoid overriding.
         guard goal == nil else {
             return
         }
         goal = Goal(tasks: [], title: title, creationDate: Date())
-        
+        // Ask DataController to create the goal.
     }
     
     
@@ -46,21 +45,28 @@ class TodaysListModel {
         }
         
         unwrappedGoal.addTask(title: title)
+        
         goal = unwrappedGoal
         
-        // check if there is a goal else return
-        // check if the goal has 3 max. tasks, if yes, return
-        // create a new task with the title(parameter)
-        // append new task to the goal
+        // Ask DataController to save to Goal.
         
     }
     
     func loadData() {
+        // Is there a goal already loaded, if yes, return.
+        // Create filtering for todays goal.
+        // Load the goal with the filtering from the data controller.
+        // Check if there is a goal for today, if yes, load it.
+        // Create a filter for previous goals, load the goals.
+        // If there is no goal,but the last goal is not completed yet, offer the old goal.
+        // If the user wants to continue with the old goal.
+        // Create a new goal from the old goal with todays creationDate, and assign to goal(variable).
+        // Ask data controller to update the goal.
         
     }
     
     func updateGoal(with title: String, completed: Bool) {
-        // Ask DataController to update the goal.
+        
         guard var unwrappedGoal = goal else {
             return
         }
@@ -71,11 +77,12 @@ class TodaysListModel {
             unwrappedGoal.completed ? unwrappedGoal.undoCompleteGoal() :  unwrappedGoal.completeGoal()
         }
         goal = unwrappedGoal
+        // Ask DataController to update the goal.
     }
     
     
     func update(taskID: UUID, with title: String, completed: Bool) {
-        // Ask DataController to update task.
+        
         guard var unwrappedGoal = goal else {
             return
         }
@@ -90,26 +97,25 @@ class TodaysListModel {
         }
         goal = unwrappedGoal
         
-        // check if there is a goal else return
-        // update task title, complete status update
+        // Ask DataController to update task.
     }
     
     
     func deleteGoal() {
+        
+        goal = nil
         // Ask DataController to delete the goal.
-       goal = nil
-    
     }
     
     
     func deleteTask(taskID: UUID) {
-        // Ask DataController to delete the task.
+        
         guard var unwrappedGoal = goal else {
             return
         }
-         unwrappedGoal.deleteTask(id: taskID)
+        unwrappedGoal.deleteTask(id: taskID)
+        goal = unwrappedGoal
         
-        // check if there is a goal else return
-        // delete the task
+        // Ask DataController to delete the task.
     }
 }
