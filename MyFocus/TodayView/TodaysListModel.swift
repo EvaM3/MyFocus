@@ -7,6 +7,16 @@
 
 import Foundation
 
+//
+//class TodaysModel: CoreDataLoaderProtocol {
+//    func loadGoal(predicate: NSPredicate?) -> [Goal] {
+//        <#code#>
+//    }
+//
+//
+//
+//}
+
 
 protocol TodayListModel {
     func createGoal(with title: String)
@@ -20,7 +30,9 @@ protocol TodayListModel {
 
 class TodaysListModel {
     
-    private var goal: Goal? = nil
+   private var goal: Goal? = nil
+    
+    var todaysGoal: Goal? {goal}
     
     
     
