@@ -9,10 +9,9 @@ import Foundation
 
 
 
-struct Goal: Identifiable, Equatable {
-    static func == (lhs: Goal, rhs: Goal) -> Bool {
-        return true
-    }
+struct Goal: Identifiable {
+  
+    static let maximumTasks = 3
     
     var id: UUID
     

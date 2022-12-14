@@ -47,12 +47,12 @@ class TodaysListModel {
     }
     
     
-    func addTask(with title: String) {
+    func addTask(with title: String) -> Void {
         guard var unwrappedGoal = goal else {
             return
         }
         
-        if unwrappedGoal.tasks.count >= 4 {  // move it into line 38 (first guard)
+        if unwrappedGoal.tasks.count >= Goal.maximumTasks {  // move it into line 38 (first guard)
             return
         }
         
