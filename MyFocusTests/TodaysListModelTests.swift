@@ -127,6 +127,7 @@ class TodaysListModelTests: XCTestCase {
         XCTAssertEqual(sut.todaysGoal?.tasks.count, Goal.maximumTasks)
     }
     
+    
     func test_updateGoalWithNoGoal() {
         // ARRANGE:
         
@@ -138,6 +139,7 @@ class TodaysListModelTests: XCTestCase {
         // ASSERT:
         XCTAssertNil(sut.todaysGoal)
     }
+    
     
     func test_updateGoalWithGoal() {
         
@@ -176,6 +178,26 @@ class TodaysListModelTests: XCTestCase {
         
     }
     
+    func test_updateTaskWithTask() {
+        
+        
+    // ARRANGE:
+        
+    let sut = makeSut()
+    let newTaskTitle = UUID().uuidString
+        
+    // ACT:
+      
+    sut.addTask(with: "")
+    sut.update(taskID: UUID(), with: newTaskTitle, completed: false)
+      
+    // ASSERT:
+ 
+      
+
+    }
+    
+    
     func test_deleteGoalWithGoal() {
         // ARRANGE:
         
@@ -200,6 +222,39 @@ class TodaysListModelTests: XCTestCase {
         
         // ASSERT:
         XCTAssertNil(sut.todaysGoal)
+        
+    }
+  
+
+    func test_deleteTaskWithTask() {
+     
+        // ARRANGE:
+        
+        let sut = makeSut()
+        let taskId = UUID()
+        
+    
+        // ACT:
+        
+        sut.addTask(with: "!")
+        sut.deleteTask(taskID: taskId)
+        
+        // ASSERT:
+        XCTAssertNil(sut.todaysGoal?.tasks)
+    }
+    
+    func test_deleteTaskWithNoTask() {
+        
+        // ARRANGE:
+           
+        let sut = makeSut()
+        let taskId = UUID()
+        
+        // ACT:
+        sut.deleteTask(taskID: taskId)
+        
+        // ASSERT:
+        XCTAssertNil(sut.todaysGoal?.tasks)
         
     }
     
