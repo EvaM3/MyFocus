@@ -189,12 +189,29 @@ class TodaysListModelTests: XCTestCase {
     // ACT:
       
     sut.addTask(with: "")
-    sut.update(taskID: UUID(), with: newTaskTitle, completed: false)
+    
       
     // ASSERT:
  
-      
+    sut.update(taskID: UUID(), with: newTaskTitle, completed: false)
+ 
 
+    }
+    
+    func test_updateTaskWithNoTask() {
+        // ARRANGE:
+            
+        let sut = makeSut()
+        
+        // ACT:
+        
+        sut.update(taskID: UUID(), with: "", completed: false)
+        
+        
+        // ASSERT:
+        
+        XCTAssertNil(sut.todaysGoal?.title)
+        
     }
     
     
