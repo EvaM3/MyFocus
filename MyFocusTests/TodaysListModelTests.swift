@@ -186,15 +186,20 @@ class TodaysListModelTests: XCTestCase {
     let sut = makeSut()
     let newTaskTitle = UUID().uuidString
         
+        
     // ACT:
-      
-    sut.addTask(with: "")
     
+        sut.createGoal(with: "!")
+        sut.addTask(with: "A")
+        guard let testTaskId = sut.todaysGoal?.tasks[0].id else {
+            XCTFail("Task ID cannot be found")
+            return
+        }
       
     // ASSERT:
  
-    sut.update(taskID: UUID(), with: newTaskTitle, completed: false)
- 
+        sut.update(taskID: testTaskId, with: newTaskTitle, completed: false)
+        XCTAssertEqual(sut.todaysGoal?.tasks[0].title, newTaskTitle)
 
     }
     
@@ -205,12 +210,13 @@ class TodaysListModelTests: XCTestCase {
         
         // ACT:
         
+        sut.createGoal(with: "!")
         sut.update(taskID: UUID(), with: "", completed: false)
         
         
         // ASSERT:
         
-        XCTAssertNil(sut.todaysGoal?.title)
+        XCTAssertTrue(((sut.todaysGoal?.completed) != nil))
         
     }
     
