@@ -68,6 +68,17 @@ class CoreDataManager: CoreDataLoaderProtocol {
         }
     }
     
+    func createGoal(goal: Goal) {
+        let newGoal = GoalEntity(context: persistentContainer.viewContext)
+        newGoal.title = goal.title
+    }
+    
+    
+    func updateGoal(goal: Goal) {
+       let loadedGoal = loadGoal()
+       let updatedGoal = loadedGoal[0].title
+    }
+    
     
     func addItem(item: ListElement) {
         let newItem = TaskEntity(context: persistentContainer.viewContext)
