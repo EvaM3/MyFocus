@@ -178,6 +178,29 @@ class TodaysListModelTests: XCTestCase {
         
     }
     
+    func test_updateTaskCompletionToggle() {
+        
+        
+        // ARRANGE:
+        
+        let sut = makeSut()
+        
+        // ACT:
+        sut.createGoal(with: "")
+        sut.addTask(with: "")
+        sut.update(taskID: UUID(), with: "", completed: true)
+        
+        // ASSERT:
+        XCTAssertEqual(sut.todaysGoal?.tasks[0].completed, true)
+        
+        sut.update(taskID: UUID(), with: "", completed: false)
+        XCTAssertEqual(sut.todaysGoal?.tasks[0].completed, false)
+        
+    }
+    
+    
+    
+    
     func test_updateTaskWithTask() {
         
         
