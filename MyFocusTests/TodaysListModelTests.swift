@@ -15,7 +15,7 @@ import XCTest
 class TodaysListModelTests: XCTestCase {
     
     
-
+    
     
     func test_initHasNoAffect() {
         
@@ -38,7 +38,7 @@ class TodaysListModelTests: XCTestCase {
         let sut = makeSut()
         
         
-     // ACT:
+        // ACT:
         sut.createGoal(with: "")
         
         
@@ -57,7 +57,7 @@ class TodaysListModelTests: XCTestCase {
         let firstGoalTitle = UUID().uuidString
         let secondGoalTitle = UUID().uuidString
         
-      
+        
         
         
         // ACT:
@@ -69,7 +69,7 @@ class TodaysListModelTests: XCTestCase {
         // ASSERT:
         
         XCTAssertEqual(sut.todaysGoal?.title, firstGoalTitle )
-       
+        
     }
     
     
@@ -78,7 +78,7 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
-       
+        
         
         // ACT:
         sut.addTask(with: "")
@@ -95,7 +95,7 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
-     
+        
         
         // ACT:
         
@@ -114,14 +114,14 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
-       
+        
         
         // ACT:
         sut.createGoal(with: "")
         for _ in 0...10 {
             sut.addTask(with: "")
         }
-       
+        
         // ASSERT:
         
         XCTAssertEqual(sut.todaysGoal?.tasks.count, Goal.maximumTasks)
@@ -154,7 +154,7 @@ class TodaysListModelTests: XCTestCase {
         
         
         // ASSERT:
-
+        
         XCTAssertEqual(sut.todaysGoal?.title, newTitle)
     }
     
@@ -181,31 +181,31 @@ class TodaysListModelTests: XCTestCase {
     func test_updateTaskWithTask() {
         
         
-    // ARRANGE:
+        // ARRANGE:
         
-    let sut = makeSut()
-    let newTaskTitle = UUID().uuidString
+        let sut = makeSut()
+        let newTaskTitle = UUID().uuidString
         
         
-    // ACT:
-    
+        // ACT:
+        
         sut.createGoal(with: "!")
         sut.addTask(with: "A")
         guard let testTaskId = sut.todaysGoal?.tasks[0].id else {
             XCTFail("Task ID cannot be found")
             return
         }
-      
-    // ASSERT:
- 
+        
+        // ASSERT:
+        
         sut.update(taskID: testTaskId, with: newTaskTitle, completed: false)
         XCTAssertEqual(sut.todaysGoal?.tasks[0].title, newTaskTitle)
-
+        
     }
     
     func test_updateTaskWithNoTask() {
         // ARRANGE:
-            
+        
         let sut = makeSut()
         
         // ACT:
@@ -225,7 +225,7 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
-    
+        
         // ACT:
         sut.createGoal(with: "")
         sut.deleteGoal()
@@ -239,7 +239,7 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
-    
+        
         // ACT:
         sut.deleteGoal()
         
@@ -247,37 +247,48 @@ class TodaysListModelTests: XCTestCase {
         XCTAssertNil(sut.todaysGoal)
         
     }
-  
-
+    
+    
     func test_deleteTaskWithTask() {
-     
+        
         // ARRANGE:
         
         let sut = makeSut()
-        let taskId = UUID()
         
-    
+        
         // ACT:
         
-        sut.addTask(with: "!")
-        sut.deleteTask(taskID: taskId)
+        
+        sut.createGoal(with: "")
+        sut.addTask(with: "")
+        XCTAssertEqual(sut.todaysGoal?.tasks.count, 1)
+        if let taskId = sut.todaysGoal?.tasks[0].id {
+            sut.deleteTask(taskID: taskId)
+        } else {
+            XCTFail("Task ID cannot be found")
+        }
+        
         
         // ASSERT:
-        XCTAssertNil(sut.todaysGoal?.tasks)
+        XCTAssertEqual(sut.todaysGoal?.tasks.count, 0)
+        
     }
+    
     
     func test_deleteTaskWithNoTask() {
         
         // ARRANGE:
-           
+        
         let sut = makeSut()
         let taskId = UUID()
         
         // ACT:
+        
+        sut.createGoal(with: "")
         sut.deleteTask(taskID: taskId)
         
         // ASSERT:
-        XCTAssertNil(sut.todaysGoal?.tasks)
+        XCTAssertEqual(sut.todaysGoal?.tasks.count, 0)
         
     }
     

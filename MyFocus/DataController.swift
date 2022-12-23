@@ -13,9 +13,15 @@ protocol CoreDataLoaderProtocol {
     func loadGoal(predicate: NSPredicate?) -> [Goal]
 }
 
+protocol CoreDataUpdaterProtocol {
+    func createGoal(goal: Goal)
+    func updateGoal(goal: Goal)
+    func deleteGoal(id: UUID)
+}
 
 
-class CoreDataManager: CoreDataLoaderProtocol {
+class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
+    
     
     
     
@@ -55,53 +61,22 @@ class CoreDataManager: CoreDataLoaderProtocol {
             return []
         }
     }
-  
-    
-    func loadGoalData(predicate: NSPredicate? = nil) -> [GoalEntity] {
-        let request: NSFetchRequest<GoalEntity> = GoalEntity.fetchRequest()
-        request.predicate = predicate
-        do {
-            return try persistentContainer.viewContext.fetch(request)
-        } catch {
-            print("Error loading data \(error)")
-            return []
-        }
-    }
     
     func createGoal(goal: Goal) {
-        let newGoal = GoalEntity(context: persistentContainer.viewContext)
-        newGoal.title = goal.title
+        let _ = mapToGoalEntity(goal: goal)
+        saveData()
+        
     }
     
     
     func updateGoal(goal: Goal) {
-       let loadedGoal = loadGoal()
-       let updatedGoal = loadedGoal[0].title
+        let loadedGoal = loadGoal()
+        let updatedGoal = loadedGoal[0].title
     }
     
-    
-    func addItem(item: ListElement) {
-        let newItem = TaskEntity(context: persistentContainer.viewContext)
-        newItem.name = item.title
-        saveData()
+    func deleteGoal(id: UUID) {
+        
     }
-    
-    func deleteData(at index: Int) {
-        let loadedData = loadGoal()
-        let selectedTask = loadedData[index]
-      //  persistentContainer.viewContext.delete(selectedTask)
-        self.saveData()
-    }
-
-    func updateData(at index: Int, title: String) {
-        let loadedData = loadGoal()
-        let selectedTask = loadedData[index]
-     //   selectedTask.name = title
-
-        self.saveData()
-
-    }
-    
     
     func generateRandomData() {
         var randomGoals = [GoalEntity]()
@@ -201,14 +176,5 @@ class CoreDataManager: CoreDataLoaderProtocol {
         return tomorrowsDate
     }
     
-  
-    func getCurrentMonth() -> String {
-        let calendar: Calendar = Calendar.current
-        let date = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM/yyyy"
-        let currentMonth = dateFormatter.string(from: date)
-        return currentMonth
-    }
-  
+    
 }
