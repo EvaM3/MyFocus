@@ -163,6 +163,7 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
+       
         
         // ACT:
         sut.createGoal(with: "")
@@ -184,6 +185,7 @@ class TodaysListModelTests: XCTestCase {
         // ARRANGE:
         
         let sut = makeSut()
+    
         
         // ACT:
         sut.createGoal(with: "")
