@@ -13,28 +13,12 @@ import CoreData
 
 
 
-// let container = CoreDataContainer(name: "FocusData", inMemory: true)
-
-//func destroyPersistentStore() {
-//    guard let persistentContainer = NSPersistentContainer()  else {
-//        print("Missing container - could not destroy")
-//        return
-//    }
-//
-//    do {
-//        try NSPersistentContainer.destroyPersistentStore(name: "FocusData")
-//    } catch  {
-//        print("Unable to destroy persistent store: \(error) - \(error.localizedDescription)")
-//   }
-//}
-
-
 
 class testDataController: CoreDataManager {
     override init() {
         super.init()
         
- var testManager = CoreDataManager()
+
           
 let persistentStoreDescription = NSPersistentStoreDescription()
     persistentStoreDescription.type = NSInMemoryStoreType
@@ -56,19 +40,38 @@ class DataControllerTests: XCTestCase {
 
     private var container: testDataController!
     
-    override func setUpWithError() throws {
+    var sut = CoreDataManager()
+    
+    override func setUp() {
+        super.setUp()
       let container = NSPersistentContainer(name: "FocusData")
       container.loadPersistentStores { description, error in
         XCTAssertNil(error)
       }
     }
       
-    override func tearDownWithError() throws {
+    override func tearDown() {
       container = nil
+      super.tearDown()
     }
 
     
+    func test_createGoalInitialSuccess() {
+        
+        
+        // ARRANGE:
+        let firstGoal = Goal(id: UUID(), tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+      
+        // ACT:
+        let newGoal = sut.createGoal(goal: firstGoal)
+        sut.saveData()
+        
+        // ASSERT:
+        XCTAssertNotNil(firstGoal)
+        XCTAssertNotNil(newGoal)
+        
+}
     
-   
-
+    
+    
 }
