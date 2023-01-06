@@ -23,9 +23,15 @@ protocol CoreDataUpdaterProtocol {
 class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
     
     
+    private let persistentContainer: NSPersistentContainer
     
+ 
     
-    private lazy var persistentContainer: NSPersistentContainer = {
+    init(persistentContainer: NSPersistentContainer? = nil) {
+        self.persistentContainer = persistentContainer ?? Self.makePersistentContainer()
+    }
+    
+    private static func makePersistentContainer() -> NSPersistentContainer {
         let container = NSPersistentContainer(name: "FocusData")
         
         container.loadPersistentStores(completionHandler: { (NSPersistentStoreDescription, error) in
@@ -34,8 +40,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
             }
         })
         return container
-    }()
-    
+    }
     
     func saveData() {
         
