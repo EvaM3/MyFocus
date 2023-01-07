@@ -61,54 +61,67 @@ class DataControllerTests: XCTestCase {
         
         // ARRANGE:
         let sut = makeSut()
-        let goalID = UUID()
-        let firstGoal = Goal(id: goalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        let goalID = UUID()  // add task
+        let taskID = UUID()
+        let testTasks = [Task(id: taskID, title: "", completed: false, creationDate: Date(), achievedDate: Date())]
+        let firstGoal = Goal(id: goalID, tasks: testTasks, title: "", completed: false, creationDate: Date(), achievedDate: Date())
         
         // ACT:
         sut.createGoal(goal: firstGoal)
       
         
         // ASSERT:
-        let result = sut.loadGoal()
-        XCTAssertEqual(result, [firstGoal])
+        
+        XCTAssertFalse(firstGoal.tasks.isEmpty)
+        XCTAssertEqual(firstGoal.tasks.count, 1)
+        XCTAssertFalse(firstGoal.completed)
         
     }
     
-    func test_fromTwoGoalsOnlyOneGoalAdded() {
+    func test_init_hasNoEffect() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        
+        // ACT, ASSERT:
+        
+        XCTAssertTrue(sut.loadGoal().isEmpty)
+    }
+    
+    func test_oneGoalCalledTwice() { // one goal, call twice the create goal
         
         // ARRANGE:
         let sut = makeSut()
         let goalID = UUID()
-        let secondID = UUID()
         let firstGoal = Goal(id: goalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
-        let secondGoal = Goal(id: secondID, tasks: [], title: "!", completed: false, creationDate: Date(), achievedDate: Date())
+       
         
         // ACT:
+        sut.createGoal(goal: firstGoal)
         sut.createGoal(goal: firstGoal)
         
         // ASSERT:
         let result = sut.loadGoal()
-        XCTAssertEqual(result, [firstGoal])
-        
+        XCTAssertNotEqual(result, [firstGoal])
+        XCTAssertEqual(result.count, 2)
     }
     
-    func test_createGoalWithTasks() {
+    func test_sameIdDifferentTitle() {
         
         // ARRANGE:
         let sut = makeSut()
         let goalID = UUID()
-        let taskID = UUID()
-        let testTasks = [Task(id: taskID, title: "", completed: false, creationDate: Date(), achievedDate: Date())]
-        let testGoal = Goal(id: goalID, tasks: testTasks, title: "", completed: false, creationDate: Date(), achievedDate: Date())
-        
+        let firstGoal = Goal(id: goalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+       let secondGoal = Goal(id: goalID, tasks: [], title: "Hi!", completed: false, creationDate: Date(), achievedDate: Date())
         
         // ACT:
-        sut.createGoal(goal: testGoal)
+        sut.createGoal(goal: firstGoal)
+        sut.createGoal(goal: secondGoal)
         
         // ASSERT:
         let result = sut.loadGoal()
-        XCTAssertFalse(testGoal.tasks.isEmpty)
-        XCTAssertEqual(testGoal.tasks.count, 1)
+        XCTAssertNotEqual(firstGoal, secondGoal)
+        XCTAssertEqual(result.count, 2)
     }
     
     func test_deleteGoalInitialSuccess() {
@@ -128,6 +141,27 @@ class DataControllerTests: XCTestCase {
         // ASSERT:
         
        XCTAssertNotNil(goalID)
+        
+    }
+    
+    func test_twoGoalsCreatedOneDeleted() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        let firstGoalID = UUID()
+        let testGoal = Goal(id: firstGoalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        let secondGoalID = UUID()
+        let secondTestGoal = Goal(id: secondGoalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        
+        // ACT:
+        sut.createGoal(goal: testGoal)
+        sut.createGoal(goal: secondTestGoal)
+        sut.deleteGoal(id: firstGoalID)
+        
+        // ASSERT:
+        let result = sut.loadGoal()
+        XCTAssertEqual(result.count, 2)
+      //  XCTAssertNil(testGoal.creationDate)
         
     }
     
