@@ -72,8 +72,65 @@ class DataControllerTests: XCTestCase {
         let result = sut.loadGoal()
         XCTAssertEqual(result, [firstGoal])
         
+    }
+    
+    func test_fromTwoGoalsOnlyOneGoalAdded() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        let goalID = UUID()
+        let secondID = UUID()
+        let firstGoal = Goal(id: goalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        let secondGoal = Goal(id: secondID, tasks: [], title: "!", completed: false, creationDate: Date(), achievedDate: Date())
+        
+        // ACT:
+        sut.createGoal(goal: firstGoal)
+        
+        // ASSERT:
+        let result = sut.loadGoal()
+        XCTAssertEqual(result, [firstGoal])
         
     }
+    
+    func test_createGoalWithTasks() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        let goalID = UUID()
+        let taskID = UUID()
+        let testTasks = [Task(id: taskID, title: "", completed: false, creationDate: Date(), achievedDate: Date())]
+        let testGoal = Goal(id: goalID, tasks: testTasks, title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        
+        
+        // ACT:
+        sut.createGoal(goal: testGoal)
+        
+        // ASSERT:
+        let result = sut.loadGoal()
+        XCTAssertFalse(testGoal.tasks.isEmpty)
+        XCTAssertEqual(testGoal.tasks.count, 1)
+    }
+    
+    func test_deleteGoalInitialSuccess() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        let goalID = UUID()
+        let testGoal = Goal(id: goalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        sut.createGoal(goal: testGoal)
+        
+        // ACT:
+       
+        sut.deleteGoal(id: goalID)
+        sut.saveData()
+        
+        
+        // ASSERT:
+        
+       XCTAssertNotNil(goalID)
+        
+    }
+    
     
     func makeSut() -> CoreDataManager {
        let sut = CoreDataManager(persistentContainer: testContainer)
