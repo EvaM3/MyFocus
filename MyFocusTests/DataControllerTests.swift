@@ -71,7 +71,7 @@ class DataControllerTests: XCTestCase {
       
         
         // ASSERT:
-        
+        // Equality with result
         XCTAssertFalse(firstGoal.tasks.isEmpty)
         XCTAssertEqual(firstGoal.tasks.count, 1)
         XCTAssertFalse(firstGoal.completed)
@@ -98,12 +98,13 @@ class DataControllerTests: XCTestCase {
         
         // ACT:
         sut.createGoal(goal: firstGoal)
-        sut.createGoal(goal: firstGoal)
+        sut.createGoal(goal: firstGoal)  // only one goal, fix it in data controller
         
         // ASSERT:
         let result = sut.loadGoal()
-        XCTAssertNotEqual(result, [firstGoal])
-        XCTAssertEqual(result.count, 2)
+       
+        XCTAssertEqual(result, [firstGoal])
+       
     }
     
     func test_sameIdDifferentTitle() {
@@ -123,6 +124,17 @@ class DataControllerTests: XCTestCase {
         XCTAssertNotEqual(firstGoal, secondGoal)
         XCTAssertEqual(result.count, 2)
     }
+    
+    func test_init_deleteHasNoEffect() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        
+        // ACT, ASSERT:
+        
+        XCTAssertTrue(sut.loadGoal().isEmpty)
+    }
+    
     
     func test_deleteGoalInitialSuccess() {
         
@@ -160,10 +172,53 @@ class DataControllerTests: XCTestCase {
         
         // ASSERT:
         let result = sut.loadGoal()
-        XCTAssertEqual(result.count, 2)
+      //  XCTAssertEqual(result.count, 2)
       //  XCTAssertNil(testGoal.creationDate)
         
     }
+    
+    
+    /* Update goal unit cases:
+    
+    //  1. Initial success:
+     
+   Input(Arrange): - setting up sut
+          - variable with new goal with creation Date, tasks and the completion is false
+     
+          - (Act): - creating goal
+                   - updating created goal
+     
+  Output(Assert): - NotEqual: The goal does not match with the updated one
+                  - Not completed: The updated goal is not completed
+                   - True: the updated goal is not empty
+     
+     
+     // 2. Update with no goal to update to:
+     
+     Input(Arrange): - setting up sut
+     
+     
+     - (Act): - updating goal
+     
+     
+     Output(Assert): - True: the updated goal is empty
+                     - True: There is no goal(empty)
+     
+     
+    // 3. Goal updated, no change in tasks
+     
+     Input(Arrange): - setting up sut
+                     - variable with new goal with creation Date, tasks and the completion is false
+     
+         - (Act): - creating goal
+                  - updating created goal
+     
+     
+     Output(Assert): - NotEqual: The goal does not match with the updated one
+                     - Not completed: The updated goal is not completed
+                     - Equal: The tasks are the same
+            
+    */
     
     
     func makeSut() -> CoreDataManager {

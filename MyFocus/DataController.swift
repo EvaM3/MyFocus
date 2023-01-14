@@ -68,9 +68,14 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
     }
     
     func createGoal(goal: Goal) {
+        if goal.id == nil {
         let _ = mapToGoalEntity(goal: goal)
+        // solution based on id
+        } else {
+            return
+        }
         saveData()
-        
+      
     }
     
     
