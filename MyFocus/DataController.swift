@@ -45,6 +45,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         
     }
     
+    
     func saveData() {
         
         do {
@@ -76,6 +77,19 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         }
     }
     
+    private func loadTaskEntities(predicate: NSPredicate? = nil) -> [TaskEntity] {
+        let request : NSFetchRequest<TaskEntity> = TaskEntity.fetchRequest()
+        request.predicate = predicate
+        do {
+            let taskEntities = try persistentContainer.viewContext.fetch(request)
+            
+            return taskEntities
+        } catch {
+            print("Error loading data \(error)")
+            return []
+        }
+    }
+    
     func createGoal(goal: Goal) {
         guard (existingGoalEntity(id: goal.id) == nil) else {
             return
@@ -94,9 +108,8 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         existingGoal.completed = goal.completed
         existingGoal.title = goal.title
         existingGoal.achievedDate = goal.achievedDate
-        
-        
     }
+    
     
     func deleteGoal(id: UUID) {
         
@@ -108,6 +121,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         }
     }
     
+    
     private func existingGoalEntity(id: UUID) -> GoalEntity? {
         let existingGoals = loadGoalEntities()
         guard let existingGoal = existingGoals.first(where: { $0.id == id }) else {
@@ -115,6 +129,35 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         }
         return existingGoal
     }
+    
+    
+    private func existingTaskEntity(id: UUID) -> TaskEntity? {
+        let existingTasks = loadTaskEntities()
+        guard let existingTask = existingTasks.first(where: { $0.id == id }) else {
+            return nil
+        }
+        return existingTask
+    }
+    
+    
+    func createTask(task: Task) {
+        guard (existingTaskEntity(id: task.id) == nil) else {
+            return
+        }
+        
+        let _ = mapToTaskEntity(item: task)
+    }
+    
+    
+    func updateTask(task: Task) {
+        guard var existingTask = existingTaskEntity(id: task.id) else {
+            return
+        }
+        existingTask.completed = task.completed
+        existingTask.name = task.title
+        existingTask.achievedDate = task.achievedDate
+    }
+    
     
     func generateRandomData() {
         var randomGoals = [GoalEntity]()
@@ -137,6 +180,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         self.saveData()
     }
     
+    
     func makeRandomTask(createDate: Date) -> TaskEntity {
         let randomTask = TaskEntity(context: persistentContainer.viewContext)
         randomTask.name = "Finish the book \(UUID().uuidString)"
@@ -145,6 +189,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         self.saveData()
         return randomTask
     }
+    
     
     func makeRandomGoal(createDate: Date) -> GoalEntity {
         var randomTasks = [TaskEntity]()
@@ -161,6 +206,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         return randomGoal
     }
     
+    
     func mapToGoal(entity: GoalEntity) -> Goal {
         var goalTasks: [Task] = []
         if let tasks = entity.tasks?.array as? [TaskEntity] {
@@ -173,6 +219,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         
         return goal
     }
+    
     
     func mapToGoalEntity(goal: Goal) -> GoalEntity {
         var taskEntities: [TaskEntity] = []
@@ -191,6 +238,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         
         return newGoal
     }
+    
     
     func mapToTaskEntity(item: Task) -> TaskEntity {
         let newItem = TaskEntity(context: persistentContainer.viewContext)

@@ -176,6 +176,16 @@ class DataControllerTests: XCTestCase {
         
     }
     
+    func test_init_updateHasNoEffect() {
+        
+        // ARRANGE:
+        let sut = makeSut()
+        
+        // ACT, ASSERT:
+        
+        XCTAssertTrue(sut.loadGoal().isEmpty)
+    }
+    
     func test_updateGoalInitialSuccess() {
         let sut = makeSut()
         let firstGoalID = UUID()
@@ -190,49 +200,23 @@ class DataControllerTests: XCTestCase {
         sut.updateGoal(goal: updatedTestGoal)
         
         XCTAssertEqual(sut.loadGoal(), [updatedTestGoal])
+        XCTAssertEqual(firstGoal.tasks, updatedTestGoal.tasks)
     }
     
-    /* Update goal unit cases:
     
-    //  1. Initial success:
-     
-   Input(Arrange): - setting up sut
-          - variable with new goal with creation Date, tasks and the completion is false
-          - variable with same id, but updated data
-     
-          - (Act): - creating new goal
-                   - updating with updated goal
-     
-  Output(Assert):  - load will be equal to the updated, one element only
+    func test_updateGoalWithNoGoalToUpdate() {
+        let sut = makeSut()
+        let goalID = UUID()
+        let firstGoal = Goal(id: goalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: nil)
         
-    
-     
-     // 2. Update with no goal to update to:
-     
-     Input(Arrange): - setting up sut
-     - variable with new goal with creation Date, tasks and the completion is false
-     
-     - (Act): - updating goal
-     
-     
-     Output(Assert): - load will be equal to empty array
-     
-     
-    // 3. Goal updated, no change in tasks = combine it with the first
-     
-     Input(Arrange): - setting up sut
-                     - variable with new goal with creation Date, tasks and the completion is false
-     
-         - (Act): - creating goal
-                  - updating created goal
-     
-     
-     Output(Assert): - NotEqual: The goal does not match with the updated one
-                     - Not completed: The updated goal is not completed
-                     - Equal: The tasks are the same
-            
-    */
-    
+        sut.createGoal(goal: firstGoal)
+        sut.updateGoal(goal: firstGoal)
+        
+        XCTAssertEqual(sut.loadGoal(), [firstGoal])
+        
+    }
+   
+   
     
     func makeSut() -> CoreDataManager {
        let sut = CoreDataManager(persistentContainer: testContainer)
