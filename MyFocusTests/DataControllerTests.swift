@@ -98,7 +98,7 @@ class DataControllerTests: XCTestCase {
         
         // ACT:
         sut.createGoal(goal: firstGoal)
-        sut.createGoal(goal: firstGoal)  // only one goal, fix it in data controller
+        sut.createGoal(goal: firstGoal)
         
         // ASSERT:
         let result = sut.loadGoal()
@@ -121,8 +121,7 @@ class DataControllerTests: XCTestCase {
         
         // ASSERT:
         let result = sut.loadGoal()
-        XCTAssertNotEqual(firstGoal, secondGoal)
-        XCTAssertEqual(result.count, 2)
+        XCTAssertEqual(result, [firstGoal])
     }
     
     func test_init_deleteHasNoEffect() {
@@ -152,7 +151,7 @@ class DataControllerTests: XCTestCase {
         
         // ASSERT:
         
-       XCTAssertNotNil(goalID)
+        XCTAssertEqual(sut.loadGoal(), [])
         
     }
     
@@ -161,22 +160,37 @@ class DataControllerTests: XCTestCase {
         // ARRANGE:
         let sut = makeSut()
         let firstGoalID = UUID()
-        let testGoal = Goal(id: firstGoalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
+        let firstGoal = Goal(id: firstGoalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
         let secondGoalID = UUID()
         let secondTestGoal = Goal(id: secondGoalID, tasks: [], title: "", completed: false, creationDate: Date(), achievedDate: Date())
         
         // ACT:
-        sut.createGoal(goal: testGoal)
+        sut.createGoal(goal: firstGoal)
         sut.createGoal(goal: secondTestGoal)
         sut.deleteGoal(id: firstGoalID)
         
         // ASSERT:
         let result = sut.loadGoal()
-     //   XCTAssertEqual(result.count, 2)
-      //  XCTAssertNil(testGoal.creationDate)
+        XCTAssertEqual(result, [secondTestGoal])
+     
         
     }
     
+    func test_updateGoalInitialSuccess() {
+        let sut = makeSut()
+        let firstGoalID = UUID()
+        let creationDate = Date()
+        let firstGoal = Goal(id: firstGoalID, tasks: [], title: "", completed: false, creationDate: creationDate, achievedDate: nil)
+
+        let updatedTestGoal = Goal(id: firstGoalID, tasks: [], title: "!", completed: true, creationDate: creationDate, achievedDate: Date() + 10)
+        
+        
+        
+        sut.createGoal(goal: firstGoal)
+        sut.updateGoal(goal: updatedTestGoal)
+        
+        XCTAssertEqual(sut.loadGoal(), [updatedTestGoal])
+    }
     
     /* Update goal unit cases:
     
@@ -184,28 +198,27 @@ class DataControllerTests: XCTestCase {
      
    Input(Arrange): - setting up sut
           - variable with new goal with creation Date, tasks and the completion is false
+          - variable with same id, but updated data
      
-          - (Act): - creating goal
-                   - updating created goal
+          - (Act): - creating new goal
+                   - updating with updated goal
      
-  Output(Assert): - NotEqual: The goal does not match with the updated one
-                  - Not completed: The updated goal is not completed
-                   - True: the updated goal is not empty
-     
+  Output(Assert):  - load will be equal to the updated, one element only
+        
+    
      
      // 2. Update with no goal to update to:
      
      Input(Arrange): - setting up sut
-     
+     - variable with new goal with creation Date, tasks and the completion is false
      
      - (Act): - updating goal
      
      
-     Output(Assert): - True: the updated goal is empty
-                     - True: There is no goal(empty)
+     Output(Assert): - load will be equal to empty array
      
      
-    // 3. Goal updated, no change in tasks
+    // 3. Goal updated, no change in tasks = combine it with the first
      
      Input(Arrange): - setting up sut
                      - variable with new goal with creation Date, tasks and the completion is false

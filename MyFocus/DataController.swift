@@ -25,7 +25,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
     
     private let persistentContainer: NSPersistentContainer
     
- 
+    
     
     init(persistentContainer: NSPersistentContainer? = nil) {
         self.persistentContainer = persistentContainer ?? Self.makePersistentContainer()
@@ -39,10 +39,10 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
                 fatalError("Unresolved error \(error), \(error)")
                 return
             }
-//            self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
+            //            self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         })
         return container
-       
+        
     }
     
     func saveData() {
@@ -56,40 +56,64 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
     
     
     func loadGoal(predicate: NSPredicate? = nil) -> [Goal] {
+        let goalEntities = loadGoalEntities(predicate: predicate)
+        let goals = goalEntities.map { goalEntity in
+            mapToGoal(entity: goalEntity)
+        }
+        return goals
+    }
+    
+    private func loadGoalEntities(predicate: NSPredicate? = nil) -> [GoalEntity] {
         let request : NSFetchRequest<GoalEntity> =  GoalEntity.fetchRequest()
         request.predicate = predicate
         do {
             let goalEntities = try persistentContainer.viewContext.fetch(request)
-            let goals = goalEntities.map { goalEntity in
-                mapToGoal(entity: goalEntity)
-            }
-            return goals
+            
+            return goalEntities
         } catch {
             print("Error loading data \(error)")
             return []
         }
-        
     }
     
     func createGoal(goal: Goal) {
-        if goal.id == nil {
-        let _ = mapToGoalEntity(goal: goal)
-        // solution based on id
-        } else {
+        guard (existingGoalEntity(id: goal.id) == nil) else {
             return
         }
+        
+        let _ = mapToGoalEntity(goal: goal)
         saveData()
-      
+        
     }
     
     
     func updateGoal(goal: Goal) {
-        let loadedGoal = loadGoal()
-        let updatedGoal = loadedGoal[0].title
+        guard var existingGoal = existingGoalEntity(id: goal.id) else {
+            return
+        }
+        existingGoal.completed = goal.completed
+        existingGoal.title = goal.title
+        existingGoal.achievedDate = goal.achievedDate
+        
+        
     }
     
     func deleteGoal(id: UUID) {
         
+        guard let existingGoal = existingGoalEntity(id: id) else {
+            return
+        }
+        do {
+            persistentContainer.viewContext.delete(existingGoal)
+        }
+    }
+    
+    private func existingGoalEntity(id: UUID) -> GoalEntity? {
+        let existingGoals = loadGoalEntities()
+        guard let existingGoal = existingGoals.first(where: { $0.id == id }) else {
+            return nil
+        }
+        return existingGoal
     }
     
     func generateRandomData() {
