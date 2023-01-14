@@ -7,6 +7,11 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="tasks" transient="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TaskEntity"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="TaskEntity" representedClassName="TaskEntity" syncable="YES">
         <attribute name="achievedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

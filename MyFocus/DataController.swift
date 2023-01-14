@@ -37,9 +37,12 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         container.loadPersistentStores(completionHandler: { (NSPersistentStoreDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error)")
+                return
             }
+//            self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         })
         return container
+       
     }
     
     func saveData() {
@@ -65,6 +68,7 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
             print("Error loading data \(error)")
             return []
         }
+        
     }
     
     func createGoal(goal: Goal) {
