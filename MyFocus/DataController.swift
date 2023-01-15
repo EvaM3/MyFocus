@@ -108,6 +108,11 @@ class CoreDataManager: CoreDataLoaderProtocol, CoreDataUpdaterProtocol {
         existingGoal.completed = goal.completed
         existingGoal.title = goal.title
         existingGoal.achievedDate = goal.achievedDate
+        
+        let existingTasks : [TaskEntity] = existingGoal.tasks?.array as? [TaskEntity] ?? []
+        let existingTaskIds = Set(existingTasks.compactMap { $0.id })
+        // same for the goal
+        // Intersect the two sets , will have the task ids, which needs to be updated, for each one call // // updateTaskEntity with the goals task   2: Set subtracts to figure out which task needs to be deleted, which one needs to be added. Then update goaltasks as well in existingGoal.
     }
     
     

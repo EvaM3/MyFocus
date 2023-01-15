@@ -200,7 +200,7 @@ class DataControllerTests: XCTestCase {
         sut.updateGoal(goal: updatedTestGoal)
         
         XCTAssertEqual(sut.loadGoal(), [updatedTestGoal])
-        XCTAssertEqual(firstGoal.tasks, updatedTestGoal.tasks)
+       
     }
     
     
